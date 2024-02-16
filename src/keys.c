@@ -6,31 +6,31 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/15 15:22:40 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/16 16:30:13 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	move_up(int count, int count2)
 {
-	while (++count < map()->size_y)
+	while (++count < map(0)->i)
 	{
 		count2 = -1;
-		while (++count2 < map()->size_x)
+		while (++count2 < map(0)->len)
 		{
-			if (map()->matrix[count][count2] == 'N')
+			if (map(0)->line[count] == 'N')
 			{
-				if (map()->matrix[count -1][count2] == '1')
+				if (map(0)->line[count -1] == '1')
 					return ;
-				map()->matrix[count][count2] = '0';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['0'], \
-				count2 * 64, count * 64);
-				map()->matrix[count - 1][count2] = 'N';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['N'], \
-				count2 * 64, (count - 1) * 64);
+				map(0)->line[count] = '0';
+				//mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['0'], 
+				// count2 * 64, count * 64);
+				map(0)->line[count - 1] = 'N';
+				//mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['N'], 
+				// count2 * 64, (count - 1) * 64);
 				return ;
 			}
 		}
@@ -39,23 +39,23 @@ void	move_up(int count, int count2)
 
 void	move_down(int count, int count2)
 {
-	while (++count < map()->size_y)
+	while (++count < map(0)->i)
 	{
 		count2 = -1;
-		while (++count2 < map()->size_x)
+		while (++count2 < map(0)->len)
 		{
-			if (map()->matrix[count][count2] == 'N')
+			if (map(0)->line[count] == 'N')
 			{
-				if (map()->matrix[count +1][count2] == '1')
+				if (map(0)->line[count +1] == '1')
 					return ;
-				map()->matrix[count][count2] = '0';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['0'], \
-				count2 * 64, count * 64);
-				map()->matrix[count + 1][count2] = 'N';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['N'], \
-				count2 * 64, (count + 1) * 64);
+				map(0)->line[count] = '0';
+				// mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['0'], 
+				// count2 * 64, count * 64);
+				map(0)->line[count + 1] = 'N';
+				// mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['N'], 
+				// count2 * 64, (count + 1) * 64);
 				return ;
 			}
 		}
@@ -64,23 +64,23 @@ void	move_down(int count, int count2)
 
 void	move_left(int count, int count2)
 {
-	while (++count < map()->size_y)
+	while (++count < map(0)->i)
 	{
 		count2 = -1;
-		while (++count2 < map()->size_x)
+		while (++count2 < map(0)->len)
 		{
-			if (map()->matrix[count][count2] == 'N')
+			if (map(0)->line[count] == 'N')
 			{
-				if (map()->matrix[count][count2 -1] == '1')
+				if (map(0)->line[count] == '1')
 					return ;
-				map()->matrix[count][count2] = '0';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['0'], \
-				count2 * 64, count * 64);
-				map()->matrix[count][count2 - 1] = 'N';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['N'], \
-				(count2 - 1) * 64, count * 64);
+				map(0)->line[count] = '0';
+				// mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['0'], 
+				// count2 * 64, count * 64);
+				map(0)->line[count] = 'N';
+				// mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['N'], 
+				// (count2 - 1) * 64, count * 64);
 				return ;
 			}
 		}
@@ -89,23 +89,23 @@ void	move_left(int count, int count2)
 
 void	move_right(int count, int count2)
 {
-	while (++count < map()->size_y)
+	while (++count < map(0)->i)
 	{
 		count2 = -1;
-		while (++count2 < map()->size_x)
+		while (++count2 < map(0)->len)
 		{
-			if (map()->matrix[count][count2] == 'N')
+			if (map(0)->line[count] == 'N')
 			{
-				if (map()->matrix[count][count2 +1] == '1')
+				if (map(0)->line[count] == '1')
 					return ;
-				map()->matrix[count][count2] = '0';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['0'], \
-				count2 * 64, count * 64);
-				map()->matrix[count][count2 + 1] = 'N';
-				mlx_put_image_to_window(window()->mlx_ptr, \
-				window()->window_ptr, window()->img['N'], \
-				(count2 + 1) * 64, count * 64);
+				map(0)->line[count] = '0';
+				// mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['0'], 
+				// count2 * 64, count * 64);
+				map(0)->line[count] = 'N';
+				// mlx_put_image_to_window(window()->mlx_ptr, 
+				// window()->window_ptr, window()->img['N'], 
+				// (count2 + 1) * 64, count * 64);
 				return ;
 			}
 		}

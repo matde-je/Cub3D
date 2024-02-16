@@ -6,11 +6,11 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/15 15:41:53 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/16 16:30:29 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	new_window(void)
 {
@@ -18,7 +18,7 @@ void	new_window(void)
 	if (!window()->mlx_ptr)
 		free_all(0);
 	(window()->window_ptr) = mlx_new_window(window()->mlx_ptr, \
-	map()->size_x * 64, map()->size_y * 64, "have fun");
+	(map_global()->x_max * 64), (map_global()->y_max * 64), "have fun");
 	if (!window()->window_ptr)
 		free_all(0);
 	//img_func();
@@ -47,12 +47,12 @@ void	new_window(void)
 // 	int	pos;
 
 // 	count = -1;
-// 	while (++count < map()->size_y)
+// 	while (++count < map_global->size_y)
 // 	{
 // 		count2 = -1;
-// 		while (++count2 < map()->size_x)
+// 		while (++count2 < map_global->size_x)
 // 		{
-// 			pos = map()->matrix[count][count2];
+// 			pos = map_global->matrix[count][count2];
 // 			if (window()->img[pos])
 // 			{
 // 				mlx_put_image_to_window(window()->mlx_ptr, 

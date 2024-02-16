@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:52:48 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/15 15:06:13 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:01:02 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,35 @@ void	error(char	*str)
 	free_all(1);
 }
 
-int	free_all(int i)
+t_map	*map(t_map *new_map)
 {
-	int	count;
+	static t_map	*var = NULL;
 
-	count = -1;
-	while (++count < map()->size_y)
-		free(map()->matrix[count]);
-	free(map()->matrix);
-	if (window()->img['N'])
-		mlx_destroy_image(window()->mlx_ptr, window()->img['N']);
-	if (window()->img['0'])
-		mlx_destroy_image(window()->mlx_ptr, window()->img['0']);
-	if (window()->img['1'])
-		mlx_destroy_image(window()->mlx_ptr, window()->img['0']);
-	if (window()->window_ptr)
-		mlx_destroy_window(window()->mlx_ptr, window()->window_ptr);
-	if (window()->mlx_ptr)
+	if (new_map != NULL)
 	{
-		mlx_destroy_display(window()->mlx_ptr);
-		free(window()->mlx_ptr);
+		if (var != NULL)
+		{
+			free(var->line);
+			free(var);
+		}
+		var = new_map;
 	}
-	if (i == 0)
-		exit(0);
-	if (i == 1)
-		exit(1);
-	return (0);
+	else if (var == NULL)
+	{
+		var = malloc(sizeof(t_map));
+		if (var == NULL)
+			error("alloc fail");
+		var->line = NULL;
+		var->i = 0;
+		var->prev = NULL;
+		var->next = NULL;
+	}
+	return (var);
 }
 
-t_map	*map(void)
+t_map_global	*map_global(void)
 {
-	static t_map	var;
+	static t_map_global	var;
 
 	return (&var);
 }

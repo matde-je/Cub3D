@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/15 15:14:01 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/16 17:09:14 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,69 @@ char	*ft_strcpy(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+void	printin(void)
+{
+	t_map	*map1;
+
+	map1 = map(0);
+	printf("------printin---------\n");
+	while (map1)
+	{
+		printf("line: %s\n", map1->line);
+		printf("len: %d\n", map1->len);
+		printf("i: %d\n", map1->i);
+		map1 = map1->next;
+	}
+	printf("------printin---------\n");
+}
+
+char	*rm_space(const char *str)
+{
+	char	*str1;
+	int		i;
+	int		j;
+
+	str1 = malloc(ft_strlen(str) + 1);
+	if (str1 == NULL)
+		error("Memory allocation failed");
+	i = -1;
+	j = 0;
+	while (++i < (int)ft_strlen(str))
+	{
+		if (str[i] != ' ')
+		{
+			str1[j] = str[i];
+			j++;
+		}
+	}
+	str1[j] = '\0';
+	return (str1);
+}
+
+int	free_all(int i)
+{
+	int		count;
+	t_map	*temp;
+
+	count = -1;
+	temp = map(0);
+	while (++count < map_global()->y_max)
+	{
+		free(map(temp)->line);
+		temp = temp->next;
+	}
+	if (window()->window_ptr)
+		mlx_destroy_window(window()->mlx_ptr, window()->window_ptr);
+	if (window()->mlx_ptr)
+	{
+		mlx_destroy_display(window()->mlx_ptr);
+		free(window()->mlx_ptr);
+	}
+	if (i == 0)
+		exit(0);
+	if (i == 1)
+		exit(1);
+	return (0);
 }

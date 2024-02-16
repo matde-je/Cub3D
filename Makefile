@@ -6,7 +6,7 @@
 #    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/02/15 17:38:04 by matilde          ###   ########.fr        #
+#    Updated: 2024/02/16 17:27:06 by matilde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 INCS 	   = inc/
 NAME       = cub3d
 CC         = cc
-CFLAGS     = -g3 -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address
 LDFLAGS	   = -L./libft -lft
 RM         = rm -rf
 
