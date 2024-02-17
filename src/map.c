@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 18:46:07 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/17 19:36:15 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_name(char *path)
 		&& (path[i - 2] == 'u' && path[i - 1] == 'b'))
 	{
 		check_map(path);
-		//check_wall();
+		check_wall();
 	}
 	else
 		error("Invalid map");
@@ -104,53 +104,53 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-// void	check_size(void)
-// {
-//  if (len < 3 || i < 3)
-//  	error("Invalid map");
-// }
+void	check_wall(void)
+{
+	int	i;
+	t_map	*map1;
 
-// void	check_wall(void)
-// {
-// 	int		count;
+	map1 = map(0);
+	if (map_global()->x_max < 3 || map_global()->y_max < 3)
+		error("Invalid map");
+	while (map1)
+	{
+		i = 0;
+		if (map1->i == 0 || map1->i == map_global()->y_max)
+		{
+			while (i < map1->len)
+			{
+				if (map1->line[i] != '1')
+					error("Invalid walls of map");
+				i++;
+			}
+		}
+		if (map1->line[0] != '1' || map1->line[map1->len - 1] != '1')
+			error("Invalid walls of map");
+		map1 = map1->next;
+	}
+	check_chars();
+}
 
-// 	count = -1;
-// 	while (++count < map(0)->len)
-// 	{
-// 		if ((map(0)->line[0] != '1' 
-// 			|| map(0)->line[map(0)->i -1] != '1'))
-// 			error("Invalid walls of map");
-// 	}
-// 	count = 0;
-// 	while (++count < map(0)->i)
-// 	{
-// 		if ((map(0)->line[count] != '1' 
-// 			|| map(0)->line[count] != '1'))
-// 			error("Invalid walls of map");
-// 	}
-// 	check_chars();
-// }
+void	check_chars(void)
+{
+	int	count;
+	int	pos;
+	t_map	*map1;
 
-// void	check_chars(void)
-// {
-// 	int	count;
-// 	int	pos;
-// 	int	count2;
-
-// 	count = 0;
-// 	pos = 0;
-// 	while (++count < map(0)->i - 1)
-// 	{
-// 		count2 = 0;
-// 		while (++count2 < map(0)->len)
-// 		{
-// 			if (map(0)->line[count] == 'N')
-// 				pos += 1;
-// 			else if (map(0)->line[count] != '0' 
-// 					&& map(0)->line[count] != '1')
-// 				error("Invalid contents in map");
-// 		}
-// 	}
-// 	if (pos != 1)
-// 		error("Invalid contents in map");
-// }
+	pos = 0;
+	map1 = map(0);
+	while (map1)
+	{
+		count = -1;
+		while(++count < map1->len)
+		{
+			if (map1->line[count] == 'N')
+				pos += 1;
+			else if (map1->line[count] != '0' && map1->line[count] != '1')
+				error("Invalid contents in map");
+		}
+		map1 = map1->next;
+	}
+	if (pos != 1)
+		error("Invalid contents in map");
+}
