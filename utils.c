@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/16 17:09:14 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/17 18:42:36 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,18 @@ char	*rm_space(const char *str)
 
 int	free_all(int i)
 {
-	int		count;
-	t_map	*temp;
+	t_map	*next;
+	t_map	*current;
 
-	count = -1;
-	temp = map(0);
-	while (++count < map_global()->y_max)
+	current = map(0);
+	while (current != NULL)
 	{
-		free(map(temp)->line);
-		temp = temp->next;
+		free(current->line);
+		next = current->next;
+		free(current);
+		current = next;
 	}
+	map(NULL);
 	if (window()->window_ptr)
 		mlx_destroy_window(window()->mlx_ptr, window()->window_ptr);
 	if (window()->mlx_ptr)

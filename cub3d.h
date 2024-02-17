@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/16 17:07:51 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/17 18:33:42 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_map
 
 typedef struct s_map_global
 {
+	int				fd;
+	char			*gnl;
 	int				x_max;
 	int				y_max;
 }				t_map_global;
@@ -66,7 +68,7 @@ void			error(char	*str);
 char			*get_next_line(int fd);
 char			*ft_strjoin1(char *linha, char *buffer);
 void			check_map(char *path);
-void			init_map(char *gnl, int fd);
+void			init_map(void);
 void			check_map(char *path);
 char			*rm_nl(char	*str);
 char			*ft_strcpy(char *dest, char *src);
@@ -74,5 +76,6 @@ void			check_chars(void);
 void			new_window(void);
 char			*rm_space(const char *str);
 t_map_global	*map_global(void);
+int				aux_map(t_map *map1, int max);
 
 #endif

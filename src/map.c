@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/16 18:04:59 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/17 18:46:07 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,73 +29,80 @@ void	check_name(char *path)
 
 void	check_map(char *path)
 {
-	int		fd;
-	char	*gnl;
 	int		i;
 
-	fd = open(path, O_RDONLY);
-	gnl = get_next_line(fd);
-	if (!gnl)
+	map_global()->fd = open(path, O_RDONLY);
+	if (map_global()->fd < 0)
+		error("Failed to open file");
+	map_global()->gnl = get_next_line(map_global()->fd);
+	if (!map_global()->gnl)
 		error("Invalid map");
-	while (gnl)
+	while (map_global()->gnl)
 	{
 		i = 0;
-		while (gnl[i] && gnl[i] == ' ')
+		while (map_global()->gnl[i] && map_global()->gnl[i] == ' ')
 			i++;
-		if (gnl[i] != '1')
+		if (map_global()->gnl[i] != '1')
 		{
-			free(gnl);
-			gnl = get_next_line(fd);
+			free(map_global()->gnl);
+			map_global()->gnl = get_next_line(map_global()->fd);
+			if (!map_global()->gnl)
+				error("Invalid map");
 		}
 		else
 			break ;
 	}
-	if (gnl[i] == '1')
-		init_map(gnl, fd);
-	free(gnl);
-	close(fd);
+	if (map_global()->gnl && map_global()->gnl[i] == '1')
+		init_map();
 }
 
-//doesnt have to be rectangle, but walls still need to be 1 
-void	init_map(char *gnl, int fd)
+void	init_map(void)
 {
 	t_map	*map1;
 	int		max;
+	char	*line;
 	int		i;
 
 	map1 = map(0);
 	max = 0;
-	while (gnl != NULL)
+	i = 0;
+	while (map_global()->gnl != NULL)
 	{
-		gnl = rm_space(rm_nl(gnl));
-		map1->line = malloc(ft_strlen(gnl) + 1);
+		line = rm_space(rm_nl(map_global()->gnl));
+		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
+		free(line);
+		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
-		ft_strcpy(map1->line, gnl);
-		map1->i += 1;
-		i = map1->i;
-		map1->len = ft_strlen(map1->line);
-		if (map1->len > max)
-			max = map1->len;
-		free(gnl);
-		gnl = get_next_line(fd);
-		if (gnl != NULL)
-		{
-			map1->next = malloc(sizeof(t_map));
-			if (map1->next == NULL)
-				error("Fail to allocate memory");
-			map1->next->prev = map1;
-		}
-		else
-			map1->next = NULL;
+		ft_memcpy(map1->line, map_global()->gnl, ft_strlen(map_global()->gnl) + 1);
+		map1->i = i++;
+		max = aux_map(map1, max);
 		map1 = map1->next;
 	}
+	free(map_global()->gnl);
+    close(map_global()->fd);
 	map_global()->x_max = max;
-	map_global()->y_max = i;
-	printin();
+	map_global()->y_max = i - 1;
 }
 
-
+int	aux_map(t_map *map1, int max)
+{
+	map1->len = ft_strlen(map1->line);
+	if (map1->len > max)
+		max = map1->len;
+	free(map_global()->gnl);
+	map_global()->gnl = get_next_line(map_global()->fd);
+	if (map_global()->gnl != NULL)
+	{
+		map1->next = malloc(sizeof(t_map));
+		if (map1->next == NULL)
+			error("Fail to allocate memory");
+		map1->next->prev = map1;
+	}
+	else
+		map1->next = NULL;
+	return (max);
+}
 
 // void	check_size(void)
 // {

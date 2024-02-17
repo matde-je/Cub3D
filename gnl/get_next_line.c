@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:46:01 by matde-je          #+#    #+#             */
-/*   Updated: 2024/02/15 16:41:07 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/16 19:14:47 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*get_next_line(int fd)
 	static char	buf[FOPEN_MAX];
 	char		*line;
 	int			trig;
+	char		*tmp;
 
 	if (fd >= FOPEN_MAX || read(fd, 0, 0) == -1)
 	{
@@ -66,7 +67,8 @@ char	*get_next_line(int fd)
 	trig = 0;
 	while (trig == 0 && (buf[0] != 0 || read(fd, buf, FOPEN_MAX) != 0))
 	{
-		line = ft_strjoin1(line, buf);
+		tmp = ft_strjoin1(line, buf);
+		line = tmp;
 		trig = buffer(buf);
 	}
 	return (line);
