@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:52:48 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:42:17 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 16:47:07 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ void	error(char	*str)
 	int	i;
 
 	i = -1;
+	write(1, "Error\n", 6);
 	while (str[++i])
 		write(1, &str[i], 1);
 	write(1, "\n", 1);
 	free_all(1);
+	exit(1);
 }
 
 t_map	*map(void)

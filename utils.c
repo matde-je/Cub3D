@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:43:23 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 16:48:23 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,28 @@ void	printin(void)
 	printf("------printin---------\n");
 }
 
-char	*rm_space(const char *str)
-{
-	char	*str1;
-	int		i;
-	int		j;
+// char	*rm_space(const char *str)
+// {
+// 	char	*str1;
+// 	int		i;
+// 	int		j;
 
-	str1 = malloc(ft_strlen(str) + 1);
-	if (str1 == NULL)
-		error("Memory allocation failed");
-	i = -1;
-	j = 0;
-	while (++i < (int)ft_strlen(str))
-	{
-		if (str[i] != ' ')
-		{
-			str1[j] = str[i];
-			j++;
-		}
-	}
-	str1[j] = '\0';
-	return (str1);
-}
+// 	str1 = malloc(ft_strlen(str) + 1);
+// 	if (str1 == NULL)
+// 		error("Memory allocation failed");
+// 	i = -1;
+// 	j = 0;
+// 	while (++i < (int)ft_strlen(str))
+// 	{
+// 		if (str[i] != ' ')
+// 		{
+// 			str1[j] = str[i];
+// 			j++;
+// 		}
+// 	}
+// 	str1[j] = '\0';
+// 	return (str1);
+// }
 
 int	free_all(int i)
 {
@@ -98,7 +98,5 @@ int	free_all(int i)
 	}
 	if (i == 0)
 		exit(0);
-	if (i == 1)
-		exit(1);
 	return (0);
 }

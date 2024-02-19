@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:42:34 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 16:51:54 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	init_map(void)
 	i = 0;
 	while (map_global()->gnl != NULL)
 	{
-		line = rm_space(rm_nl(map_global()->gnl));
+		line = rm_nl(map_global()->gnl);
 		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
-		free(line);
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
@@ -120,7 +119,7 @@ void	check_chars(void)
 		{
 			if (map1->line[count] == 'N')
 				pos += 1;
-			else if (map1->line[count] != '0' && map1->line[count] != '1')
+			else if (map1->line[count] != '0' && map1->line[count] != '1' && map1->line[count] != ' ')
 				error("Invalid contents in map");
 		}
 		map1 = map1->next;
