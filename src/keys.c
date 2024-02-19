@@ -6,128 +6,118 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/16 16:30:13 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:34 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	move_up(int count, int count2)
+void	move_up(int i)
 {
-	while (++count < map(0)->i)
+	t_map	*map1;
+
+	map1 = map();
+	while (map1)
 	{
-		count2 = -1;
-		while (++count2 < map(0)->len)
+		i = -1;
+		while (++i < map1->len)
 		{
-			if (map(0)->line[count] == 'N')
+			if (map1->line[i] == 'N')
 			{
-				if (map(0)->line[count -1] == '1')
+				if (map1->prev->line[i] == '1')
 					return ;
-				map(0)->line[count] = '0';
-				//mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['0'], 
-				// count2 * 64, count * 64);
-				map(0)->line[count - 1] = 'N';
-				//mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['N'], 
-				// count2 * 64, (count - 1) * 64);
+				map1->line[i] = '0';
+				map1->prev->line[i] = 'N';
 				return ;
 			}
 		}
+		map1 = map1->next;
 	}
 }
 
-void	move_down(int count, int count2)
+void	move_down(int i)
 {
-	while (++count < map(0)->i)
+	t_map	*map1;
+
+	map1 = map();
+	while (map1)
 	{
-		count2 = -1;
-		while (++count2 < map(0)->len)
+		i = -1;
+		while (++i < map1->len)
 		{
-			if (map(0)->line[count] == 'N')
+			if (map1->line[i] == 'N')
 			{
-				if (map(0)->line[count +1] == '1')
+				if (map1->next->line[i] == '1')
 					return ;
-				map(0)->line[count] = '0';
-				// mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['0'], 
-				// count2 * 64, count * 64);
-				map(0)->line[count + 1] = 'N';
-				// mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['N'], 
-				// count2 * 64, (count + 1) * 64);
+				map1->line[i] = '0';
+				map1->next->line[i] = 'N';
 				return ;
 			}
 		}
+		map1 = map1->next;
 	}
 }
 
-void	move_left(int count, int count2)
+void	move_left(int i)
 {
-	while (++count < map(0)->i)
+	t_map	*map1;
+
+	map1 = map();
+	while (map1)
 	{
-		count2 = -1;
-		while (++count2 < map(0)->len)
+		i = -1;
+		while (++i < map1->len)
 		{
-			if (map(0)->line[count] == 'N')
+			if (map1->line[i] == 'N')
 			{
-				if (map(0)->line[count] == '1')
+				if (map1->line[i -1] == '1')
 					return ;
-				map(0)->line[count] = '0';
-				// mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['0'], 
-				// count2 * 64, count * 64);
-				map(0)->line[count] = 'N';
-				// mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['N'], 
-				// (count2 - 1) * 64, count * 64);
+				map1->line[i] = '0';
+				map1->line[i -1] = 'N';
 				return ;
 			}
 		}
+		map1 = map1->next;
 	}
 }
 
-void	move_right(int count, int count2)
+void	move_right(int i)
 {
-	while (++count < map(0)->i)
+	t_map	*map1;
+
+	map1 = map();
+	while (map1)
 	{
-		count2 = -1;
-		while (++count2 < map(0)->len)
+		i = -1;
+		while (++i < map1->len)
 		{
-			if (map(0)->line[count] == 'N')
+			if (map1->line[i] == 'N')
 			{
-				if (map(0)->line[count] == '1')
+				if (map1->line[i + 1] == '1')
 					return ;
-				map(0)->line[count] = '0';
-				// mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['0'], 
-				// count2 * 64, count * 64);
-				map(0)->line[count] = 'N';
-				// mlx_put_image_to_window(window()->mlx_ptr, 
-				// window()->window_ptr, window()->img['N'], 
-				// (count2 + 1) * 64, count * 64);
+				map1->line[i] = '0';
+				map1->line[i +1] = 'N';
 				return ;
 			}
 		}
+		map1 = map1->next;
 	}
 }
 
 int	key_handler(int key)
 {
-	int	count;
-	int	count2;
+	int	i;
 
-	count = -1;
-	count2 = -1;
+	i = -1;
 	if (key == ESC)
 		free_all(0);
 	else if (key == W)
-		move_up(count, count2);
+		move_up(i);
 	else if (key == A)
-		move_left(count, count2);
+		move_left(i);
 	else if (key == D)
-		move_right(count, count2);
+		move_right(i);
 	else if (key == S)
-		move_down(count, count2);
+		move_down(i);
 	return (0);
 }

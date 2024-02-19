@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:52:48 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 18:25:34 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:17 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,11 @@ void	error(char	*str)
 	free_all(1);
 }
 
-t_map	*map(t_map *new_map)
+t_map	*map(void)
 {
 	static t_map	*var = NULL;
 
-	if (new_map != NULL)
-	{
-		if (var != NULL)
-		{
-			free(var->line);
-			free(var);
-		}
-		var = new_map;
-	}
-	else if (var == NULL)
+	if (var == NULL)
 	{
 		var = malloc(sizeof(t_map));
 		if (var == NULL)

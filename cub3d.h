@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:16:41 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:13 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_window
 	char	*mlx_ptr;
 }				t_window;
 
-t_map			*map(t_map *new_map);
+t_map			*map(void);
 void			printin(void);
 t_window		*window(void);
 void			check_name(char *path);

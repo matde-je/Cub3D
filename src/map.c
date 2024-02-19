@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 19:42:46 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:34 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	check_name(char *path)
 		&& (path[i - 2] == 'u' && path[i - 1] == 'b'))
 	{
 		check_map(path);
+		check_chars();
 		check_wall();
 	}
 	else
@@ -63,7 +64,7 @@ void	init_map(void)
 	char	*line;
 	int		i;
 
-	map1 = map(0);
+	map1 = map();
 	max = 0;
 	i = 0;
 	while (map_global()->gnl != NULL)
@@ -111,7 +112,7 @@ void	check_chars(void)
 	t_map	*map1;
 
 	pos = 0;
-	map1 = map(0);
+	map1 = map();
 	while (map1)
 	{
 		count = -1;

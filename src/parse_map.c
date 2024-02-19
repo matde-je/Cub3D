@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:16:29 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:42:34 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_wall(void)
 	int		i;
 	t_map	*map1;
 
-	map1 = map(0);
+	map1 = map();
 	if (map_global()->x_max < 3 || map_global()->y_max < 3)
 		error("Invalid map");
 	while (map1)
@@ -37,7 +37,6 @@ void	check_wall(void)
 		map1 = map1->next;
 	}
 	check_walls();
-	check_chars();
 }
 
 void	check_walls(void)
@@ -45,7 +44,7 @@ void	check_walls(void)
 	t_map	*map1;
 	int		conta;
 
-	map1 = map(0);
+	map1 = map();
 	if (map_global()->x_max < 3 || map_global()->y_max < 3)
 		error("Invalid map");
 	while (map1)

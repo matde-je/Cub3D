@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 18:42:36 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:43:23 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	printin(void)
 {
 	t_map	*map1;
 
-	map1 = map(0);
+	map1 = map();
 	printf("------printin---------\n");
 	while (map1)
 	{
@@ -81,7 +81,7 @@ int	free_all(int i)
 	t_map	*next;
 	t_map	*current;
 
-	current = map(0);
+	current = map();
 	while (current != NULL)
 	{
 		free(current->line);
@@ -89,7 +89,6 @@ int	free_all(int i)
 		free(current);
 		current = next;
 	}
-	map(NULL);
 	if (window()->window_ptr)
 		mlx_destroy_window(window()->mlx_ptr, window()->window_ptr);
 	if (window()->mlx_ptr)
