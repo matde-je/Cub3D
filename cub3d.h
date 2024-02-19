@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 18:33:42 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 15:16:41 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ void			new_window(void);
 char			*rm_space(const char *str);
 t_map_global	*map_global(void);
 int				aux_map(t_map *map1, int max);
+void			check_walls(void);
+void			check_walls2(t_map *map1);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 19:36:15 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/17 19:42:46 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,37 +104,10 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void	check_wall(void)
-{
-	int	i;
-	t_map	*map1;
-
-	map1 = map(0);
-	if (map_global()->x_max < 3 || map_global()->y_max < 3)
-		error("Invalid map");
-	while (map1)
-	{
-		i = 0;
-		if (map1->i == 0 || map1->i == map_global()->y_max)
-		{
-			while (i < map1->len)
-			{
-				if (map1->line[i] != '1')
-					error("Invalid walls of map");
-				i++;
-			}
-		}
-		if (map1->line[0] != '1' || map1->line[map1->len - 1] != '1')
-			error("Invalid walls of map");
-		map1 = map1->next;
-	}
-	check_chars();
-}
-
 void	check_chars(void)
 {
-	int	count;
-	int	pos;
+	int		count;
+	int		pos;
 	t_map	*map1;
 
 	pos = 0;
@@ -142,7 +115,7 @@ void	check_chars(void)
 	while (map1)
 	{
 		count = -1;
-		while(++count < map1->len)
+		while (++count < map1->len)
 		{
 			if (map1->line[count] == 'N')
 				pos += 1;
