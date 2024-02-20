@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/17 18:44:37 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:00:20 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,25 @@ void	new_window(void)
 	if (!window()->mlx_ptr)
 		free_all(0);
 	(window()->window_ptr) = mlx_new_window(window()->mlx_ptr, \
-	(map_global()->x_max * 64), (map_global()->y_max * 64), "have fun");
+	map_global()->x_max * 64, map_global()->y_max * 64, "have fun");
 	if (!window()->window_ptr)
 		free_all(0);
 	//img_func();
 }
+
+
+
+
+void	look_left(void)
+{
+
+}
+
+void	look_right(void)
+{
+
+}
+
 
 // void	img_func(void)
 // {

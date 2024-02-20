@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 16:51:54 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 18:44:36 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_map(char *path)
 {
 	int		i;
 
-	map_global()->fd = open(path, O_RDONLY);
+	(map_global()->fd) = open(path, O_RDONLY);
 	if (map_global()->fd < 0)
 		error("Failed to open file");
 	map_global()->gnl = get_next_line(map_global()->fd);
@@ -74,15 +74,16 @@ void	init_map(void)
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
-		ft_memcpy(map1->line, map_global()->gnl, ft_strlen(map_global()->gnl) + 1);
+		ft_memcpy(map1->line, map_global()->gnl, \
+			ft_strlen(map_global()->gnl) + 1);
 		map1->i = i++;
 		max = aux_map(map1, max);
 		map1 = map1->next;
 	}
 	free(map_global()->gnl);
-    close(map_global()->fd);
+	close(map_global()->fd);
 	map_global()->x_max = max;
-	map_global()->y_max = i - 1;
+	map_global()->y_max = i;
 }
 
 int	aux_map(t_map *map1, int max)
@@ -119,7 +120,8 @@ void	check_chars(void)
 		{
 			if (map1->line[count] == 'N')
 				pos += 1;
-			else if (map1->line[count] != '0' && map1->line[count] != '1' && map1->line[count] != ' ')
+			else if (map1->line[count] != '0' && map1->line[count] != '1' \
+				&& map1->line[count] != ' ')
 				error("Invalid contents in map");
 		}
 		map1 = map1->next;

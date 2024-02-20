@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:42:13 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:21:21 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define W 0x77
 # define D 0x64
 # define S 0x73
+# define LAK 0xff51
+# define RAK 0xff53
 
 # include "libft/inc/libft.h"
 # include <errno.h>
@@ -57,7 +59,18 @@ typedef struct s_window
 	char	*mlx_ptr;
 }				t_window;
 
+typedef struct s_texture
+{
+	void	*north;
+	void	*south;
+	void	*east;
+	void	*west;
+	int		*floor;
+	int		*ceiling;
+}	t_texture;
+
 t_map			*map(void);
+t_texture		*texture(void);
 void			printin(void);
 t_window		*window(void);
 void			check_name(char *path);
@@ -79,5 +92,7 @@ t_map_global	*map_global(void);
 int				aux_map(t_map *map1, int max);
 void			check_walls(void);
 void			check_walls2(t_map *map1);
+void			look_right(void);
+void			look_left(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 16:48:23 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:10:10 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,58 +23,32 @@ char	*rm_nl(char	*str)
 	return (str);
 }
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 void	printin(void)
 {
 	t_map	*map1;
 
 	map1 = map();
-	printf("------printin---------\n");
 	while (map1)
 	{
+		printf("i: %d\n", map1->i);
 		printf("line: %s\n", map1->line);
 		printf("len: %d\n", map1->len);
-		printf("i: %d\n", map1->i);
 		map1 = map1->next;
 	}
-	printf("------printin---------\n");
 }
 
-// char	*rm_space(const char *str)
-// {
-// 	char	*str1;
-// 	int		i;
-// 	int		j;
+void	error(char	*str)
+{
+	int	i;
 
-// 	str1 = malloc(ft_strlen(str) + 1);
-// 	if (str1 == NULL)
-// 		error("Memory allocation failed");
-// 	i = -1;
-// 	j = 0;
-// 	while (++i < (int)ft_strlen(str))
-// 	{
-// 		if (str[i] != ' ')
-// 		{
-// 			str1[j] = str[i];
-// 			j++;
-// 		}
-// 	}
-// 	str1[j] = '\0';
-// 	return (str1);
-// }
+	i = -1;
+	write(1, "Error\n", 6);
+	while (str[++i])
+		write(1, &str[i], 1);
+	write(1, "\n", 1);
+	free_all(1);
+	exit(1);
+}
 
 int	free_all(int i)
 {

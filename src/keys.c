@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 15:42:34 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:15:27 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,9 @@ int	key_handler(int key)
 		move_right(i);
 	else if (key == S)
 		move_down(i);
+	else if (key == LAK)
+		look_left();
+	else if (key == RAK)
+		look_right();
 	return (0);
 }

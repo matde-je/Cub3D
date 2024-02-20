@@ -6,12 +6,12 @@
 #    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/02/16 17:27:06 by matilde          ###   ########.fr        #
+#    Updated: 2024/02/20 12:22:08 by matilde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = main.c keys.c map.c utils.c parse_map.c window_img.c get_next_line.c \
-			get_next_line_utils.c
+			get_next_line_utils.c parse_textures.c
 
 #Add any missing folder containing a .c to the vpath
 vpath %.c gnl/ src/

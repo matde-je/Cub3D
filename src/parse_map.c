@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 16:57:41 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/19 17:16:33 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_wall(void)
 	while (map1)
 	{
 		i = 0;
-		if (map1->i == 0 || map1->i == map_global()->y_max)
+		if (map1->i == 0 || map1->i == map_global()->y_max - 1)
 		{
 			while (i < map1->len)
 			{

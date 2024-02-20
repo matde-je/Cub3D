@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:52:48 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 16:47:07 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:21:11 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
-		error("Error in number of arguments");
+		error("Number of arguments");
 	check_name(argv[1]);
 	new_window();
 	mlx_key_hook(window()->window_ptr, key_handler, NULL);
@@ -24,19 +24,6 @@ int	main(int argc, char **argv)
 		mlx_loop(window()->mlx_ptr);
 	free_all(0);
 	return (0);
-}
-
-void	error(char	*str)
-{
-	int	i;
-
-	i = -1;
-	write(1, "Error\n", 6);
-	while (str[++i])
-		write(1, &str[i], 1);
-	write(1, "\n", 1);
-	free_all(1);
-	exit(1);
 }
 
 t_map	*map(void)
@@ -66,6 +53,13 @@ t_map_global	*map_global(void)
 t_window	*window(void)
 {
 	static t_window		var;
+
+	return (&var);
+}
+
+t_texture	*texture(void)
+{
+	static t_texture	var;
 
 	return (&var);
 }
