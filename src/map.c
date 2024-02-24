@@ -6,13 +6,13 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 18:44:36 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 11:01:51 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_name(char *path)
+void	parsing(char *path)
 {
 	int	i;
 
@@ -20,9 +20,15 @@ void	check_name(char *path)
 	if ((path[i - 4] == '.' && path[i - 3] == 'c')
 		&& (path[i - 2] == 'u' && path[i - 1] == 'b'))
 	{
+		map_global()->path = malloc(ft_strlen(path) + 1);
+		if (map_global()->path == NULL)
+			error("Fail to allocate memory");
+		ft_strlcpy(map_global()->path, path, ft_strlen(path) + 1);
 		check_map(path);
 		check_chars();
 		check_wall();
+		prep_texture(path);
+		count_rgb(0, 0, 0, 0);
 	}
 	else
 		error("Invalid map");
@@ -118,7 +124,8 @@ void	check_chars(void)
 		count = -1;
 		while (++count < map1->len)
 		{
-			if (map1->line[count] == 'N')
+			if (map1->line[count] == 'N' || map1->line[count] == 'S' \
+				|| map1->line[count] == 'E' || map1->line[count] == 'W')
 				pos += 1;
 			else if (map1->line[count] != '0' && map1->line[count] != '1' \
 				&& map1->line[count] != ' ')

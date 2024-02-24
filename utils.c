@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 17:10:10 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 11:02:38 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,33 @@ char	*rm_nl(char	*str)
 	return (str);
 }
 
-void	printin(void)
+void	printin(int i)
 {
 	t_map	*map1;
+	int		j;
 
 	map1 = map();
-	while (map1)
+	while (map1 && i == 0)
 	{
 		printf("i: %d\n", map1->i);
 		printf("line: %s\n", map1->line);
 		printf("len: %d\n", map1->len);
 		map1 = map1->next;
+	}
+	j = -1;
+	while (++j < 7 && i == 1)
+		printf("%d", texture()->f[j]);
+	printf("\n");
+	j = -1;
+	while (++j < 6 && i == 1)
+		printf("%d", texture()->c[j]);
+	printf("\n");
+	if (i == 2)
+	{
+		printf("%s\n", (char *)texture()->no);
+		printf("%s\n", (char *)texture()->so);
+		printf("%s\n", (char *)texture()->we);
+		printf("%s\n", (char *)texture()->ea);
 	}
 }
 
@@ -63,6 +79,20 @@ int	free_all(int i)
 		free(current);
 		current = next;
 	}
+	if (texture()->no)
+		free(texture()->no);
+	if (texture()->so)
+		free(texture()->so);
+	if (texture()->we)
+		free(texture()->we);
+	if (texture()->ea)
+		free(texture()->ea);
+	if (texture()->f)
+		free(texture()->f);
+	if (texture()->c)
+		free(texture()->c);
+	if (map_global()->path)
+		free(map_global()->path);
 	if (window()->window_ptr)
 		mlx_destroy_window(window()->mlx_ptr, window()->window_ptr);
 	if (window()->mlx_ptr)

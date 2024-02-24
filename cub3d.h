@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/20 12:21:21 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:54:17 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_map
 typedef struct s_map_global
 {
 	int				fd;
+	char			*path;
 	char			*gnl;
 	int				x_max;
 	int				y_max;
@@ -61,19 +62,20 @@ typedef struct s_window
 
 typedef struct s_texture
 {
-	void	*north;
-	void	*south;
-	void	*east;
-	void	*west;
-	int		*floor;
-	int		*ceiling;
+	void	*no;
+	void	*so;
+	void	*ea;
+	void	*we;
+	int		*f;
+	int		*c;
 }	t_texture;
 
 t_map			*map(void);
 t_texture		*texture(void);
-void			printin(void);
+void			parse_texture(char *path);
+void			printin(int i);
 t_window		*window(void);
-void			check_name(char *path);
+void			parsing(char *path);
 void			check_wall(void);
 int				key_handler(int key);
 int				free_all(int i);
@@ -84,15 +86,21 @@ void			check_map(char *path);
 void			init_map(void);
 void			check_map(char *path);
 char			*rm_nl(char	*str);
-char			*ft_strcpy(char *dest, char *src);
 void			check_chars(void);
 void			new_window(void);
-char			*rm_space(const char *str);
 t_map_global	*map_global(void);
 int				aux_map(t_map *map1, int max);
 void			check_walls(void);
 void			check_walls2(t_map *map1);
 void			look_right(void);
 void			look_left(void);
+void			parse_rgb(char **trim, char **trim1);
+void			rgb_c(int i, char **split, int e);
+void			rgb_f(int j, char **split, int e);
+int				parse_rgb2(char **trim, char **trim1, char ***split);
+void			parse_textures(char **trim, char **trim1);
+void			count_rgb(int we, int no, int so, int ea);
+void			prep_texture(char *path);
+int				count_textures(int *we, int *no, int *so, int *ea);
 
 #endif

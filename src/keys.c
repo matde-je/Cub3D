@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/19 17:15:27 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:30:45 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	move_up(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N')
+			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->prev->line[i] == '1')
 					return ;
@@ -45,7 +46,8 @@ void	move_down(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N')
+			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->next->line[i] == '1')
 					return ;
@@ -68,7 +70,8 @@ void	move_left(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N')
+			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->line[i -1] == '1')
 					return ;
@@ -91,7 +94,8 @@ void	move_right(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N')
+			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->line[i + 1] == '1')
 					return ;
