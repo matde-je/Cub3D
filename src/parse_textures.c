@@ -28,12 +28,9 @@ void	prep_texture(char *path)
 	{
 		trim = NULL;
 		trim1 = NULL;
-		gnl = map_global()->gnl;
-		while (*map_global()->gnl == ' ')
-			map_global()->gnl++;
+		parse_textures(&trim, &trim1, &gnl);
 		if (*map_global()->gnl == '1')
 			break ;
-		parse_textures(&trim, &trim1);
 		parse_rgb(&trim, &trim1);
 		free(gnl);
 		map_global()->gnl = get_next_line(map_global()->fd);
@@ -44,8 +41,11 @@ void	prep_texture(char *path)
 	close(map_global()->fd);
 }
 
-void	parse_textures(char **trim, char **trim1)
+void	parse_textures(char **trim, char **trim1, char **gnl)
 {
+	*gnl = map_global()->gnl;
+	while (*map_global()->gnl == ' ')
+		map_global()->gnl++;
 	if (*map_global()->gnl == 'N' && *(map_global()->gnl + 1) == 'O')
 	{
 		map_global()->no += 1;

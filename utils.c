@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 13:12:11 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 14:27:05 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,18 +79,7 @@ int	free_all(int i)
 		free(current);
 		current = next;
 	}
-	if (texture()->no)
-		free(texture()->no);
-	if (texture()->so)
-		free(texture()->so);
-	if (texture()->we)
-		free(texture()->we);
-	if (texture()->ea)
-		free(texture()->ea);
-	if (texture()->f)
-		free(texture()->f);
-	if (texture()->c)
-		free(texture()->c);
+	freeing();
 	if (map_global()->path)
 		free(map_global()->path);
 	if (window()->window_ptr)
@@ -103,4 +92,20 @@ int	free_all(int i)
 	if (i == 0)
 		exit(0);
 	return (0);
+}
+
+void	freeing(void)
+{
+	if (texture()->no)
+		free(texture()->no);
+	if (texture()->so)
+		free(texture()->so);
+	if (texture()->we)
+		free(texture()->we);
+	if (texture()->ea)
+		free(texture()->ea);
+	if (texture()->f)
+		free(texture()->f);
+	if (texture()->c)
+		free(texture()->c);
 }

@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 13:21:22 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 14:27:21 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void			parse_rgb(char **trim, char **trim1);
 void			rgb_c(int i, char **split, int e);
 void			rgb_f(int j, char **split, int e);
 int				parse_rgb2(char **trim, char **trim1, char ***split);
-void			parse_textures(char **trim, char **trim1);
+void			parse_textures(char **trim, char **trim1, char **gnl);
 void			prep_texture(char *path);
 void			count_texture(char **trim, char **trim1);
+void			freeing(void);
 
 #endif
