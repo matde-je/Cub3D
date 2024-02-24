@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/23 12:54:17 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:21:22 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_map
 typedef struct s_map_global
 {
 	int				fd;
+	int				no;
+	int				so;
+	int				we;
+	int				ea;
+	int				c;
+	int				f;
 	char			*path;
 	char			*gnl;
 	int				x_max;
@@ -99,8 +105,7 @@ void			rgb_c(int i, char **split, int e);
 void			rgb_f(int j, char **split, int e);
 int				parse_rgb2(char **trim, char **trim1, char ***split);
 void			parse_textures(char **trim, char **trim1);
-void			count_rgb(int we, int no, int so, int ea);
 void			prep_texture(char *path);
-int				count_textures(int *we, int *no, int *so, int *ea);
+void			count_texture(char **trim, char **trim1);
 
 #endif

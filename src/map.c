@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 11:01:51 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:10:24 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ void	parsing(char *path)
 		check_map(path);
 		check_chars();
 		check_wall();
+		map_global()->gnl = NULL;
+		map_global()->no = 0;
+		map_global()->so = 0;
+		map_global()->we = 0;
+		map_global()->ea = 0;
+		map_global()->c = 0;
+		map_global()->f = 0;
 		prep_texture(path);
-		count_rgb(0, 0, 0, 0);
 	}
 	else
 		error("Invalid map");

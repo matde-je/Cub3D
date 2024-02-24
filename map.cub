@@ -1,11 +1,11 @@
-   
-   NO ./textures/HEDGE.xpm
-SO ./textures/SLIME.xpm
+  NO ./textures/HEDGE.xpm  
+
+   SO ./textures/SLIME.xpm
 WE ./textures/SLUDGE.xpm
 EA ./textures/WARN.xpm
 
-F 220,100,0
-C 225,30,0
+  F 220,100,0
+  C 225,30,0
 
   
     111111111111111111111      

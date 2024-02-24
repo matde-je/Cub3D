@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/23 12:54:55 by matilde          ###   ########.fr       */
+/*   Updated: 2024/02/24 13:18:39 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	parse_rgb(char **trim, char **trim1)
 	j = parse_rgb2(trim, trim1, &split);
 	if (*map_global()->gnl == 'F')
 	{
+		map_global()->f += 1;
+		if (map_global()->f != 1)
+			error("Invalid color");
 		texture()->f = (int *)malloc(sizeof(int) * (ft_strlen(*trim1) - 1));
 		rgb_f(-1, split, 0);
 		texture()->f[ft_strlen(*trim1) - 2] = '\0';
@@ -56,6 +59,9 @@ int	parse_rgb2(char **trim, char **trim1, char ***split)
 			error("Invalid color");
 	if (*map_global()->gnl == 'C')
 	{
+		map_global()->c += 1;
+		if (map_global()->c != 1)
+			error("Invalid color");
 		texture()->c = (int *)malloc(sizeof(int) * (ft_strlen(*trim1) - 1));
 		rgb_c(-1, *split, 0);
 		texture()->c[ft_strlen(*trim1) - 2] = '\0';
