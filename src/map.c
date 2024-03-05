@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 13:10:24 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/05 17:48:43 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ void	parsing(char *path)
 		check_chars();
 		check_wall();
 		map_global()->gnl = NULL;
-		map_global()->no = 0;
-		map_global()->so = 0;
-		map_global()->we = 0;
-		map_global()->ea = 0;
-		map_global()->c = 0;
-		map_global()->f = 0;
 		prep_texture(path);
 	}
 	else
@@ -119,26 +113,30 @@ int	aux_map(t_map *map1, int max)
 
 void	check_chars(void)
 {
-	int		count;
+	int		i;
 	int		pos;
-	t_map	*map1;
+	t_map	*mp;
 
 	pos = 0;
-	map1 = map();
-	while (map1)
+	mp = map();
+	while (mp)
 	{
-		count = -1;
-		while (++count < map1->len)
+		i = -1;
+		while (++i < mp->len)
 		{
-			if (map1->line[count] == 'N' || map1->line[count] == 'S' \
-				|| map1->line[count] == 'E' || map1->line[count] == 'W')
+			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E' \
+				|| mp->line[i] == 'W')
+			{
 				pos += 1;
-			else if (map1->line[count] != '0' && map1->line[count] != '1' \
-				&& map1->line[count] != ' ')
+				if (pos != 1)
+					error("Invalid contents in map");
+				map_global()->pos_x = i;
+				map_global()->pos_y = mp->i;
+				printf("map %i\n", map_global()->pos_x);
+			}
+			else if (mp->line[i] != 48 && mp->line[i] != 49 && mp->line[i] != 32)
 				error("Invalid contents in map");
 		}
-		map1 = map1->next;
+		mp = mp->next;
 	}
-	if (pos != 1)
-		error("Invalid contents in map");
 }

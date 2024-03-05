@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/20 14:30:45 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/05 17:30:44 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	move_up(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->prev->line[i] = 'N';
+				map_global()->pos_y = map1->i - 1;
 				return ;
 			}
 		}
@@ -53,6 +54,7 @@ void	move_down(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->next->line[i] = 'N';
+				map_global()->pos_y = map1->i + 1;
 				return ;
 			}
 		}
@@ -77,6 +79,7 @@ void	move_left(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->line[i -1] = 'N';
+				map_global()->pos_x = i - 1;
 				return ;
 			}
 		}
@@ -101,6 +104,7 @@ void	move_right(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->line[i +1] = 'N';
+				map_global()->pos_x = i + 1;
 				return ;
 			}
 		}
@@ -127,5 +131,8 @@ int	key_handler(int key)
 		look_left();
 	else if (key == RAK)
 		look_right();
+	if (key == W || key == A || key == S || key == D || key == LAK \
+		|| key == RAK)
+		raycasting();
 	return (0);
 }

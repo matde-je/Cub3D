@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 13:18:39 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/05 13:06:53 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	parse_rgb(char **trim, char **trim1)
 {
-	char	**split;
-	int		j;
+	char		**split;
+	int			j;
+	static int	f = 0;
 
 	j = parse_rgb2(trim, trim1, &split);
 	if (*map_global()->gnl == 'F')
 	{
-		map_global()->f += 1;
-		if (map_global()->f != 1)
+		f += 1;
+		if (f != 1)
 			error("Invalid color");
-		texture()->f = (int *)malloc(sizeof(int) * (ft_strlen(*trim1) - 1));
+		texture()->f = (int *)malloc(sizeof(int) * 4);
 		rgb_f(-1, split, 0);
-		texture()->f[ft_strlen(*trim1) - 2] = '\0';
 	}
 	if (j == 0)
 	{
@@ -38,12 +38,12 @@ void	parse_rgb(char **trim, char **trim1)
 		free(*trim1);
 	if (*trim)
 		free(*trim);
-	j = -1;
 }
 
 int	parse_rgb2(char **trim, char **trim1, char ***split)
 {
-	int		j;
+	int			j;
+	static int	c = 0;
 
 	if (*map_global()->gnl != 'C' && *map_global()->gnl != 'F')
 		return (1);
@@ -59,58 +59,45 @@ int	parse_rgb2(char **trim, char **trim1, char ***split)
 			error("Invalid color");
 	if (*map_global()->gnl == 'C')
 	{
-		map_global()->c += 1;
-		if (map_global()->c != 1)
+		c += 1;
+		if (c != 1)
 			error("Invalid color");
-		texture()->c = (int *)malloc(sizeof(int) * (ft_strlen(*trim1) - 1));
+		texture()->c = (int *)malloc(sizeof(int) * 4);
 		rgb_c(-1, *split, 0);
-		texture()->c[ft_strlen(*trim1) - 2] = '\0';
 	}
 	return (0);
 }
 
 void	rgb_c(int j, char **split, int e)
 {
+	int	red;
+	int	green;
+	int	blue;
+
 	while (split[++j])
 	{
-		if (ft_atoi(split[j]) >= 10 && ft_atoi(split[j]) < 100)
-		{
-			texture()->c[e] = ft_atoi(split[j]) / 10;
-			texture()->c[e + 1] = ft_atoi(split[j]) % 10;
-			e++;
-		}
-		else if (ft_atoi(split[j]) < 10)
-			texture()->c[e] = ft_atoi(split[j]);
-		else
-		{
-			texture()->c[e] = ft_atoi(split[j]) / 100;
-			texture()->c[e + 1] = (ft_atoi(split[j]) % 100) / 10;
-			texture()->c[e + 2] = (ft_atoi(split[j]) % 100) % 10;
-			e += 2;
-		}
+		texture()->c[e] = ft_atoi(split[j]);
 		e++;
 	}
+	red = texture()->c[0];
+	green = texture()->c[1];
+	blue = texture()->c[2];
+	texture()->c[3] = (red << 16) | (green << 8) | blue;
 }
 
 void	rgb_f(int j, char **split, int e)
 {
+	int	red;
+	int	green;
+	int	blue;
+
 	while (split[++j])
 	{
-		if (ft_atoi(split[j]) >= 10 && ft_atoi(split[j]) < 100)
-		{
-			texture()->f[e] = ft_atoi(split[j]) / 10;
-			texture()->f[e + 1] = ft_atoi(split[j]) % 10;
-			e++;
-		}
-		else if (ft_atoi(split[j]) < 10)
-			texture()->f[e] = ft_atoi(split[j]);
-		else
-		{
-			texture()->f[e] = ft_atoi(split[j]) / 100;
-			texture()->f[e + 1] = (ft_atoi(split[j]) % 100) / 10;
-			texture()->f[e + 2] = (ft_atoi(split[j]) % 100) % 10;
-			e += 2;
-		}
+		texture()->f[e] = ft_atoi(split[j]);
 		e++;
 	}
+	red = texture()->f[0];
+	green = texture()->f[1];
+	blue = texture()->f[2];
+	texture()->f[3] = (red << 16) | (green << 8) | blue;
 }

@@ -6,13 +6,14 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 14:27:21 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/05 17:27:03 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+//keys
 # define ESC 0xff1b
 # define A 0x61
 # define W 0x77
@@ -36,6 +37,7 @@
 #  define BUFFER_SIZE 5
 # endif
 
+//the map is here in this linked list (line)
 typedef struct s_map
 {
 	int				len;
@@ -45,27 +47,27 @@ typedef struct s_map
 	struct s_map	*next;
 }				t_map;
 
+//has the max length of the map and the position of the camera 
 typedef struct s_map_global
 {
+	int				pos_x;
+	int				pos_y;
 	int				fd;
-	int				no;
-	int				so;
-	int				we;
-	int				ea;
-	int				c;
-	int				f;
 	char			*path;
 	char			*gnl;
 	int				x_max;
 	int				y_max;
 }				t_map_global;
 
+//has the window and the images
 typedef struct s_window
 {
 	char	*window_ptr;
-	char	*mlx_ptr;
+	void	*img[200];
+	char	*mlx;
 }				t_window;
 
+//in here are the paths and code numbers for the colors and textures
 typedef struct s_texture
 {
 	void	*no;
@@ -76,9 +78,16 @@ typedef struct s_texture
 	int		*c;
 }	t_texture;
 
+//has the angle and distance of the raycasting
+typedef struct s_ray
+{
+	float		angle;
+	float		x;
+	float		y;
+}				t_ray;
+
 t_map			*map(void);
 t_texture		*texture(void);
-void			parse_texture(char *path);
 void			printin(int i);
 t_window		*window(void);
 void			parsing(char *path);
@@ -108,5 +117,12 @@ void			parse_textures(char **trim, char **trim1, char **gnl);
 void			prep_texture(char *path);
 void			count_texture(char **trim, char **trim1);
 void			freeing(void);
+void			img_func(void);
+void			put_cf_colors(void);
+void			textur_mapping(void);
+void			draw_ceiling(void);
+void			draw_floor(void);
+void			raycasting(void);
+t_ray			*ray(void);
 
 #endif

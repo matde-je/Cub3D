@@ -43,13 +43,16 @@ void	prep_texture(char *path)
 
 void	parse_textures(char **trim, char **trim1, char **gnl)
 {
+	static int	no = 0;
+	static int	so = 0;
+
 	*gnl = map_global()->gnl;
 	while (*map_global()->gnl == ' ')
 		map_global()->gnl++;
 	if (*map_global()->gnl == 'N' && *(map_global()->gnl + 1) == 'O')
 	{
-		map_global()->no += 1;
-		if (map_global()->no != 1)
+		no += 1;
+		if (no != 1)
 			error("Invalid texture");
 		*trim = ft_strtrim(map_global()->gnl, "N");
 		*trim1 = ft_strtrim(*trim, "O");
@@ -57,23 +60,26 @@ void	parse_textures(char **trim, char **trim1, char **gnl)
 	}
 	else if (*map_global()->gnl == 'S' && *(map_global()->gnl + 1) == 'O')
 	{
-		map_global()->so += 1;
-		if (map_global()->so != 1)
+		so += 1;
+		if (so != 1)
 			error("Invalid texture");
 		*trim = ft_strtrim(map_global()->gnl, "S");
 		*trim1 = ft_strtrim(*trim, "O");
-		(texture()->so) = ft_strtrim(*trim1, " ");
 	}
-	else
-		count_texture(trim, trim1);
+	count_texture(trim, trim1);
 }
 
 void	count_texture(char **trim, char **trim1)
 {
-	if (*map_global()->gnl == 'W' && *(map_global()->gnl + 1) == 'E')
+	static int	we = 0;
+	static int	ea = 0;
+
+	if (*map_global()->gnl == 'S' && *(map_global()->gnl + 1) == 'O')
+		(texture()->so) = ft_strtrim(*trim1, " ");
+	else if (*map_global()->gnl == 'W' && *(map_global()->gnl + 1) == 'E')
 	{
-		map_global()->we += 1;
-		if (map_global()->we != 1)
+		we += 1;
+		if (we != 1)
 			error("Invalid texture");
 		*trim = ft_strtrim(map_global()->gnl, "W");
 		*trim1 = ft_strtrim(*trim, "E");
@@ -81,9 +87,11 @@ void	count_texture(char **trim, char **trim1)
 	}
 	else if (*map_global()->gnl == 'E' && *(map_global()->gnl + 1) == 'A')
 	{
+		ea += 1;
+		if (ea != 1)
+			error("Invalid texture");
 		*trim = ft_strtrim(map_global()->gnl, "E");
 		*trim1 = ft_strtrim(*trim, "A");
 		(texture()->ea) = ft_strtrim(*trim1, " ");
-		map_global()->ea += 1;
 	}
 }
