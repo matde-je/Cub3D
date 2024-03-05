@@ -132,7 +132,6 @@ void	check_chars(void)
 					error("Invalid contents in map");
 				map_global()->pos_x = i;
 				map_global()->pos_y = mp->i;
-				printf("map %i\n", map_global()->pos_x);
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49 && mp->line[i] != 32)
 				error("Invalid contents in map");
