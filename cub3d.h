@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 17:27:03 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 11:21:59 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_texture
 typedef struct s_ray
 {
 	float		angle;
+	int			hit_wall;
+	float		distance;
 	float		x;
 	float		y;
 }				t_ray;
@@ -119,9 +121,7 @@ void			count_texture(char **trim, char **trim1);
 void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
-void			textur_mapping(void);
-void			draw_ceiling(void);
-void			draw_floor(void);
+void			textur_mapping(t_map *map1);
 void			raycasting(void);
 t_ray			*ray(void);
 

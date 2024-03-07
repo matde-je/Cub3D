@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/02/24 14:27:05 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:45:48 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ int	free_all(int i)
 	if (map_global()->path)
 		free(map_global()->path);
 	if (window()->window_ptr)
-		mlx_destroy_window(window()->mlx_ptr, window()->window_ptr);
-	if (window()->mlx_ptr)
+		mlx_destroy_window(window()->mlx, window()->window_ptr);
+	if (window()->mlx)
 	{
-		mlx_destroy_display(window()->mlx_ptr);
-		free(window()->mlx_ptr);
+		mlx_destroy_display(window()->mlx);
+		free(window()->mlx);
 	}
 	if (i == 0)
 		exit(0);
