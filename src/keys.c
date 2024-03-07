@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 17:30:44 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:00:00 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ int	key_handler(int key)
 		look_right();
 	if (key == W || key == A || key == S || key == D || key == LAK \
 		|| key == RAK)
-		raycasting();
+		raycasting(map_global()->y_max, -1, -1);
 	return (0);
 }

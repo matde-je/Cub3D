@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 11:21:59 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:18:14 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_texture
 	int		*c;
 }	t_texture;
 
-//has the angle and distance of the raycasting
+//has the angle, distance of the raycasting and if the way hit the wall
 typedef struct s_ray
 {
 	float		angle;
@@ -122,7 +122,8 @@ void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
 void			textur_mapping(t_map *map1);
-void			raycasting(void);
+void			raycasting(int z, int y, int x);
 t_ray			*ray(void);
+void			coordenates(int *z, int *y, int *x, int a);
 
 #endif

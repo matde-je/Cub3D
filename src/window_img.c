@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/06 16:55:21 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 12:59:39 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	put_cf_colors(void)
 			texture()->f[3]);
 	}
 	ray()->hit_wall = 0;
-	raycasting();
+	raycasting(map_global()->y_max, -1, -1);
 }
 
 //put image of the texture orientation to the window

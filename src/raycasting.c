@@ -6,14 +6,35 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:11 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 11:25:25 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:24:55 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-//calculate updated ray angle if cameras moved
-void	calculate_ray_angle(void)
+//if cameras moved, the ray angle is updated
+void	ray_angle(t_map *map1)
+{
+	if (map1->line[map_global()->pos_x] == 'N' - 32)
+		ray()->angle = 270;
+	else if (map1->line[map_global()->pos_x] == 'N' + 32)
+		ray()->angle = 90;
+	else if (map1->line[map_global()->pos_x] == 'S' + 32)
+		ray()->angle = 270;
+	else if (map1->line[map_global()->pos_x] == 'S' - 32)
+		ray()->angle = 90;
+	else if (map1->line[map_global()->pos_x] == 'E' - 32)
+		ray()->angle = 0;
+	else if (map1->line[map_global()->pos_x] == 'E' + 32)
+		ray()->angle = 180;
+	else if (map1->line[map_global()->pos_x] == 'W' + 32)
+		ray()->angle = 0;
+	else if (map1->line[map_global()->pos_x] == 'W' - 32)
+		ray()->angle = 180;
+}
+
+//calculate initial ray angle
+void	calculate_ray_angle(int z, int y, int x)
 {
 	t_map	*map1;
 
@@ -22,44 +43,22 @@ void	calculate_ray_angle(void)
 			map1 = map1->next;
 	if (!map1 || map1->i != map_global()->pos_y)
 		return ;
-	if (ray()->angle == 0 && map1->line[map_global()->pos_x] != 'N')
-		ray()->angle = map1->line[map_global()->pos_x];
-	else if (ray()->angle == 180 && map1->line[map_global()->pos_x] != 'S')
-		ray()->angle = map1->line[map_global()->pos_x];
-	else if (ray()->angle == 90 && map1->line[map_global()->pos_x] != 'E')
-		ray()->angle = map1->line[map_global()->pos_x];
-	else if (ray()->angle == 270 && map1->line[map_global()->pos_x] != 'W')
-		ray()->angle = map1->line[map_global()->pos_x];
-}
-
-//calculate initial, from start ray angle
-void	ray_angle(void)
-{
-	t_map	*map1;
-	int		i;
-
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N')
-				ray()->angle = 0;
-			else if (map1->line[i] == 'S')
-				ray()->angle = 180;
-			else if (map1->line[i] == 'E')
-				ray()->angle = 90;
-			else if (map1->line[i] == 'W')
-				ray()->angle = 270;
-		}
-		map1 = map1->next;
-	}
+	if (map1->line[map_global()->pos_x] == 'N')
+		ray()->angle = 0;
+	else if (map1->line[map_global()->pos_x] == 'S')
+		ray()->angle = 180;
+	else if (map1->line[map_global()->pos_x] == 'E')
+		ray()->angle = 90;
+	else if (map1->line[map_global()->pos_x] == 'W')
+		ray()->angle = 270;
+	else
+		ray_angle(map1);
+	coordenates(&z, &y, &x, 0);
 }
 
 //coordenates from where the ray starts and finishes,
 //limits of the map according to the orientation of the camera
-void	coordenates(int *z, int *y, int *x)
+void	coordenates(int *z, int *y, int *x, int a)
 {
 	t_map	*map1;
 
@@ -67,57 +66,53 @@ void	coordenates(int *z, int *y, int *x)
 	while (map1 && map1->i < map_global()->pos_y)
 			map1 = map1->next;
 	if (!map1 || map1->i != map_global()->pos_y)
+		return ;
+	if (a == 1 && ray()->angle == 90)
+		*x = map_global()->pos_x;
+	else if (a == 1)
+		*x = -1;
+	if (a == 1)
 		return ;
 	if (ray()->angle && ray()->angle == 0)
 		*z = map1->i;
 	else
 		*z = map_global()->y_max;
 	if (ray()->angle == 180)
-		*y = (map_global()->y_max / 2) - 1;
-	if (ray()->angle == 90)
-		*x = (map_global()->x_max / 2) - 1;
-	if (ray()->angle == 270)
-		*x = (map_global()->x_max / 2) - 1;
+		*y = map1->i;
 }
 
 //algorithm
-void	raycasting(void)
+void	raycasting(int z, int y, int x)
 {
 	t_map	*map1;
-	int		z;
-	int		y;
-	int		x;
-	int		max_distance = 100;
+	float	ray_dx;
+	float	ray_dy;
 
-	x = -1;
-	y = -1;
 	map1 = map();
-	ray_angle();
-	coordenates(&z, &y, &x);
+	calculate_ray_angle(z, y, x);
 	while (++y < z)
 	{
-		calculate_ray_angle();
-		coordenates(&z, &y, &x);
+		coordenates(&z, &y, &x, 1);
 		while (++x < map_global()->x_max)
 		{
 			ray()->x = map_global()->pos_x;
 			ray()->y = map_global()->pos_y;
-			float ray_dx = cos(ray()->angle);
-			float ray_dy = sin(ray()->angle);
+			ray_dx = cos(ray()->angle);
+			ray_dy = sin(ray()->angle);
 			(ray()->distance) = sqrt(pow(ray()->x - map_global()->pos_x, 2) + \
 			pow(ray()->y - map_global()->pos_y, 2));
-			while (!ray()->hit_wall && ray()->distance < max_distance)
+			while (map1 && !ray()->hit_wall && ray()->distance < 100)
 			{
 				ray()->x += ray_dx;
 				ray()->y += ray_dy;
 				while (map1 && map1->i != (int)ray()->y)
 					map1 = map1->next;
-				if (map1->i == (int)ray()->y && map1->line[(int)ray()->x] == '1')
+				if (map1 && map1->i == (int)ray()->y \
+					&& map1->line[(int)ray()->x] == '1')
 					ray()->hit_wall = 1;
 				ray()->distance += 0.1;
 			}
 			textur_mapping(map1);
-			//map1 = map();
 		}
 	}
 }
