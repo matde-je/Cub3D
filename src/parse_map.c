@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 17:48:43 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:11:35 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parsing(char *path)
 			error("Fail to allocate memory");
 		ft_strlcpy(map_global()->path, path, ft_strlen(path) + 1);
 		check_map(path);
-		check_chars();
+		check_chars(-1);
 		check_wall();
 		map_global()->gnl = NULL;
 		prep_texture(path);
@@ -111,9 +111,8 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void	check_chars(void)
+void	check_chars(int i)
 {
-	int		i;
 	int		pos;
 	t_map	*mp;
 
@@ -133,7 +132,8 @@ void	check_chars(void)
 				map_global()->pos_x = i;
 				map_global()->pos_y = mp->i;
 			}
-			else if (mp->line[i] != 48 && mp->line[i] != 49 && mp->line[i] != 32)
+			else if (mp->line[i] != 48 && mp->line[i] != 49 \
+				&& mp->line[i] != 32)
 				error("Invalid contents in map");
 		}
 		mp = mp->next;

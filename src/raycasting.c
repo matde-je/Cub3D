@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:11 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 13:24:55 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:25:01 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,16 @@ void	ray_angle(t_map *map1)
 		ray()->angle = 180;
 }
 
-//calculate initial ray angle
-void	calculate_ray_angle(int z, int y, int x)
+//calculate initial ray angle and init y and z coordinates 
+//for limits of the map according to the orientaion of the camera
+//coordenates from where the ray starts and finishes
+void	calculate_ray_angle(int *z, int *y)
 {
 	t_map	*map1;
 
 	map1 = map();
 	while (map1 && map1->i < map_global()->pos_y)
-			map1 = map1->next;
+		map1 = map1->next;
 	if (!map1 || map1->i != map_global()->pos_y)
 		return ;
 	if (map1->line[map_global()->pos_x] == 'N')
@@ -53,35 +55,15 @@ void	calculate_ray_angle(int z, int y, int x)
 		ray()->angle = 270;
 	else
 		ray_angle(map1);
-	coordenates(&z, &y, &x, 0);
-}
-
-//coordenates from where the ray starts and finishes,
-//limits of the map according to the orientation of the camera
-void	coordenates(int *z, int *y, int *x, int a)
-{
-	t_map	*map1;
-
-	map1 = map();
-	while (map1 && map1->i < map_global()->pos_y)
-			map1 = map1->next;
-	if (!map1 || map1->i != map_global()->pos_y)
-		return ;
-	if (a == 1 && ray()->angle == 90)
-		*x = map_global()->pos_x;
-	else if (a == 1)
-		*x = -1;
-	if (a == 1)
-		return ;
-	if (ray()->angle && ray()->angle == 0)
+	if (ray()->angle == 0)
 		*z = map1->i;
 	else
 		*z = map_global()->y_max;
 	if (ray()->angle == 180)
-		*y = map1->i;
+		*y = map1->i - 1;
 }
 
-//algorithm
+//algorithm of casting rays 
 void	raycasting(int z, int y, int x)
 {
 	t_map	*map1;
@@ -89,10 +71,12 @@ void	raycasting(int z, int y, int x)
 	float	ray_dy;
 
 	map1 = map();
-	calculate_ray_angle(z, y, x);
+	calculate_ray_angle(&z, &y);
 	while (++y < z)
 	{
-		coordenates(&z, &y, &x, 1);
+		x = -1;
+		if (ray()->angle == 90)
+			x = map_global()->pos_x - 1;
 		while (++x < map_global()->x_max)
 		{
 			ray()->x = map_global()->pos_x;
@@ -112,14 +96,14 @@ void	raycasting(int z, int y, int x)
 					ray()->hit_wall = 1;
 				ray()->distance += 0.1;
 			}
-			textur_mapping(map1);
+			textur_mapping();
 		}
 	}
 }
 
 //put textures of walls in the window
 //i save the position of the camera in the img[pos] accordingly
-void	textur_mapping(t_map *map1)
+void	textur_mapping(void)
 {
 	int	pos;
 
@@ -137,7 +121,7 @@ void	textur_mapping(t_map *map1)
 		pos = 'S';
 	if (pos != 0)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
-		window()->img[pos], (int)ray()->x * 32, map1->i * 32);
+		window()->img[pos], (int)ray()->x * 32, (int)ray()->y * 32);
 }
 
 //eucledian distance: 
