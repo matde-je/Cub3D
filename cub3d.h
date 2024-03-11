@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 15:11:48 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/08 16:59:43 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 #  define BUFFER_SIZE 5
 # endif
 
+# define M_PI 3.14159265358979323846
+
 //the map is here in this linked list (line)
 typedef struct s_map
 {
@@ -47,7 +49,7 @@ typedef struct s_map
 	struct s_map	*next;
 }				t_map;
 
-//has the max length of the map and the position of the camera 
+//has the max lengths of the map and the position of the camera 
 typedef struct s_map_global
 {
 	int				pos_x;
@@ -79,11 +81,10 @@ typedef struct s_texture
 }	t_texture;
 
 //has the angle, distance of the raycasting, 
-//if the way hit the wall and ray coordinates
+//if the ray hit the wall and ray coordinates
 typedef struct s_ray
 {
 	float		angle;
-	int			hit_wall;
 	float		distance;
 	float		x;
 	float		y;
@@ -122,8 +123,8 @@ void			count_texture(char **trim, char **trim1);
 void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
-void			textur_mapping(void);
-void			raycasting(int z, int y, int x);
+void			textur_mapping(float x, float y);
+void			raycasting(void);
 t_ray			*ray(void);
 
 #endif

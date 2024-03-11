@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/06 11:45:48 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:39:24 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,12 @@ void	freeing(void)
 		free(texture()->f);
 	if (texture()->c)
 		free(texture()->c);
+	if (window()->img['N'])
+		mlx_destroy_image(window()->mlx, window()->img['N']);
+	if (window()->img['S'])
+		mlx_destroy_image(window()->mlx, window()->img['S']);
+	if (window()->img['E'])
+		mlx_destroy_image(window()->mlx, window()->img['E']);
+	if (window()->img['W'])
+		mlx_destroy_image(window()->mlx, window()->img['W']);
 }

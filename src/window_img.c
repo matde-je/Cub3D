@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 12:59:39 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/08 17:04:05 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,29 +66,8 @@ void	put_cf_colors(void)
 			mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, \
 			texture()->f[3]);
 	}
-	ray()->hit_wall = 0;
-	raycasting(map_global()->y_max, -1, -1);
+	raycasting();
 }
-
-//put image of the texture orientation to the window
-// void	textur_mapping(void)
-// {
-// 	int	pos;
-
-// 	pos = 0;
-// 	if (ray()->x - map_global()->pos_x > 0)
-// 		pos = 'E';
-// 	else if (ray()->x - map_global()->pos_x < 0)
-// 		pos = 'W';
-// 	else if (ray()->y - map_global()->pos_y > 0)
-// 		pos = 'N';
-// 	else if (ray()->y - map_global()->pos_y < 0)
-// 		pos = 'S';
-// 	if (pos != 0)
-// 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, 
-// 		window()->img[pos], map_global()->x_max * 32, map_global()->y_max * 32);
-// 	raycasting();
-// }
 
 //algorithm
 // void	raycasting(void)
@@ -114,4 +93,3 @@ void	put_cf_colors(void)
 // 	}
 // 	textur_mapping();
 // }
-
