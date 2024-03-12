@@ -12,7 +12,7 @@
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c window_img.c get_next_line.c \
 			get_next_line_utils.c parse_textures.c parse_rgb.c structs.c \
-			cameras.c raycasting.c
+			cameras.c render.c
 			
 
 #Add any missing folder containing a .c to the vpath

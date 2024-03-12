@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/08 16:59:43 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/12 17:38:18 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 #  define BUFFER_SIZE 5
 # endif
 
+# define WIN_HEIGHT 700
+# define WIN_WIDTH 700
 # define M_PI 3.14159265358979323846
 
 //the map is here in this linked list (line)
@@ -49,6 +51,14 @@ typedef struct s_map
 	struct s_map	*next;
 }				t_map;
 
+typedef struct s_img
+{
+    void*  img_ptr;
+    char *addr;
+    int bpp;
+    int size;
+    int endian;
+} t_img;
 //has the max lengths of the map and the position of the camera 
 typedef struct s_map_global
 {
@@ -65,7 +75,7 @@ typedef struct s_map_global
 typedef struct s_window
 {
 	char	*window_ptr;
-	void	*img[200];
+    t_img   *image;
 	char	*mlx;
 }				t_window;
 
@@ -90,6 +100,7 @@ typedef struct s_ray
 	float		y;
 }				t_ray;
 
+void put_pixel_2img(t_img *image, int x, int y, int color);
 t_map			*map(void);
 t_texture		*texture(void);
 void			printin(int i);

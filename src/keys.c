@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/08 16:19:19 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/12 17:54:10 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,6 @@ int	key_handler(int key)
 		look_right();
 	if (key == W || key == A || key == S || key == D || key == LAK \
 		|| key == RAK)
-		raycasting();
+	    return (0);	// raycasting();
 	return (0);
 }
