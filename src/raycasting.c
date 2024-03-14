@@ -6,77 +6,182 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:11 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/08 17:03:33 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:15:12 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-//algorithm of casting rays
-//atan2(): returns o inverso da tangent of y/x in radians, dá nos o angulo
-void	raycasting(void)
+int	player_angle(void)
 {
 	t_map	*map1;
-	int		step_x;
-	int		step_y;
-	float	cur_x;
-	float	cur_y;
+	int		i;
+	int		player_angle;
 
 	map1 = map();
-	ray()->x = map_global()->pos_x;
-	ray()->y = map_global()->pos_y;
-	(ray()->angle) = atan2(ray()->y - map_global()->pos_y, \
-	ray()->x - map_global()->pos_x);
-	if (ray()->angle < 0)
-		ray()->angle += 2 * M_PI;
-	step_x = -1;
-	if (cos(ray()->angle) >= 0)
-		step_x = 1;
-	step_y = -1;
-	if (sin(ray()->angle) >= 0)
-		step_y = 1;
-	step_x *= (int)round((cos(ray()->angle)));
-	step_y *= (int)round((sin(ray()->angle)));
-	cur_x = map_global()->pos_x;
-	cur_y = map_global()->pos_y;
-	while (map1 && map1->i < map_global()->pos_y)
-		map1 = map1->next;
-	if (!map1 || map1->i != map_global()->pos_y)
-		return ;
-	while (cur_x < map1->len && cur_y < map_global()->y_max)
+	while (map1)
 	{
-		if (map1->line[(int)round(cur_x)] == '1')
-			textur_mapping(cur_x, cur_y);
-		cur_x += step_x;
-		if (cur_x >= map1->len)
+		i = -1;
+		while (++i < map1->len)
 		{
-			cur_x = 0;
-			cur_y += step_y;
+			if (map1->line[i] == 'N')
+				player_angle = 0;
+			else if (map1->line[i] == 'S')
+				player_angle = 180;
+			else if (map1->line[i] == 'E')
+				player_angle = 90;
+			else if (map1->line[i] == 'W')
+				player_angle = 270;
+		}
+		map1 = map1->next;
+	}
+	return (player_angle);
+}
+
+void	raycasting(void)
+{
+	float	horizontal_x;
+	float	horizontal_y;
+	float	horizontal_distance;
+	float	vertical_distance;
+	float	intersect_x;
+	float	intersect_y;
+	float	vertical_x;
+	float	vertical_y;
+	t_map	*map1;
+	int		column;
+
+	map1 = map();
+	column = -1;
+	while (++column < map1->len)
+	{
+		horizontal_colision(column, &horizontal_x, &horizontal_y, map1);
+		vertical_colision(column, &vertical_x, &vertical_y, map1);
+		horizontal_distance = distance(map_global()->pos_x, horizontal_x, \
+		map_global()->pos_y, horizontal_y);
+		vertical_distance = distance(map_global()->pos_x, vertical_x, \
+		map_global()->pos_y, vertical_y);
+		intersect_x = vertical_x;
+		intersect_y = vertical_y;
+		if (horizontal_distance < vertical_distance)
+		{
+			intersect_x = horizontal_x;
+			intersect_y = horizontal_y;
+		}
+		if (intersect_x != 0 && intersect_y != 0)
+		{
+			calculate_ray_angle(intersect_x, intersect_y);
+			if (horizontal_distance < vertical_distance)
+				render(column, intersect_x, intersect_y, horizontal_distance);
+			else
+				render(column, intersect_x, intersect_y, vertical_distance);
+		}
+		map1 = map1->next;
+	}
+}
+
+void	horizontal_colision(int j, float *horizontal_x, \
+	float *horizontal_y, t_map *map1)
+{
+	horizontal_x = 0;
+	horizontal_y = 0;
+	while (++j < map1->len)
+	{
+		if (map1->line[j] == '1')
+		{
+			*horizontal_x = j;
+			*horizontal_y = map1->i;
+			break ;
 		}
 	}
 }
 
-//put textures of walls in the window
-//i save the position of the camera in the img[pos] accordingly
-void	textur_mapping(float cur_x, float cur_y)
+void	vertical_colision(int j, float *vertical_x, \
+	float *vertical_y, t_map *map1)
 {
-	int	pos;
+	int	column;
 
-	pos = 0;
-	(ray()->distance) = sqrt(pow(ray()->x - cur_x, 2) + \
-	pow(ray()->y - cur_y, 2));
-	if (ray()->x - map_global()->pos_x > 0)
-		pos = 'E';
-	else if (ray()->x - map_global()->pos_x < 0)
-		pos = 'W';
-	else if (ray()->y - map_global()->pos_y > 0)
-		pos = 'N';
-	else if (ray()->y - map_global()->pos_y < 0)
-		pos = 'S';
-	if (pos != 0)
-		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
-		window()->img[pos], round(ray()->x * 32), round(ray()->y * 32));
+	column = j;
+	vertical_x = 0;
+	vertical_y = 0;
+	while (++j < map_global()->y_max)
+	{
+		if (map1->line[column] == '1')
+		{
+			*vertical_x = column;
+			*vertical_y = j;
+			break ;
+		}
+		map1 = map1->next;
+	}
 }
 
-//eucledian distance: 
-//sqrt(pow(ray()->x-map_global()->pos_x,2)+pow(ray()->y-map_global()->pos_y,2))
+void	calculate_ray_angle(float intersect_x, float intersect_y)
+{
+	(ray()->angle) = atan2(distance(0, 0, intersect_y, map_global()->pos_y), \
+	distance(intersect_x, map_global()->pos_x, 0, 0));
+}
+
+float	distance(float x1, float y1, float x2, float y2)
+{
+	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+}
+
+int	calculate_texture_index(float intersect_x, float intersect_y)
+{
+	int	pos;
+	int	player;
+
+	pos = -1;
+	player = player_angle();
+	if (player == 0)
+	{
+		pos = 'N';
+		if (intersect_x < map_global()->pos_x)
+			pos = 'W';
+		else if (intersect_x > map_global()->pos_x)
+			pos = 'E';
+	}
+	else if (player == 180)
+	{
+		pos = 'S';
+		if (intersect_x < map_global()->pos_x)
+			pos = 'E';
+		else if (intersect_x > map_global()->pos_x)
+			pos = 'W';
+	}
+	else if (player == 90)
+	{
+		pos = 'E';
+		if (intersect_y > map_global()->pos_y)
+			pos = 'N';
+		else if (intersect_y < map_global()->pos_y)
+			pos = 'S';
+	}
+	else if (player == 270)
+	{
+		pos = 'W';
+		if (intersect_y > map_global()->pos_y)
+			pos = 'N';
+		else if (intersect_y < map_global()->pos_y)
+			pos = 'S';
+	}
+	return (pos);
+}
+
+void	render(int column, float intersect_x, float intersect_y, float distance)
+{
+	int		wall_height;
+	int		wall_top;
+	int		pos;
+	//int		wall_bottom;
+
+	wall_height = (int)(map_global()->y_max / distance);
+	wall_top = (map_global()->y_max - wall_height) / 2;
+	//wall_bottom = wall_top + wall_height;
+	pos = calculate_texture_index(intersect_x, intersect_y);
+	if (pos == -1)
+		return ;
+	mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+	window()->img[pos], column, wall_top);
+}

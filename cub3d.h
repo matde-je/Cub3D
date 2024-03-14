@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/08 16:59:43 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/14 22:14:03 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_map
 	struct s_map	*next;
 }				t_map;
 
-//has the max lengths of the map and the position of the camera 
+//has the max lengths of the map and the position of the camera (player)
 typedef struct s_map_global
 {
 	int				pos_x;
@@ -85,6 +85,7 @@ typedef struct s_texture
 typedef struct s_ray
 {
 	float		angle;
+	int			fov;
 	float		distance;
 	float		x;
 	float		y;
@@ -123,8 +124,16 @@ void			count_texture(char **trim, char **trim1);
 void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
-void			textur_mapping(float x, float y);
+int				calculate_texture_index(float intersect_x, float intersect_y);
+float			distance(float x1, float y1, float x2, float y2);
+void			calculate_ray_angle(float intersect_x, float intersect_y);
 void			raycasting(void);
+void			vertical_colision(int column, float *vertical_x, \
+				float *vertical_y, t_map *map1);
+void			horizontal_colision(int column, float *horizontal_x, \
+				float *horizontal_y, t_map *map1);
 t_ray			*ray(void);
+void			render(int column, float intersect_x, \
+				float intersect_y, float distance);
 
 #endif
