@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/08 17:04:05 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 11:28:28 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,99 @@ void	put_cf_colors(void)
 	raycasting();
 }
 
-//algorithm
-// void	raycasting(void)
+// void	put_cf_colors(void)
 // {
-// 	float	step;
-// 	int		max;
+// 	int	y;
+// 	int	x;
+//     int color1;
+//     int color2;
 
-// 	step = 0.1;
-// 	max = 100;
-// 	//printf("map %i\n", map_global()->pos_x);
-// 	ray()->x = map_global()->pos_x;
-// 	ray()->y = map_global()->pos_y;
-// 	while (1)
+//     color1 = texture()->c[0] << 16 | texture()->c[1]<< 8 | texture()->c[2];
+//     color2 = texture()->f[0] << 16 | texture()->f[1]<< 8 | texture()->f[2];
+// 	x = -1;
+// 	while (++x < WIN_WIDTH)
 // 	{
-// 		if (sqrt(pow(ray()->x - map_global()->pos_x, 2) + 
-// 			pow(ray()->y - map_global()->pos_y, 2)) < 0.1)
-// 			break ;
-// 		if (sqrt(pow(ray()->x - map_global()->pos_x, 2) + 
-// 			pow(ray()->y - map_global()->pos_y, 2)) > max)
-// 			return ;
-// 		ray()->x += step;
-// 		ray()->y += step;
+// 		y = WIN_HEIGHT / 2 - 1;
+// 		while (++y < WIN_HEIGHT)
+//             put_pixel_2img(window()->image, x, y, color1);
+// 			/* mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, 
+// 			texture()->c[3]); */
 // 	}
-// 	textur_mapping();
+// 	x = -1;
+// 	while (++x < WIN_WIDTH)
+// 	{
+// 		y = -1;
+// 		while (++y < WIN_HEIGHT / 2)
+//             put_pixel_2img(window()->image, x, y, color2);
+// 			/* mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, 
+// 			texture()->c[3]); */
+// 	}
+//     mlx_put_image_to_window(window()->mlx, window()->window_ptr,window()->image->img_ptr, 0, 0);
+// 	raycasting();
 // }
+
+int	calculate_texture_index(void)
+{
+	int	pos;
+	int	player;
+
+	pos = -1;
+	player = player_angle();
+	if (player == 0)
+	{
+		pos = 'N';
+		if (ray()->intersect_x < map_global()->pos_x)
+			pos = 'W';
+		else if (ray()->intersect_x > map_global()->pos_x)
+			pos = 'E';
+	}
+	else if (player == 180)
+	{
+		pos = 'S';
+		if (ray()->intersect_x < map_global()->pos_x)
+			pos = 'E';
+		else if (ray()->intersect_x > map_global()->pos_x)
+			pos = 'W';
+	}
+	else
+		texture_index(player, &pos);
+	return (pos);
+}
+
+void	texture_index(int player, int *pos)
+{
+	if (player == 90)
+	{
+		*pos = 'E';
+		if (ray()->intersect_y > map_global()->pos_y)
+			*pos = 'N';
+		else if (ray()->intersect_y < map_global()->pos_y)
+			*pos = 'S';
+	}
+	else if (player == 270)
+	{
+		*pos = 'W';
+		if (ray()->intersect_y > map_global()->pos_y)
+			*pos = 'N';
+		else if (ray()->intersect_y < map_global()->pos_y)
+			*pos = 'S';
+	}
+}
+
+void	render(int column, float distance)
+{
+	int		wall_height;
+	int		wall_top;
+	int		pos;
+
+	if (ray()->intersect_x == 0 && ray()->intersect_y == 0)
+		return ;
+	wall_height = (int)(map_global()->y_max / distance);
+	wall_top = (map_global()->y_max - wall_height) / 2;
+	pos = calculate_texture_index();
+	if (pos == -1)
+		return ;
+	mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+	window()->img[pos], column, wall_top);
+}
+//wall_bottom = wall_top + wall_height;

@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/14 22:14:03 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 11:18:49 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,8 @@ typedef struct s_texture
 //if the ray hit the wall and ray coordinates
 typedef struct s_ray
 {
-	float		angle;
-	int			fov;
-	float		distance;
-	float		x;
-	float		y;
+	float		intersect_x;
+	float		intersect_y;
 }				t_ray;
 
 t_map			*map(void);
@@ -124,16 +121,14 @@ void			count_texture(char **trim, char **trim1);
 void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
-int				calculate_texture_index(float intersect_x, float intersect_y);
+int				calculate_texture_index(void);
 float			distance(float x1, float y1, float x2, float y2);
-void			calculate_ray_angle(float intersect_x, float intersect_y);
 void			raycasting(void);
-void			vertical_colision(int column, float *vertical_x, \
-				float *vertical_y, t_map *map1);
-void			horizontal_colision(int column, float *horizontal_x, \
-				float *horizontal_y, t_map *map1);
+void			horizontal_colision(int column, t_map *map1);
+int				vertical_colision(float dist, int j, t_map *map1);
 t_ray			*ray(void);
-void			render(int column, float intersect_x, \
-				float intersect_y, float distance);
+void			render(int column, float distance);
+void			texture_index(int player, int *pos);
+int				player_angle(void);
 
 #endif
