@@ -6,37 +6,11 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 15:41:11 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 11:37:29 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:08:16 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	player_angle(void)
-{
-	t_map	*map1;
-	int		i;
-	int		player_angle;
-
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N')
-				player_angle = 0;
-			else if (map1->line[i] == 'S')
-				player_angle = 180;
-			else if (map1->line[i] == 'E')
-				player_angle = 90;
-			else if (map1->line[i] == 'W')
-				player_angle = 270;
-		}
-		map1 = map1->next;
-	}
-	return (player_angle);
-}
 
 void	raycasting(void)
 {

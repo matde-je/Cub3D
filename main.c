@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:52:48 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 11:42:13 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:11:20 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error("Number of arguments");
 	parsing(argv[1]);
-	printin(0);
 	new_window();
 	mlx_key_hook(window()->window_ptr, key_handler, NULL);
 	mlx_hook(window()->window_ptr, 17, 131072, &free_all, NULL);

@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 11:44:06 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 14:07:17 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,54 +100,6 @@ void	put_cf_colors(void)
 //window()->image->img_ptr, 0, 0);
 // 	raycasting();
 // }
-
-int	calculate_texture_index(void)
-{
-	int	pos;
-	int	player;
-
-	pos = -1;
-	player = player_angle();
-	if (player == 0)
-	{
-		pos = 'N';
-		if (ray()->intersect_x < map_global()->pos_x)
-			pos = 'W';
-		else if (ray()->intersect_x > map_global()->pos_x)
-			pos = 'E';
-	}
-	else if (player == 180)
-	{
-		pos = 'S';
-		if (ray()->intersect_x < map_global()->pos_x)
-			pos = 'E';
-		else if (ray()->intersect_x > map_global()->pos_x)
-			pos = 'W';
-	}
-	else
-		texture_index(player, &pos);
-	return (pos);
-}
-
-void	texture_index(int player, int *pos)
-{
-	if (player == 90)
-	{
-		*pos = 'E';
-		if (ray()->intersect_y > map_global()->pos_y)
-			*pos = 'N';
-		else if (ray()->intersect_y < map_global()->pos_y)
-			*pos = 'S';
-	}
-	else if (player == 270)
-	{
-		*pos = 'W';
-		if (ray()->intersect_y > map_global()->pos_y)
-			*pos = 'N';
-		else if (ray()->intersect_y < map_global()->pos_y)
-			*pos = 'S';
-	}
-}
 
 void	render(int column, float distance)
 {

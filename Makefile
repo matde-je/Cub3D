@@ -6,13 +6,13 @@
 #    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/03/07 15:09:49 by matilde          ###   ########.fr        #
+#    Updated: 2024/03/15 14:08:01 by matilde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c window_img.c get_next_line.c \
 			get_next_line_utils.c parse_textures.c parse_rgb.c structs.c \
-			cameras.c raycasting.c
+			cameras.c raycasting.c orientation.c
 			
 
 #Add any missing folder containing a .c to the vpath
