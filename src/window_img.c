@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 11:28:28 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 11:44:06 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	put_cf_colors(void)
 // 			/* mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, 
 // 			texture()->c[3]); */
 // 	}
-//     mlx_put_image_to_window(window()->mlx, window()->window_ptr,window()->image->img_ptr, 0, 0);
+//mlx_put_image_to_window(window()->mlx, window()->window_ptr,
+//window()->image->img_ptr, 0, 0);
 // 	raycasting();
 // }
 
@@ -164,4 +165,5 @@ void	render(int column, float distance)
 	mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
 	window()->img[pos], column, wall_top);
 }
+
 //wall_bottom = wall_top + wall_height;

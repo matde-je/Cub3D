@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 11:18:49 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 11:59:57 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@ t_ray			*ray(void);
 void			render(int column, float distance);
 void			texture_index(int player, int *pos);
 int				player_angle(void);
+char			*rm_space(char *str);
 
 #endif

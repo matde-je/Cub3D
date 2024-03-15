@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 15:39:24 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/15 12:26:20 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	printin(int i)
 	while (map1 && i == 0)
 	{
 		printf("i: %d\n", map1->i);
-		printf("line: %s\n", map1->line);
+		printf("line: %s.\n", map1->line);
 		printf("len: %d\n", map1->len);
 		map1 = map1->next;
 	}
@@ -116,4 +116,21 @@ void	freeing(void)
 		mlx_destroy_image(window()->mlx, window()->img['E']);
 	if (window()->img['W'])
 		mlx_destroy_image(window()->mlx, window()->img['W']);
+}
+
+char	*rm_space(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	while (str[--i])
+	{
+		if (str[i] == ' ')
+			continue ;
+		else
+			break ;
+	}
+	if (str[i] != ' ')
+		str[i + 1] = '\0';
+	return (str);
 }
