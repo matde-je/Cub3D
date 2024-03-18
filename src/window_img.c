@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/18 11:39:57 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:59:49 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,24 +100,3 @@ void	put_cf_colors(void)
 //window()->image->img_ptr, 0, 0);
 // 	raycasting();
 // }
-
-// void	render(int column, float distance)
-// {
-// //	int		wall_height;
-// //	int		wall_top;
-// 	int		pos;
-// 	(void)column;
-
-// 	if (ray()->intersect_x == 0 && ray()->intersect_y == 0)
-// 		return ;
-// //	wall_height = (int)(map_global()->y_max / distance);
-
-// //	wall_top = (map_global()->y_max - wall_height) / 2;
-// 	pos = calculate_texture_index();
-// 	if (pos == -1)
-// 		return ;
-// 	mlx_put_image_to_window(window()->mlx, window()->window_ptr, window()->img[pos], 
-// 	(ray()->intersect_x / distance) * 32, (ray()->intersect_y / distance) * 32);
-// }
-
-//wall_bottom = wall_top + wall_height;

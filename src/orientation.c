@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:07:05 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/18 12:04:06 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/18 18:04:31 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	calculate_texture_index(void)
 	{
 		pos = 'N';
 		if (ray()->intersect_x < map_global()->pos_x)
-			pos = 'W';
-		else if (ray()->intersect_x > map_global()->pos_x)
 			pos = 'E';
+		else if (ray()->intersect_x > map_global()->pos_x)
+			pos = 'W';
 	}
 	else if (player == 180)
 	{
@@ -63,7 +63,7 @@ void	texture_index(int player, int *pos)
 {
 	if (player == 90)
 	{
-		*pos = 'E';
+		*pos = 'O';
 		if (ray()->intersect_y > map_global()->pos_y)
 			*pos = 'N';
 		else if (ray()->intersect_y < map_global()->pos_y)
@@ -71,7 +71,7 @@ void	texture_index(int player, int *pos)
 	}
 	else if (player == 270)
 	{
-		*pos = 'W';
+		*pos = 'E';
 		if (ray()->intersect_y > map_global()->pos_y)
 			*pos = 'N';
 		else if (ray()->intersect_y < map_global()->pos_y)
@@ -79,15 +79,6 @@ void	texture_index(int player, int *pos)
 	}
 }
 
-// int front_vertices[4][2] = {
-//{ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2},
-//Front bottom left
-// int left_vertices[4][2] = {
-//{ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2},
-//Left bottom front
-// int right_vertices[4][2] = {
-//{ray()->intersect_x + cube_size / 2, ray()->intersect_y - cube_size / 2},
-//Right bottom front
 void	render_cube(float distance)
 {
 	int	cube_size;
@@ -99,37 +90,46 @@ void	render_cube(float distance)
 	pos = calculate_texture_index();
 	if (pos == -1)
 		return ;
-	if (player == 'N')
+	if (player == 0)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
-		window()->img[player], \
+		window()->img['N'], \
 		ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2);
-	else if (player == 'S')
+	else if (player == 180)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
-		window()->img[player], ray()->intersect_x - cube_size / 2, \
+		window()->img['S'], ray()->intersect_x - cube_size / 2, \
 		((ray()->intersect_y - cube_size) / 2) + cube_size);
-	else if (player == 'W')
+	else if (player == 270)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
-		window()->img[player], ray()->intersect_x - cube_size / 2, \
+		window()->img['E'], ray()->intersect_x - cube_size / 2, \
 		ray()->intersect_y - cube_size / 2);
-	else if (player == 'E')
+	else if (player == 90)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
-		window()->img[player], ray()->intersect_x + cube_size / 2, \
+		window()->img['W'], ray()->intersect_x + cube_size / 2, \
 		ray()->intersect_y - cube_size / 2);
-	if (pos == 'W')
+	if (pos == 'W' && player != 90)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
 		window()->img[pos], ray()->intersect_x - cube_size / 2, \
 		ray()->intersect_y - cube_size / 2);
-	else if (pos == 'E')
+	else if (pos == 'E' && player != 270)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
 		window()->img[pos], ray()->intersect_x + cube_size / 2, \
 		ray()->intersect_y - cube_size / 2);
-	else if (pos == 'N' && player != 'N')
+	else if (pos == 'N' && player != 0)
 		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
 		window()->img[pos], \
 		ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2);
+	else if (pos == 'S' && player != 180)
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[pos], ray()->intersect_x - cube_size / 2, \
+		((ray()->intersect_y - cube_size) / 2) + cube_size);
 }
-// mlx_put_image_to_window(window()->mlx, window()->window_ptr, 
-// window()->img[player], ray()->intersect_x - cube_size / 2, );
-// if (pos != player)
-// 	mlx_put_image_to_window(window()->mlx, window()->window_ptr, 
-// 	window()->img[pos], ray()->intersect_x - cube_size / 2, );
+
+// int front_vertices[4][2] = {
+//{ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2},
+//Front bottom left
+// int left_vertices[4][2] = {
+//{ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2},
+//Left bottom front
+// int right_vertices[4][2] = {
+//{ray()->intersect_x + cube_size / 2, ray()->intersect_y - cube_size / 2},
+//Right bottom front
