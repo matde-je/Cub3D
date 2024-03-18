@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/06 15:41:11 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 14:08:16 by matilde          ###   ########.fr       */
+/*   Created: 2024/03/15 19:24:41 by matilde           #+#    #+#             */
+/*   Updated: 2024/03/18 12:05:11 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../cub3d.h"
 
@@ -47,19 +48,16 @@ void	horizontal_colision(int j, t_map *map1)
 	}
 	(dist) = distance(map_global()->pos_x, horizontal_x, map_global()->pos_y, \
 		horizontal_y);
-	if (vertical_colision(dist, column, map1) == 0)
-	{
-		ray()->intersect_x = horizontal_x;
-		ray()->intersect_y = horizontal_y;
-		render(column, dist);
-	}
+	ray()->intersect_x = horizontal_x;
+	ray()->intersect_y = horizontal_y;
+	vertical_colision(&dist, column, map1, 0);
+	render_cube(dist);
 }
 
-int	vertical_colision(float dist, int j, t_map *map1)
+void	vertical_colision(float *dist, int j, t_map *map1, int column)
 {
 	float	vertical_x;
 	float	vertical_y;
-	int		column;
 	float	dist2;
 
 	column = j;
@@ -77,14 +75,12 @@ int	vertical_colision(float dist, int j, t_map *map1)
 	}
 	dist2 = distance(map_global()->pos_x, vertical_x, map_global()->pos_y, \
 		vertical_y);
-	if (dist2 < dist)
+	if (dist2 < *dist)
 	{
 		ray()->intersect_x = vertical_x;
 		ray()->intersect_y = vertical_y;
-		render(column, dist2);
-		return (1);
+		*dist = dist2;
 	}
-	return (0);
 }
 
 float	distance(float x1, float y1, float x2, float y2)

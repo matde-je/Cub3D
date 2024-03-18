@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:07:05 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 14:08:33 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/18 12:04:06 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,19 @@
 int	player_angle(void)
 {
 	t_map	*map1;
-	int		i;
 	int		player_angle;
 
 	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N')
-				player_angle = 0;
-			else if (map1->line[i] == 'S')
-				player_angle = 180;
-			else if (map1->line[i] == 'E')
-				player_angle = 90;
-			else if (map1->line[i] == 'W')
-				player_angle = 270;
-		}
+	while (map1 && map1->i != map_global()->pos_y)
 		map1 = map1->next;
-	}
+	if (map1->line[map_global()->pos_x] == 'N')
+		player_angle = 0;
+	else if (map1->line[map_global()->pos_x] == 'S')
+		player_angle = 180;
+	else if (map1->line[map_global()->pos_x] == 'E')
+		player_angle = 90;
+	else if (map1->line[map_global()->pos_x] == 'W')
+		player_angle = 270;
 	return (player_angle);
 }
 
@@ -85,3 +78,58 @@ void	texture_index(int player, int *pos)
 			*pos = 'S';
 	}
 }
+
+// int front_vertices[4][2] = {
+//{ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2},
+//Front bottom left
+// int left_vertices[4][2] = {
+//{ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2},
+//Left bottom front
+// int right_vertices[4][2] = {
+//{ray()->intersect_x + cube_size / 2, ray()->intersect_y - cube_size / 2},
+//Right bottom front
+void	render_cube(float distance)
+{
+	int	cube_size;
+	int	pos;
+	int	player;
+
+	cube_size = (map_global()->x_max * 32) / distance;
+	player = player_angle();
+	pos = calculate_texture_index();
+	if (pos == -1)
+		return ;
+	if (player == 'N')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[player], \
+		ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2);
+	else if (player == 'S')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[player], ray()->intersect_x - cube_size / 2, \
+		((ray()->intersect_y - cube_size) / 2) + cube_size);
+	else if (player == 'W')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[player], ray()->intersect_x - cube_size / 2, \
+		ray()->intersect_y - cube_size / 2);
+	else if (player == 'E')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[player], ray()->intersect_x + cube_size / 2, \
+		ray()->intersect_y - cube_size / 2);
+	if (pos == 'W')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[pos], ray()->intersect_x - cube_size / 2, \
+		ray()->intersect_y - cube_size / 2);
+	else if (pos == 'E')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[pos], ray()->intersect_x + cube_size / 2, \
+		ray()->intersect_y - cube_size / 2);
+	else if (pos == 'N' && player != 'N')
+		mlx_put_image_to_window(window()->mlx, window()->window_ptr, \
+		window()->img[pos], \
+		ray()->intersect_x - cube_size / 2, ray()->intersect_y - cube_size / 2);
+}
+// mlx_put_image_to_window(window()->mlx, window()->window_ptr, 
+// window()->img[player], ray()->intersect_x - cube_size / 2, );
+// if (pos != player)
+// 	mlx_put_image_to_window(window()->mlx, window()->window_ptr, 
+// 	window()->img[pos], ray()->intersect_x - cube_size / 2, );

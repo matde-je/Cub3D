@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 11:59:57 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/18 12:05:02 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,9 @@ int				calculate_texture_index(void);
 float			distance(float x1, float y1, float x2, float y2);
 void			raycasting(void);
 void			horizontal_colision(int column, t_map *map1);
-int				vertical_colision(float dist, int j, t_map *map1);
+void			vertical_colision(float *dist, int j, t_map *map1, int column);
 t_ray			*ray(void);
-void			render(int column, float distance);
+void			render_cube(float distance);
 void			texture_index(int player, int *pos);
 int				player_angle(void);
 char			*rm_space(char *str);
