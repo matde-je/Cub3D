@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 12:26:20 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:17:33 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,6 @@ void	printin(int i)
 	}
 }
 
-void	error(char	*str)
-{
-	int	i;
-
-	i = -1;
-	write(1, "Error\n", 6);
-	while (str[++i])
-		write(1, &str[i], 1);
-	write(1, "\n", 1);
-	free_all(1);
-	exit(1);
-}
-
 int	free_all(int i)
 {
 	t_map	*next;
@@ -82,8 +69,8 @@ int	free_all(int i)
 	freeing();
 	if (map_global()->path)
 		free(map_global()->path);
-	if (window()->window_ptr)
-		mlx_destroy_window(window()->mlx, window()->window_ptr);
+	if (window()->win)
+		mlx_destroy_window(window()->mlx, window()->win);
 	if (window()->mlx)
 	{
 		mlx_destroy_display(window()->mlx);

@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 12:08:53 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:23:26 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	parsing(char *path)
 		ft_strlcpy(map_global()->path, path, ft_strlen(path) + 1);
 		check_map(path);
 		check_chars(-1);
-		check_wall();
+		check_wall(0);
+		check_walls();
 		map_global()->gnl = NULL;
 		prep_texture(path);
 	}
@@ -129,8 +130,8 @@ void	check_chars(int i)
 				pos += 1;
 				if (pos != 1)
 					error("Invalid contents in map");
-				map_global()->pos_x = i;
-				map_global()->pos_y = mp->i;
+				map_global()->px = i;
+				map_global()->py = mp->i;
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49 \
 				&& mp->line[i] != 32)

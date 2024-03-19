@@ -6,15 +6,14 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/15 12:25:48 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/19 16:34:02 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_wall(void)
+void	check_wall(int i)
 {
-	int		i;
 	t_map	*map1;
 
 	map1 = map();
@@ -38,12 +37,17 @@ void	check_wall(void)
 				i++;
 			}
 		}
-		if ((map1->line[0] != '1' && map1->line[0] != ' ') \
-			|| map1->line[map1->len - 1] != '1')
-			error("Invalid walls0 of map");
-		map1 = map1->next;
+		map1 = check_wallhelp(map1);
 	}
-	check_walls();
+}
+
+t_map	*check_wallhelp(t_map *map1)
+{
+	if ((map1->line[0] != '1' && map1->line[0] != ' ') \
+		|| map1->line[map1->len - 1] != '1')
+		error("Invalid walls of map");
+	map1 = map1->next;
+	return (map1);
 }
 
 void	check_walls(void)
@@ -60,7 +64,7 @@ void	check_walls(void)
 			while (--conta >= 0)
 			{
 				if (map1->line[map1->len -1 - conta] != '1')
-					error("Invalid walls of map2");
+					error("Invalid walls of map");
 			}
 		}
 		check_walls2(map1);
@@ -78,7 +82,7 @@ void	check_walls2(t_map *map1)
 		while (--conta >= 0)
 		{
 			if (map1->prev->line[map1->prev->len -1 - conta] != '1')
-				error("Invalid walls of map3");
+				error("Invalid walls of map");
 		}
 	}
 }

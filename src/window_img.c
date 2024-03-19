@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/18 15:59:49 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/19 14:55:43 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	new_window(void)
 	window()->mlx = mlx_init();
 	if (!window()->mlx)
 		free_all(0);
-	(window()->window_ptr) = mlx_new_window(window()->mlx, \
+	(window()->win) = mlx_new_window(window()->mlx, \
 	map_global()->x_max * 32, map_global()->y_max * 32, "have fun");
-	if (!window()->window_ptr)
+	if (!window()->win)
 		free_all(0);
 	img_func();
 }
@@ -55,7 +55,7 @@ void	put_cf_colors(void)
 	{
 		x = -1;
 		while (++x < (map_global()->x_max * 32))
-			mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, \
+			mlx_pixel_put(window()->mlx, window()->win, x, y, \
 			texture()->c[3]);
 	}
 	y = (map_global()->y_max * 32) / 2;
@@ -63,7 +63,7 @@ void	put_cf_colors(void)
 	{
 		x = -1;
 		while (++x < (map_global()->x_max * 32))
-			mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, \
+			mlx_pixel_put(window()->mlx, window()->win, x, y, \
 			texture()->f[3]);
 	}
 	raycasting();
@@ -84,7 +84,7 @@ void	put_cf_colors(void)
 // 		y = WIN_HEIGHT / 2 - 1;
 // 		while (++y < WIN_HEIGHT)
 //             put_pixel_2img(window()->image, x, y, color1);
-// 			/* mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, 
+// 			/* mlx_pixel_put(window()->mlx, window()->win, x, y, 
 // 			texture()->c[3]); */
 // 	}
 // 	x = -1;
@@ -93,10 +93,10 @@ void	put_cf_colors(void)
 // 		y = -1;
 // 		while (++y < WIN_HEIGHT / 2)
 //             put_pixel_2img(window()->image, x, y, color2);
-// 			/* mlx_pixel_put(window()->mlx, window()->window_ptr, x, y, 
+// 			/* mlx_pixel_put(window()->mlx, window()->win, x, y, 
 // 			texture()->c[3]); */
 // 	}
-//mlx_put_image_to_window(window()->mlx, window()->window_ptr,
+//mlx_put_image_to_window(window()->mlx, window()->win,
 //window()->image->img_ptr, 0, 0);
 // 	raycasting();
 // }
