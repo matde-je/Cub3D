@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 19:24:41 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/19 16:20:23 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:23:23 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	raycasting(void)
 			{
 				ray()->x = j;
 				ray()->y = map1->i;
-				calculate_ray_angle();
-				(ray()->distance) = distance(map_global()->px, j, \
-				map_global()->py, ray()->y);
-				if (ray()->angle <= 0.1)
+				ray_dist_angle(map_global()->px, j, map_global()->py, ray()->y);
+				if (ray()->angle <= 0.1 || (ray()->y != 0 && ray()->y != \
+				map_global()->y_max && (ray()->x == skipspace(map1->line) || \
+				ray()->x == map_global()->x_max)))
 					render_cube2((map_global()->x_max * 32) / ray()->distance, \
 					player_angle(), calculate_texture_index());
 				render_cube();
@@ -40,13 +40,10 @@ void	raycasting(void)
 	}
 }
 
-float	distance(int x1, int x2, int y1, int y2)
+//calculating ray distance and angle
+void	ray_dist_angle(int x1, int x2, int y1, int y2)
 {
-	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
-}
-
-void	calculate_ray_angle(void)
-{
+	(ray()->distance) = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 	(ray()->angle) = atan2(sqrt(pow(ray()->y - map_global()->py, 2)), \
 	sqrt(pow(ray()->x - map_global()->px, 2)));
 }

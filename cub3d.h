@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:47:16 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/19 16:33:57 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:23:07 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,15 +123,15 @@ void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
 int				calculate_texture_index(void);
-float			distance(int x1, int y1, int x2, int y2);
+void			ray_dist_angle(int x1, int y1, int x2, int y2);
 void			raycasting(void);
 t_ray			*ray(void);
 void			render_cube(void);
 void			texture_index(int player, int *pos);
 int				player_angle(void);
 char			*rm_space(char *str);
-void			calculate_ray_angle(void);
 void			render_cube2(int cube_size, int player, int pos);
 t_map			*check_wallhelp(t_map *map1);
+int				skipspace(char *str);
 
 #endif

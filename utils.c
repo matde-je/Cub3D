@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/19 16:17:33 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:09:14 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ char	*rm_nl(char	*str)
 		if (str[i] == '\n')
 			str[i] = '\0';
 	return (str);
+}
+
+int	skipspace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	return (i);
 }
 
 void	printin(int i)
@@ -51,34 +61,6 @@ void	printin(int i)
 		printf("%s\n", (char *)texture()->we);
 		printf("%s\n", (char *)texture()->ea);
 	}
-}
-
-int	free_all(int i)
-{
-	t_map	*next;
-	t_map	*current;
-
-	current = map();
-	while (current != NULL)
-	{
-		free(current->line);
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	freeing();
-	if (map_global()->path)
-		free(map_global()->path);
-	if (window()->win)
-		mlx_destroy_window(window()->mlx, window()->win);
-	if (window()->mlx)
-	{
-		mlx_destroy_display(window()->mlx);
-		free(window()->mlx);
-	}
-	if (i == 0)
-		exit(0);
-	return (0);
 }
 
 void	freeing(void)
