@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error("Number of arguments");
 	parsing(argv[1]);
-    init();
+    // init();
 	new_window();
 	mlx_key_hook(window()->window_ptr, key_handler, NULL);
 	mlx_hook(window()->window_ptr, 17, 131072, &free_all, NULL);

@@ -14,11 +14,11 @@
 
 void	parsing(char *path)
 {
-	int	i;
-
-	i = ft_strlen(path);
 	if (ft_strnstr(path, ".cub", 4) != NULL)
 	{
+        int fd;
+
+        fd = open(path, O_RDONLY);
 		map_global()->path = malloc(ft_strlen(path) + 1);
 		if (map_global()->path == NULL)
 			error("Fail to allocate memory");
