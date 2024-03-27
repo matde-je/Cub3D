@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/07 15:11:35 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/26 17:51:27 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	parsing(char *path)
 	int	i;
 
 	i = ft_strlen(path);
-	if ((path[i - 4] == '.' && path[i - 3] == 'c')
-		&& (path[i - 2] == 'u' && path[i - 1] == 'b'))
+	if (ft_strnstr(path, ".cub", 4) != NULL)
 	{
 		map_global()->path = malloc(ft_strlen(path) + 1);
 		if (map_global()->path == NULL)

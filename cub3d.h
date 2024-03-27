@@ -39,9 +39,28 @@
 
 # define WIN_HEIGHT 700
 # define WIN_WIDTH 700
+# define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
 
 //the map is here in this linked list (line)
+typedef struct s_point
+{
+    double x;
+    double y;
+} t_point;
+
+typedef struct s_player
+{
+    char dirc;
+    t_point pos;
+    t_point dir;
+    t_point plane;
+    bool has_moved;
+    int move_x;
+    int move_y;
+    int rotate;
+} t_player;
+
 typedef struct s_map
 {
 	int				len;
@@ -58,7 +77,10 @@ typedef struct s_img
     int bpp;
     int size;
     int endian;
+    int width;
+    int height;
 } t_img;
+
 //has the max lengths of the map and the position of the camera 
 typedef struct s_map_global
 {
@@ -94,12 +116,53 @@ typedef struct s_texture
 //if the ray hit the wall and ray coordinates
 typedef struct s_ray
 {
-	float		angle;
-	float		distance;
-	float		x;
-	float		y;
+    float camera_x;
+    int map_x;
+    int map_y;
+    int steps_x;
+    int steps_y;
+    t_point dir;
+    t_point ray_dir;
+    t_point side_len;
+    t_point delta_len;
+    double perp_wall_len;
+    double wall_len;
+    t_point pos;
+    double wall_x;
+    t_point plane;
+    int side;
+    int line_height;
+    int render_start;
+    int render_end;
+    int hit_wall;
+    double steps;
+    double texture_pos;
+    int y;
+    int tex_y;
+    int tex_x;
 }				t_ray;
 
+typedef struct s_c3d
+{
+    void *mlx;
+    t_img image;
+    t_img tex[4];
+    void *win;
+    t_ray ray;
+    char **xpm;
+    char **map;
+}   t_c3d;
+
+//Raycast functions//
+void launch_ray(int x);
+void dda(void);
+void step_side_len_x(void);
+void step_side_len_y(void);
+void perp_render(void);
+//Raycast functions//
+
+t_c3d *cub3(void);
+char map_iter(int x, int y);
 void put_pixel_2img(t_img *image, int x, int y, int color);
 t_map			*map(void);
 t_texture		*texture(void);

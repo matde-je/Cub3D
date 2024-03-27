@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 12:23:31 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 12:24:37 by matilde          ###   ########.fr       */
+/*   Updated: 2024/03/13 22:37:12 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_map	*map(void)
 			error("alloc fail");
 		var->line = NULL;
 		var->i = 0;
-		var->prev = NULL;
+		var->prev = NULL; 
 		var->next = NULL;
 	}
 	return (var);
