@@ -73,7 +73,7 @@ typedef struct s_map
 typedef struct s_img
 {
     void*  img_ptr;
-    char *addr;
+    int *addr;
     int bpp;
     int size;
     int endian;
@@ -147,6 +147,7 @@ typedef struct s_c3d
     void *mlx;
     t_img image;
     t_img tex[4];
+    int tex_arr[4][TEX_SIZE * TEX_SIZE];
     void *win;
     t_ray ray;
     char **xpm;
@@ -164,6 +165,7 @@ void perp_render(void);
 t_c3d *cub3(void);
 char map_iter(int x, int y);
 void put_pixel_2img(t_img *image, int x, int y, int color);
+int init_tex(void);
 t_map			*map(void);
 t_texture		*texture(void);
 void			printin(int i);
