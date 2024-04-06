@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-//camera looks left
+// camera looks left
 void	look_left(void)
 {
 	t_map	*map1;
@@ -24,7 +24,7 @@ void	look_left(void)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+			if (map1->line[i] == 'N' || map1->line[i] == 'S'
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				map1->line[i] -= 32;
@@ -35,7 +35,7 @@ void	look_left(void)
 	}
 }
 
-//camera look right
+// camera look right
 void	look_right(void)
 {
 	t_map	*map1;
@@ -47,7 +47,7 @@ void	look_right(void)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+			if (map1->line[i] == 'N' || map1->line[i] == 'S'
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				map1->line[i] += 32;

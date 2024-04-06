@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	prep_texture(char *path)
 {
@@ -21,7 +21,7 @@ void	prep_texture(char *path)
 	(map_global()->fd) = open(path, O_RDONLY);
 	if (map_global()->fd < 0)
 		error("Failed to open file");
-	map_global()->gnl = get_next_line(map_global()->fd);
+	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
 	if (!map_global()->gnl)
 		error("Invalid map");
 	while (map_global()->gnl)
@@ -33,7 +33,7 @@ void	prep_texture(char *path)
 			break ;
 		parse_rgb(&trim, &trim1);
 		free(gnl);
-		map_global()->gnl = get_next_line(map_global()->fd);
+		(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
 		if (!map_global()->gnl)
 			error("Invalid map");
 	}

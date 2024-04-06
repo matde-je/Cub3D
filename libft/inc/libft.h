@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 13:44:31 by acuva-nu          #+#    #+#             */
-/*   Updated: 2024/02/01 18:02:16 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/06 14:21:28 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,5 @@ int					ft_hexing(unsigned long int n, char *b);
 int					ft_x(unsigned int n, char c);
 int					ft_p(unsigned int long n);
 int					ft_printf(const char *fmt, ...);
-/*----------------------------- GNL---------------------*/
-char				*get_next_line(int fd);
+
 #endif

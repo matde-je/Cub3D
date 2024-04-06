@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 13:06:53 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/06 14:01:25 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	parse_rgb(char **trim, char **trim1)
 {

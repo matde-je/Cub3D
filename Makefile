@@ -3,27 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
+#    By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/03/07 15:09:49 by matilde          ###   ########.fr        #
+#    Updated: 2024/04/06 14:20:16 by matde-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c window_img.c get_next_line.c \
-			get_next_line_utils.c parse_textures.c parse_rgb.c structs.c \
+			parse_textures.c parse_rgb.c structs.c \
 			cameras.c render.c
 			
 
 #Add any missing folder containing a .c to the vpath
-vpath %.c gnl/ src/
+vpath %.c gnl/ src/parse src/init src/raycast/ src/ 
 
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 INCS 	   = inc/
-NAME       = cub3d
+NAME       = cub3D
 CC         = cc
-CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS     = -g -Wall -Wextra -Werror -fsanitize=address
 LDFLAGS	   = -L./libft -lft
 RM         = rm -rf
 

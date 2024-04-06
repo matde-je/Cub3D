@@ -3,22 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+
+	+#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
 /*   Updated: 2024/03/26 17:51:27 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	parsing(char *path)
 {
-	if (ft_strnstr(path, ".cub", 4) != NULL)
-	{
-        int fd;
+	int	i;
+	int	fd;
 
-        fd = open(path, O_RDONLY);
+	i = ft_strlen(path);
+	if ((path[i - 4] == '.' && path[i - 3] == 'c') && (path[i - 2] == 'u'
+			&& path[i - 1] == 'b'))
+	{
+		fd = open(path, O_RDONLY);
 		map_global()->path = malloc(ft_strlen(path) + 1);
 		if (map_global()->path == NULL)
 			error("Fail to allocate memory");
@@ -35,12 +39,12 @@ void	parsing(char *path)
 
 void	check_map(char *path)
 {
-	int		i;
+	int	i;
 
 	(map_global()->fd) = open(path, O_RDONLY);
 	if (map_global()->fd < 0)
 		error("Failed to open file");
-	map_global()->gnl = get_next_line(map_global()->fd);
+	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
 	if (!map_global()->gnl)
 		error("Invalid map");
 	while (map_global()->gnl)
@@ -51,7 +55,7 @@ void	check_map(char *path)
 		if (map_global()->gnl[i] != '1')
 		{
 			free(map_global()->gnl);
-			map_global()->gnl = get_next_line(map_global()->fd);
+			(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
 			if (!map_global()->gnl)
 				error("Invalid map");
 		}
@@ -79,8 +83,8 @@ void	init_map(void)
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
-		ft_memcpy(map1->line, map_global()->gnl, \
-			ft_strlen(map_global()->gnl) + 1);
+		ft_memcpy(map1->line, map_global()->gnl, ft_strlen(map_global()->gnl)
+			+ 1);
 		map1->i = i++;
 		max = aux_map(map1, max);
 		map1 = map1->next;
@@ -97,7 +101,7 @@ int	aux_map(t_map *map1, int max)
 	if (map1->len > max)
 		max = map1->len;
 	free(map_global()->gnl);
-	map_global()->gnl = get_next_line(map_global()->fd);
+	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
 	if (map_global()->gnl != NULL)
 	{
 		map1->next = malloc(sizeof(t_map));
@@ -122,7 +126,7 @@ void	check_chars(int i)
 		i = -1;
 		while (++i < mp->len)
 		{
-			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E' \
+			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
 				|| mp->line[i] == 'W')
 			{
 				pos += 1;
@@ -131,7 +135,7 @@ void	check_chars(int i)
 				map_global()->pos_x = i;
 				map_global()->pos_y = mp->i;
 			}
-			else if (mp->line[i] != 48 && mp->line[i] != 49 \
+			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)
 				error("Invalid contents in map");
 		}

@@ -3,7 +3,8 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+      
+	+#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
 /*   Updated: 2024/03/12 17:54:10 by acuva-nu         ###   ########.fr       */
@@ -22,7 +23,7 @@ void	move_up(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+			if (map1->line[i] == 'N' || map1->line[i] == 'S'
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->prev->line[i] == '1')
@@ -47,7 +48,7 @@ void	move_down(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+			if (map1->line[i] == 'N' || map1->line[i] == 'S'
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->next->line[i] == '1')
@@ -72,13 +73,13 @@ void	move_left(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+			if (map1->line[i] == 'N' || map1->line[i] == 'S'
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
-				if (map1->line[i -1] == '1')
+				if (map1->line[i - 1] == '1')
 					return ;
 				map1->line[i] = '0';
-				map1->line[i -1] = 'N';
+				map1->line[i - 1] = 'N';
 				map_global()->pos_x = i - 1;
 				return ;
 			}
@@ -97,13 +98,13 @@ void	move_right(int i)
 		i = -1;
 		while (++i < map1->len)
 		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
+			if (map1->line[i] == 'N' || map1->line[i] == 'S'
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				if (map1->line[i + 1] == '1')
 					return ;
 				map1->line[i] = '0';
-				map1->line[i +1] = 'N';
+				map1->line[i + 1] = 'N';
 				map_global()->pos_x = i + 1;
 				return ;
 			}
@@ -131,8 +132,8 @@ int	key_handler(int key)
 		look_left();
 	else if (key == RAK)
 		look_right();
-	if (key == W || key == A || key == S || key == D || key == LAK \
+	if (key == W || key == A || key == S || key == D || key == LAK
 		|| key == RAK)
-	    return (0);	// raycasting();
+		return (0); // raycasting();
 	return (0);
 }

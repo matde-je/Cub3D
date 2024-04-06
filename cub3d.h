@@ -42,7 +42,6 @@
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
 
-//the map is here in this linked list (line)
 typedef struct s_point
 {
     double x;
@@ -61,6 +60,7 @@ typedef struct s_player
     int rotate;
 } t_player;
 
+//the map is here in this linked list (line)
 typedef struct s_map
 {
 	int				len;
@@ -73,7 +73,7 @@ typedef struct s_map
 typedef struct s_img
 {
     void*  img_ptr;
-    int *addr;
+    char *addr;
     int bpp;
     int size;
     int endian;
@@ -175,8 +175,7 @@ void			check_wall(void);
 int				key_handler(int key);
 int				free_all(int i);
 void			error(char	*str);
-char			*get_next_line(int fd);
-char			*ft_strjoin1(char *linha, char *buffer);
+char			*get_next_line(int fd, int i, int e, char *line);
 void			check_map(char *path);
 void			init_map(void);
 void			check_map(char *path);
