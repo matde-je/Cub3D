@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   orientation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:07:05 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/20 11:17:07 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/06 13:46:03 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	player_angle(void)
 	int		player_angle;
 
 	map1 = map();
+	player_angle = 0;
 	while (map1 && map1->i != map_global()->py)
 		map1 = map1->next;
 	if (map1->line[map_global()->px] == 'N')

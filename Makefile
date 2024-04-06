@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
+#    By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/03/15 14:08:01 by matilde          ###   ########.fr        #
+#    Updated: 2024/04/06 13:42:42 by matde-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ vpath %.c gnl/ src/
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 INCS 	   = inc/
-NAME       = cub3d
+NAME       = cub3D
 CC         = cc
 CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address
 LDFLAGS	   = -L./libft -lft
