@@ -5,10 +5,11 @@
 #                                                     +:+ +:+         +:+      #
 #    By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/04/07 14:11:08 by matde-je         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2024/04/07 14:36:36 by matde-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c window_img.c get_next_line.c \
 			parse_textures.c parse_rgb.c structs.c \

@@ -8,7 +8,7 @@ MiniLibX - Drawing inside windows
 .fi
 .B mlx_pixel_put
 (
-.I void *mlx_ptr, void *win_ptr, int x, int y, int color
+.I void *mlx_ptr, void *win, int x, int y, int color
 );
 
 .nf
@@ -16,7 +16,7 @@ MiniLibX - Drawing inside windows
 .fi
 .B mlx_string_put
 (
-.I void *mlx_ptr, void *win_ptr, int x, int y, int color, char *string
+.I void *mlx_ptr, void *win, int x, int y, int color, char *string
 );
 
 
@@ -24,7 +24,7 @@ MiniLibX - Drawing inside windows
 The
 .B mlx_pixel_put
 () function draws a defined pixel in the window
-.I win_ptr
+.I win
 using the (
 .I x
 ,

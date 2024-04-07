@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+      
-	+#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/12 17:54:10 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:41:51 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +29,7 @@ void	move_up(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->prev->line[i] = 'N';
-				map_global()->pos_y = map1->i - 1;
+				map_global()->py = map1->i - 1;
 				return ;
 			}
 		}
@@ -55,7 +54,7 @@ void	move_down(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->next->line[i] = 'N';
-				map_global()->pos_y = map1->i + 1;
+				map_global()->py = map1->i + 1;
 				return ;
 			}
 		}
@@ -80,7 +79,7 @@ void	move_left(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->line[i - 1] = 'N';
-				map_global()->pos_x = i - 1;
+				map_global()->px = i - 1;
 				return ;
 			}
 		}
@@ -105,7 +104,7 @@ void	move_right(int i)
 					return ;
 				map1->line[i] = '0';
 				map1->line[i + 1] = 'N';
-				map_global()->pos_x = i + 1;
+				map_global()->px = i + 1;
 				return ;
 			}
 		}

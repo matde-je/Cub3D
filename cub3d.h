@@ -37,6 +37,7 @@
 #  define BUFFER_SIZE 5
 # endif
 
+# define PI 3.14159265358979323846
 # define WIN_HEIGHT 700
 # define WIN_WIDTH 700
 # define TEX_SIZE 64
@@ -81,11 +82,11 @@ typedef struct s_img
     int height;
 } t_img;
 
-//has the max lengths of the map and the position of the camera 
+//has the max lengths of the map and the position of the camera (player)
 typedef struct s_map_global
 {
-	int				pos_x;
-	int				pos_y;
+	int				px;
+	int				py;
 	int				fd;
 	char			*path;
 	char			*gnl;
@@ -97,7 +98,7 @@ typedef struct s_map_global
 //has the window and the images
 typedef struct s_window
 {
-	char	*window_ptr;
+	char	*win;
     t_img   *image;
 	char	*mlx;
 }				t_window;
@@ -113,8 +114,7 @@ typedef struct s_texture
 	int		*c;
 }	t_texture;
 
-//has the angle, distance of the raycasting, 
-//if the ray hit the wall and ray coordinates
+//has the angle, distance and ray coordinates of the intersections
 typedef struct s_ray
 {
     float camera_x;
@@ -172,7 +172,7 @@ t_texture		*texture(void);
 void			printin(int i);
 t_window		*window(void);
 void			parsing(char *path);
-void			check_wall(void);
+void			check_wall(int i);
 int				key_handler(int key);
 int				free_all(int i);
 void			error(char	*str);
@@ -199,8 +199,16 @@ void			count_texture(char **trim, char **trim1);
 void			freeing(void);
 void			img_func(void);
 void			put_cf_colors(void);
-void			textur_mapping(float x, float y);
+int				calculate_texture_index(void);
+void			ray_dist_angle(int x1, int y1, int x2, int y2);
 void			raycasting(void);
 t_ray			*ray(void);
+void			render_cube(void);
+void			texture_index(int player, int *pos);
+int				player_angle(void);
+char			*rm_space(char *str);
+void			render_cube2(int cube_size, int player, int pos);
+t_map			*check_wallhelp(t_map *map1);
+int				skipspace(char *str);
 
 #endif
