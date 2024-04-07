@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 15:59:59 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:12:51 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,8 @@ void	check_wall(int i)
 			{
 				if (map1->line[i] == ' ')
 				{
-					if (map1->i == 0 && map1->next->line[i] && map1->next->line[i] != '1')
-					{
-						printf("%s\n", map1->next->line);
-						printf("%i, %i, %c\n", map1->i, i, map1->next->line[i]);
+					if (map1->i == 0 && map1->next->line[i] != '1')
 						error("Invalid walls of map1");
-					}
 					else if (map1->i == map_global()->y_max - 1 \
 						&& map1->prev->line[i] != '1')
 						error("Invalid walls of map2");

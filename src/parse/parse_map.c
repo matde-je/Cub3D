@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 14:54:57 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:19:54 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	parsing(char *path)
 		check_map(path);
 		check_chars(-1, 0);
 		check_wall(0);
+		check_walls();
 		map_global()->gnl = NULL;
 		prep_texture(path);
 	}
@@ -75,7 +76,7 @@ void	init_map(void)
 	i = 0;
 	while (map_global()->gnl != NULL)
 	{
-		line = rm_nl(map_global()->gnl);
+		line = rm_space(rm_nl(map_global()->gnl));
 		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
