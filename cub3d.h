@@ -156,16 +156,19 @@ typedef struct s_c3d
 }   t_c3d;
 
 //Raycast functions//
+void raycasting(void);
 void launch_ray(int x);
 void dda(void);
 void step_side_len_x(void);
 void step_side_len_y(void);
 void perp_render(void);
+void	render_textures(int x);
+void render_vert_text(int x);
 //Raycast functions//
 
 t_c3d *cub3(void);
 char map_iter(int x, int y);
-void put_pixel_2img(t_img *image, int x, int y, int color);
+void put_pixel_2img(int x, int y, int color);
 int init_tex(void);
 t_map			*map(void);
 t_texture		*texture(void);

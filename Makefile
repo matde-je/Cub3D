@@ -21,11 +21,11 @@ vpath %.c gnl/ src/parse src/init src/raycast/ src/
 
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
-INCS 	   = inc/
+INCS 	   = cub3d.h
 NAME       = cub3D
 CC         = cc
 CFLAGS     = -g -Wall -Wextra -Werror -fsanitize=address
-LDFLAGS	   = -L./libft -lft
+LDFLAGS	   = -L./libft -lft   -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
 RM         = rm -rf
 
 all: ${NAME}
@@ -36,7 +36,7 @@ $(OBJ_DIR)/%.o: %.c
 	
 ${NAME}: ${OBJS} 
 	make -s -C libft
-	${CC} ${CFLAGS}  $^ -Lminilibx-linux -I/minilibx-linux/mlx.h -L/usr/lib -lmlx -lXext -lX11 -lm -lz -o $@  -I ${INCS} ${LDFLAGS}
+	${CC} ${CFLAGS}  $^ -o $@  -I ${INCS} ${LDFLAGS}
 
 clean:
 	${RM} ${OBJ_DIR} 
