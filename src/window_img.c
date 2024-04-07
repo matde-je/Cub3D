@@ -41,11 +41,33 @@ void	new_window(void)
 	put_cf_colors();
 }
 
+void	put_cf_colors(void)
+{
+	int	y;
+	int	x;
+
+	x = -1;
+	while (++x < WIN_WIDTH)
+	{
+		y = WIN_HEIGHT / 2 - 1;
+		while (++y < WIN_HEIGHT)
+			put_pixel_2img(window()->image, x, y, texture()->c[3]);
+	}
+	x = -1;
+	while (++x < WIN_WIDTH)
+	{
+		y = -1;
+		while (++y < WIN_HEIGHT / 2)
+			put_pixel_2img(window()->image, x, y, texture()->f[3]);
+	}
+	mlx_put_image_to_window(window()->mlx, window()->window_ptr,
+		window()->image->img_ptr, 0, 0);
+}
+
 // loads the textures of the walls to img['orientation']
 // void	img_func(void)
 // {
 // 		int	w;
-
 // 	/* 	int	h;
 // 		h = 32;
 // 		w = 32;
@@ -59,39 +81,11 @@ void	new_window(void)
 // 		"./textures/WARN.xpm", &w, &h); */
 // }
 // puts in window the ceiling and floor colors, pixel by pixel (slow proccess)
-void	put_cf_colors(void)
-{
-	int	y;
-	int	x;
-	int	color1;
-	int	color2;
-
-	color1 = texture()->c[0] << 16 | texture()->c[1] << 8 | texture()->c[2];
-	color2 = texture()->f[0] << 16 | texture()->f[1] << 8 | texture()->f[2];
-	x = -1;
-	while (++x < WIN_WIDTH)
-	{
-		y = WIN_HEIGHT / 2 - 1;
-		while (++y < WIN_HEIGHT)
-			put_pixel_2img(window()->image, x, y, color1);
-	}
-	x = -1;
-	while (++x < WIN_WIDTH)
-	{
-		y = -1;
-		while (++y < WIN_HEIGHT / 2)
-			put_pixel_2img(window()->image, x, y, color2);
-	}
-	mlx_put_image_to_window(window()->mlx, window()->window_ptr,
-		window()->image->img_ptr, 0, 0);
-}
-
 // algorithm
 // void	raycasting(void)
 // {
 // 	float	step;
 // 	int		max;
-
 // 	step = 0.1;
 // 	max = 100;
 // 	//printf("map %i\n", map_global()->pos_x);

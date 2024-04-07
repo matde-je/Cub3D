@@ -91,6 +91,7 @@ typedef struct s_map_global
 	char			*gnl;
 	int				x_max;
 	int				y_max;
+    char            orientation;
 }				t_map_global;
 
 //has the window and the images
@@ -180,7 +181,7 @@ void			check_map(char *path);
 void			init_map(void);
 void			check_map(char *path);
 char			*rm_nl(char	*str);
-void			check_chars(int i);
+void			check_chars(int i, int pos);
 void			new_window(void);
 t_map_global	*map_global(void);
 int				aux_map(t_map *map1, int max);

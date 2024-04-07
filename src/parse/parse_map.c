@@ -28,7 +28,7 @@ void	parsing(char *path)
 			error("Fail to allocate memory");
 		ft_strlcpy(map_global()->path, path, ft_strlen(path) + 1);
 		check_map(path);
-		check_chars(-1);
+		check_chars(-1, 0);
 		check_wall();
 		map_global()->gnl = NULL;
 		prep_texture(path);
@@ -114,12 +114,10 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void	check_chars(int i)
+void	check_chars(int i, int pos)
 {
-	int		pos;
 	t_map	*mp;
 
-	pos = 0;
 	mp = map();
 	while (mp)
 	{
@@ -130,15 +128,16 @@ void	check_chars(int i)
 				|| mp->line[i] == 'W')
 			{
 				pos += 1;
-				if (pos != 1)
-					error("Invalid contents in map");
 				map_global()->pos_x = i;
 				map_global()->pos_y = mp->i;
+				map_global()->orientation = mp->line[i];
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49
-				&& mp->line[i] != 32)
+				&& mp->line[i] != 32 )
 				error("Invalid contents in map");
 		}
 		mp = mp->next;
 	}
+	if (pos != 1)
+		error("Invalid contents in map");
 }
