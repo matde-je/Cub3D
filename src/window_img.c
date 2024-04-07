@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 14:39:24 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/07 17:23:00 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	new_window(void)
 	window()->mlx = mlx_init();
 	if (!window()->mlx)
 		free_all(0);
-	(window()->win) = mlx_new_window(window()->mlx, WIN_WIDTH,
-			WIN_HEIGHT, "have fun");
+	(window()->win) = mlx_new_window(window()->mlx, WIN_WIDTH, WIN_HEIGHT,
+			"have fun");
 	if (!window()->win)
 		free_all(0);
 	img->img_ptr = mlx_new_image(window()->mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -70,13 +70,13 @@ void	put_cf_colors(void)
 // 	/* 	int	h;
 // 		h = 32;
 // 		w = 32;
-// 		(window()->img['N']) = mlx_xpm_file_to_image(window()->mlx, 
+// 		(window()->img['N']) = mlx_xpm_file_to_image(window()->mlx,
 // 		"./textures/HEDGE.xpm", &w, &h);
-// 		(window()->img['S']) = mlx_xpm_file_to_image(window()->mlx, 
+// 		(window()->img['S']) = mlx_xpm_file_to_image(window()->mlx,
 // 		"./textures/SLIME.xpm", &w, &h);
-// 		(window()->img['W']) = mlx_xpm_file_to_image(window()->mlx, 
+// 		(window()->img['W']) = mlx_xpm_file_to_image(window()->mlx,
 // 		"./textures/SLUDGE.xpm", &w, &h);
-// 		(window()->img['E']) = mlx_xpm_file_to_image(window()->mlx, 
+// 		(window()->img['E']) = mlx_xpm_file_to_image(window()->mlx,
 // 		"./textures/WARN.xpm", &w, &h); */
 // }
 // puts in window the ceiling and floor colors, pixel by pixel (slow proccess)

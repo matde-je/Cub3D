@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 16:19:54 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/07 20:42:35 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	parsing(char *path)
 	int	i;
 
 	i = ft_strlen(path);
-	if ((path[i - 4] == '.' && path[i - 3] == 'c')
-		&& (path[i - 2] == 'u' && path[i - 1] == 'b'))
+	if ((path[i - 4] == '.' && path[i - 3] == 'c') && (path[i - 2] == 'u'
+			&& path[i - 1] == 'b'))
 	{
 		map_global()->path = malloc(ft_strlen(path) + 1);
 		if (map_global()->path == NULL)
@@ -29,7 +29,7 @@ void	parsing(char *path)
 		check_wall(0);
 		check_walls();
 		map_global()->gnl = NULL;
-		prep_texture(path);
+		prep_texture(path, 0, NULL, NULL);
 	}
 	else
 		error("Invalid map");
@@ -37,7 +37,7 @@ void	parsing(char *path)
 
 void	check_map(char *path)
 {
-	int		i;
+	int	i;
 
 	(map_global()->fd) = open(path, O_RDONLY);
 	if (map_global()->fd < 0)
@@ -81,8 +81,8 @@ void	init_map(void)
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
-		ft_memcpy(map1->line, map_global()->gnl, \
-			ft_strlen(map_global()->gnl) + 1);
+		ft_memcpy(map1->line, map_global()->gnl, ft_strlen(map_global()->gnl)
+			+ 1);
 		map1->i = i++;
 		max = aux_map(map1, max);
 		map1 = map1->next;
@@ -122,7 +122,7 @@ void	check_chars(int i, int pos)
 		i = -1;
 		while (++i < mp->len)
 		{
-			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E' \
+			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
 				|| mp->line[i] == 'W')
 			{
 				pos += 1;
@@ -130,7 +130,7 @@ void	check_chars(int i, int pos)
 				map_global()->py = mp->i;
 				map_global()->orientation = mp->line[i];
 			}
-			else if (mp->line[i] != 48 && mp->line[i] != 49 \
+			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)
 				error("Invalid contents in map");
 		}

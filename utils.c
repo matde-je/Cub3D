@@ -6,15 +6,15 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 16:14:04 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/07 22:59:52 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*rm_nl(char	*str)
+char	*rm_nl(char *str)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	while (str[++i])
@@ -31,6 +31,25 @@ int	skipspace(char *str)
 	while (str[i] == ' ')
 		i++;
 	return (i);
+}
+
+char	*rm_space(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str);
+	if (i <= 0)
+		return (NULL);
+	while (str[--i])
+	{
+		if (str[i] == ' ')
+			continue ;
+		else
+			break ;
+	}
+	if (str[i] != ' ')
+		str[i + 1] = '\0';
+	return (str);
 }
 
 void	printin(int i)
@@ -65,6 +84,8 @@ void	printin(int i)
 
 void	freeing(void)
 {
+	if (window()->win)
+		mlx_destroy_window(window()->mlx, window()->win);
 	if (texture()->no)
 		free(texture()->no);
 	if (texture()->so)
@@ -77,29 +98,18 @@ void	freeing(void)
 		free(texture()->f);
 	if (texture()->c)
 		free(texture()->c);
-	// if (window()->img['N'])
-	// 	mlx_destroy_image(window()->mlx, window()->img['N']);
-	// if (window()->img['S'])
-	// 	mlx_destroy_image(window()->mlx, window()->img['S']);
-	// if (window()->img['E'])
-	// 	mlx_destroy_image(window()->mlx, window()->img['E']);
-	// if (window()->img['W'])
-	// 	mlx_destroy_image(window()->mlx, window()->img['W']);
-}
-
-char	*rm_space(char *str)
-{
-	int	i;
-
-	i = ft_strlen(str);
-	while (str[--i])
+	if (window()->image && window()->image->img_ptr)
 	{
-		if (str[i] == ' ')
-			continue ;
-		else
-			break ;
+		mlx_destroy_image(window()->mlx, window()->image->img_ptr);
+		free(window()->image);	
 	}
-	if (str[i] != ' ')
-		str[i + 1] = '\0';
-	return (str);
 }
+
+// if (window()->img['N'])
+// 	mlx_destroy_image(window()->mlx, window()->img['N']);
+// if (window()->img['S'])
+// 	mlx_destroy_image(window()->mlx, window()->img['S']);
+// if (window()->img['E'])
+// 	mlx_destroy_image(window()->mlx, window()->img['E']);
+// if (window()->img['W'])
+// 	mlx_destroy_image(window()->mlx, window()->img['W']);

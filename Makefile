@@ -6,7 +6,7 @@
 #    By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/07 14:36:36 by matde-je         ###   ########.fr        #
+#    Updated: 2024/04/07 19:54:47 by matde-je         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 INCS 	   = cub3d.h
 NAME       = cub3D
 CC         = cc
-CFLAGS     = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address
 LDFLAGS	   = -L./libft -lft   -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
 RM         = rm -rf
 

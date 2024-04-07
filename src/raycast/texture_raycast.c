@@ -43,43 +43,43 @@ void	render_textures(int x)
 	}
 }
 
-void render_vert_text(int x)
+void	render_vert_text(int x)
 {
-    int y;
-    double step;
-    double tex_pos;
-    unsigned int color;
+	int				y;
+	double			step;
+	double			tex_pos;
+	unsigned int	color;
 
-    color = 0;
-    step = 1.0 * TEX_SIZE / cub3()->ray.line_height;
-    tex_pos = (cub3()->ray.render_start - WIN_HEIGHT / 2 \
-            + cub3()->ray.line_height / 2) * step;
-    y = cub3()->ray.render_start - 1;
-    while (++y < cub3()->ray.render_end)
-    {
-        cub3()->ray.tex_y = (int)tex_pos & (TEX_SIZE -1);
-        tex_pos += step;
-        color = cub3()->tex_arr[10][TEX_SIZE * cub3()->ray.tex_y \
-        + cub3()->ray.tex_x];
-        if (cub3()->ray.side == 1)
-            color = (color >> 1) & 8355711;
-        put_pixel_2img(x, y, color);
-    }
+	color = 0;
+	step = 1.0 * TEX_SIZE / cub3()->ray.line_height;
+	tex_pos = (cub3()->ray.render_start - WIN_HEIGHT / 2
+			+ cub3()->ray.line_height / 2) * step;
+	y = cub3()->ray.render_start - 1;
+	while (++y < cub3()->ray.render_end)
+	{
+		cub3()->ray.tex_y = (int)tex_pos & (TEX_SIZE - 1);
+		tex_pos += step;
+		color = cub3()->tex_arr[10][TEX_SIZE * cub3()->ray.tex_y
+			+ cub3()->ray.tex_x];
+		if (cub3()->ray.side == 1)
+			color = (color >> 1) & 8355711;
+		put_pixel_2img(x, y, color);
+	}
 }
 
-void raycasting(void)
+void	raycasting(void)
 {
-    int x;
+	int	x;
 
-    x = -1;
-    while (++x < WIN_WIDTH)
-    {
-        launch_ray(x);
-        dda();
-        step_side_len_x();
-        step_side_len_y();
-        perp_render();
-        render_textures(x);
-        render_vert_text(x);
-    }
+	x = -1;
+	while (++x < WIN_WIDTH)
+	{
+		launch_ray(x);
+		dda();
+		step_side_len_x();
+		step_side_len_y();
+		perp_render();
+		render_textures(x);
+		render_vert_text(x);
+	}
 }
