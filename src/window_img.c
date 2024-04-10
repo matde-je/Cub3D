@@ -1,13 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_img->c                                       :+:      :+:    :+:   */
+/*   window_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+      
-	+#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/12 17:47:25 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:28:21 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +27,9 @@ void	new_window(void)
 	window()->mlx = mlx_init();
 	if (!window()->mlx)
 		free_all(0);
-	(window()->window_ptr) = mlx_new_window(window()->mlx, WIN_WIDTH,
-			WIN_HEIGHT, "have fun");
-	if (!window()->window_ptr)
+	(window()->win) = mlx_new_window(window()->mlx, WIN_WIDTH, WIN_HEIGHT,
+			"have fun");
+	if (!window()->win)
 		free_all(0);
 	img->img_ptr = mlx_new_image(window()->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!img->img_ptr)
@@ -38,61 +37,54 @@ void	new_window(void)
 	img->addr = mlx_get_data_addr(img->img_ptr, &(img->bpp), &(img->size),
 			&(img->endian));
 	window()->image = img;
-    raycasting();
 	put_cf_colors();
 }
 
-// loads the textures of the walls to img['orientation']
-// void	img_func(void)
-// {
-// 		int	w;
-
-// 	/* 	int	h;
-// 		h = 32;
-// 		w = 32;
-// 		(window()->img['N']) = mlx_xpm_file_to_image(window()->mlx, \
-// 		"./textures/HEDGE.xpm", &w, &h);
-// 		(window()->img['S']) = mlx_xpm_file_to_image(window()->mlx, \
-// 		"./textures/SLIME.xpm", &w, &h);
-// 		(window()->img['W']) = mlx_xpm_file_to_image(window()->mlx, \
-// 		"./textures/SLUDGE.xpm", &w, &h);
-// 		(window()->img['E']) = mlx_xpm_file_to_image(window()->mlx, \
-// 		"./textures/WARN.xpm", &w, &h); */
-// }
-// puts in window the ceiling and floor colors, pixel by pixel (slow proccess)
 void	put_cf_colors(void)
 {
 	int	y;
 	int	x;
-	int	color1;
-	int	color2;
 
-	color1 = texture()->c[0] << 16 | texture()->c[1] << 8 | texture()->c[2];
-	color2 = texture()->f[0] << 16 | texture()->f[1] << 8 | texture()->f[2];
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
 		y = WIN_HEIGHT / 2 - 1;
 		while (++y < WIN_HEIGHT)
-			put_pixel_2img(window()->image, x, y, color1);
+			put_pixel_2img(window()->image, x, y, tex()->c[3]);
 	}
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
 		y = -1;
 		while (++y < WIN_HEIGHT / 2)
-			put_pixel_2img(window()->image, x, y, color2);
+			put_pixel_2img(window()->image, x, y, tex()->f[3]);
 	}
-	mlx_put_image_to_window(window()->mlx, window()->window_ptr,
+	mlx_put_image_to_window(window()->mlx, window()->win,
 		window()->image->img_ptr, 0, 0);
 }
 
+// loads the texs of the walls to img['orientation']
+// void	img_func(void)
+// {
+// 		int	w;
+// 	/* 	int	h;
+// 		h = 32;
+// 		w = 32;
+// 		(window()->img['N']) = mlx_xpm_file_to_image(window()->mlx,
+// 		"./texs/HEDGE.xpm", &w, &h);
+// 		(window()->img['S']) = mlx_xpm_file_to_image(window()->mlx,
+// 		"./texs/SLIME.xpm", &w, &h);
+// 		(window()->img['W']) = mlx_xpm_file_to_image(window()->mlx,
+// 		"./texs/SLUDGE.xpm", &w, &h);
+// 		(window()->img['E']) = mlx_xpm_file_to_image(window()->mlx,
+// 		"./texs/WARN.xpm", &w, &h); */
+// }
+// puts in window the ceiling and floor colors, pixel by pixel (slow proccess)
 // algorithm
 // void	raycasting(void)
 // {
 // 	float	step;
 // 	int		max;
-
 // 	step = 0.1;
 // 	max = 100;
 // 	//printf("map %i\n", map_global()->pos_x);

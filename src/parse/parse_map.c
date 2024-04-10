@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+
-	+#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/26 17:51:27 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:31:27 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +15,21 @@
 void	parsing(char *path)
 {
 	int	i;
-	int	fd;
 
 	i = ft_strlen(path);
 	if ((path[i - 4] == '.' && path[i - 3] == 'c') && (path[i - 2] == 'u'
 			&& path[i - 1] == 'b'))
 	{
-		fd = open(path, O_RDONLY);
 		map_global()->path = malloc(ft_strlen(path) + 1);
 		if (map_global()->path == NULL)
 			error("Fail to allocate memory");
 		ft_strlcpy(map_global()->path, path, ft_strlen(path) + 1);
 		check_map(path);
-		check_chars(-1);
-		check_wall();
+		check_chars(-1, 0);
+		check_wall(0);
+		check_walls();
 		map_global()->gnl = NULL;
-		prep_texture(path);
+		prep_texture(path, 0, NULL, NULL);
 	}
 	else
 		error("Invalid map");
@@ -79,7 +77,7 @@ void	init_map(void)
 	i = 0;
 	while (map_global()->gnl != NULL)
 	{
-		line = rm_nl(map_global()->gnl);
+		line = rm_space(rm_nl(map_global()->gnl));
 		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
@@ -115,8 +113,7 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-
-static void start_pos_dir(char c)
+void start_pos_dir(char c)
 {
     if (c == 'N')
     {
@@ -141,34 +138,3 @@ static void start_pos_dir(char c)
     else
         return ;
 }
-
-void	check_chars(int i)
-{
-	int		pos;
-	t_map	*mp;
-
-	pos = 0;
-	mp = map();
-	while (mp)
-	{
-		i = -1;
-		while (++i < mp->len)
-		{
-			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
-				|| mp->line[i] == 'W')
-			{
-                start_pos_dir(mp->line[i]);
-				pos += 1;
-				if (pos != 1)
-					error("Invalid contents in map");
-				map_global()->pos_x = i;
-				map_global()->pos_y = mp->i;
-			}
-			else if (mp->line[i] != 48 && mp->line[i] != 49
-				&& mp->line[i] != 32)
-				error("Invalid contents in map");
-		}
-		mp = mp->next;
-	}
-}
-

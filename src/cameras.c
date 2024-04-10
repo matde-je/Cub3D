@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cameras.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:39:08 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 17:39:16 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/07 14:14:47 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	look_left(void)
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				map1->line[i] -= 32;
+				map_global()->orientation = map1->line[i];
 				return ;
 			}
 		}
@@ -51,6 +52,7 @@ void	look_right(void)
 				|| map1->line[i] == 'E' || map1->line[i] == 'W')
 			{
 				map1->line[i] += 32;
+				map_global()->orientation = map1->line[i];
 				return ;
 			}
 		}
