@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+      
+	+#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 18:41:33 by acuva-nu          #+#    #+#             */
 /*   Updated: 2024/04/02 18:41:33 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../cub3d.h"
+#include "../../cub3d.h"
 
-int ft_arr_len(char **arr)
+int	ft_arr_len(char **arr)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (arr[i])
-        i++;
-    return (i);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }

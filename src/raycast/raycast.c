@@ -29,7 +29,7 @@ void	step_side_len(void)
 	{
 		ray()->steps_x = -1;
 		ray()->side_len.x = (player()->pos.x - ray()->map_x)
-            * ray()->delta_len.x;
+			* ray()->delta_len.x;
 	}
 	else
 	{
@@ -37,46 +37,45 @@ void	step_side_len(void)
 		ray()->side_len.x = (ray()->map_x + 1.0 - player()->pos.x)
 			* ray()->delta_len.x;
 	}
-    if (ray()->dir.y < 0)
-    {
-        ray()->steps_y = -1;
-        ray()->side_len.y = (player()->pos.y - ray()->map_y)
-            * ray()->delta_len.y;
-    }
-    else
-    {
-        ray()->steps_y = 1;
-        ray()->side_len.y = (ray()->map_y + 1.0 - player()->pos.y)
-            * ray()->delta_len.y;
-    }
+	if (ray()->dir.y < 0)
+	{
+		ray()->steps_y = -1;
+		ray()->side_len.y = (player()->pos.y - ray()->map_y)
+			* ray()->delta_len.y;
+	}
+	else
+	{
+		ray()->steps_y = 1;
+		ray()->side_len.y = (ray()->map_y + 1.0 - player()->pos.y)
+			* ray()->delta_len.y;
+	}
 }
 
 void	do_dda(void)
 {
-    int hit_wall;
+	int	hit_wall;
 
-    hit_wall = 0;
-    while (ray()->hit_wall == 0)
-    {
-        if (ray()->side_len.x < ray()->side_len.y)
-        {
-            ray()->side_len.x += ray()->delta_len.x;
-            ray()->map_x += ray()->steps_x;
-            ray()->side = 0;
-        }
-        else
-        {
-            ray()->side_len.y += ray()->delta_len.y;
-            ray()->map_y += ray()->steps_y;
-            ray()->side = 0;
-        }
-        if (ray()->map_y < 0.25
-            || ray()->map_x > map_global()->y_max - 0.25
-            || ray()->map_x > map_global()->y_max - 1.25)
-            break ;
-        else if (map_iter(ray()->map_x, ray()->map_y) > '0')
-            hit_wall = 1;
-    }
+	hit_wall = 0;
+	while (ray()->hit_wall == 0)
+	{
+		if (ray()->side_len.x < ray()->side_len.y)
+		{
+			ray()->side_len.x += ray()->delta_len.x;
+			ray()->map_x += ray()->steps_x;
+			ray()->side = 0;
+		}
+		else
+		{
+			ray()->side_len.y += ray()->delta_len.y;
+			ray()->map_y += ray()->steps_y;
+			ray()->side = 0;
+		}
+		if (ray()->map_y < 0.25 || ray()->map_x > map_global()->y_max - 0.25
+			|| ray()->map_x > map_global()->y_max - 1.25)
+			break ;
+		else if (map_iter(ray()->map_x, ray()->map_y) > '0')
+			hit_wall = 1;
+	}
 }
 
 void	perp_render(void)
@@ -92,9 +91,9 @@ void	perp_render(void)
 	ray()->render_end = ray()->line_height / 2 + WIN_HEIGHT / 2;
 	if (ray()->render_end >= WIN_HEIGHT)
 		ray()->render_end = WIN_HEIGHT - 1;
-    if (ray()->side == 0)
-        ray()->wall_x = player()->pos.y + ray()->wall_len * ray()->dir.y;
-    else
-        ray()->wall_x = player()->pos.x + ray()->wall_len * ray()->dir.x;
-    ray()->wall_x -= floor(ray()->wall_x);
+	if (ray()->side == 0)
+		ray()->wall_x = player()->pos.y + ray()->wall_len * ray()->dir.y;
+	else
+		ray()->wall_x = player()->pos.x + ray()->wall_len * ray()->dir.x;
+	ray()->wall_x -= floor(ray()->wall_x);
 }

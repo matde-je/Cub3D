@@ -25,7 +25,7 @@ void	check_chars(int i, int pos)
 			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
 				|| mp->line[i] == 'W')
 			{
-                start_pos_dir(mp->line[i]);
+				start_pos_dir(mp->line[i]);
 				pos += 1;
 				map_global()->px = i;
 				map_global()->py = mp->i;

@@ -14,12 +14,12 @@
 
 void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 {
-	char		**split;
-	int 		i;
+	char	**split;
+	int		i;
 
 	i = 0;
 	while (map_global()->gnl[i] == ' ')
-			i++;
+		i++;
 	free_trim(trim, trim1, NULL, NULL);
 	if (map_global()->gnl[i] != 'C' && map_global()->gnl[i] != 'F')
 		return ;
