@@ -6,33 +6,33 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 17:14:45 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/10 18:26:37 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void	parse_rgb(char **trim, char **trim1, int i)
+void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 {
 	char		**split;
-	static int	c = 0;
-	static int	f = 0;
+	int 		i;
 
+	i = 0;
+	while (map_global()->gnl[i] == ' ')
+			i++;
 	free_trim(trim, trim1, NULL, NULL);
 	if (map_global()->gnl[i] != 'C' && map_global()->gnl[i] != 'F')
 		return ;
 	parse_rgb2(trim, trim1, &split, i);
 	if (map_global()->gnl[i] == 'C')
 	{
-		c += 1;
-		if (c != 1)
-			free_trim(trim, trim1, "Invalid color", &split);
+		*c += 1;
 		rgb_c(-1, split, 0);
 	}
 	if (map_global()->gnl[i] == 'F')
 	{
-		f += 1;
-		if (f != 1)
+		*f += 1;
+		if (*f != 1)
 			free_trim(trim, trim1, "Invalid color", &split);
 		tex()->f = (int *)malloc(sizeof(int) * 4);
 		rgb_f(-1, split, 0);
