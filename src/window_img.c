@@ -38,6 +38,7 @@ void	new_window(void)
 	img->addr = mlx_get_data_addr(img->img_ptr, &(img->bpp), &(img->size),
 			&(img->endian));
 	window()->image = img;
+    raycasting();
 	put_cf_colors();
 }
 

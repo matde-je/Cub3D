@@ -14,91 +14,87 @@
 
 void	launch_ray(int x)
 {
-	cub3()->ray.camera_x = 2 * x / (double)WIN_WIDTH - 1;
-	cub3()->ray.ray_dir.x = cub3()->ray.dir.x + cub3()->ray.plane.x
-		* cub3()->ray.camera_x;
-	cub3()->ray.ray_dir.y = cub3()->ray.dir.y + cub3()->ray.plane.y
-		* cub3()->ray.camera_x;
-	cub3()->ray.map_x = (int)cub3()->ray.pos.x;
-	cub3()->ray.map_y = (int)cub3()->ray.pos.y;
-	cub3()->ray.hit_wall = 0;
-	if (cub3()->ray.ray_dir.x == 0)
-		cub3()->ray.delta_len.x = 1e30;
-	else
-		cub3()->ray.delta_len.x = fabs(1 / cub3()->ray.ray_dir.x);
-	if (cub3()->ray.ray_dir.y == 0)
-		cub3()->ray.delta_len.y = 1e30;
-	else
-		cub3()->ray.delta_len.y = fabs(1 / cub3()->ray.ray_dir.y);
+	ray()->camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	ray()->dir.x = player()->dir.x + ray()->plane.x * ray()->camera_x;
+	ray()->dir.y = player()->dir.y + ray()->plane.y * ray()->camera_x;
+	ray()->map_x = (int)player()->pos.x;
+	ray()->map_y = (int)player()->pos.y;
+	ray()->delta_len.x = fabs(1 / ray()->dir.x);
+	ray()->delta_len.y = fabs(1 / ray()->dir.y);
 }
 
-void	dda(void)
+void	step_side_len(void)
 {
-	while (cub3()->ray.hit_wall == 0)
+	if (ray()->dir.x < 0)
 	{
-		if (cub3()->ray.side_len.x < cub3()->ray.side_len.y)
-		{
-			cub3()->ray.side_len.x += cub3()->ray.delta_len.x;
-			cub3()->ray.map_x += cub3()->ray.steps_x;
-			cub3()->ray.side = 0;
-		}
-		else
-		{
-			cub3()->ray.side_len.y += cub3()->ray.delta_len.y;
-			cub3()->ray.map_y += cub3()->ray.steps_y;
-			cub3()->ray.side = 0;
-		}
-		if (map_iter(cub3()->ray.map_x, cub3()->ray.map_y) > 0)
-			cub3()->ray.hit_wall = 1;
-	}
-}
-
-void	step_side_len_x(void)
-{
-	if (cub3()->ray.ray_dir.x < 0)
-	{
-		cub3()->ray.steps_x = -1;
-		cub3()->ray.side_len.x = (cub3()->ray.pos.x - cub3()->ray.map_x)
-			* cub3()->ray.delta_len.x;
+		ray()->steps_x = -1;
+		ray()->side_len.x = (player()->pos.x - ray()->map_x)
+            * ray()->delta_len.x;
 	}
 	else
 	{
-		cub3()->ray.steps_x = 1;
-		cub3()->ray.side_len.x = (cub3()->ray.map_x + 1.0 - cub3()->ray.pos.x)
-			* cub3()->ray.delta_len.x;
+		ray()->steps_x = 1;
+		ray()->side_len.x = (ray()->map_x + 1.0 - player()->pos.x)
+			* ray()->delta_len.x;
 	}
+    if (ray()->dir.y < 0)
+    {
+        ray()->steps_y = -1;
+        ray()->side_len.y = (player()->pos.y - ray()->map_y)
+            * ray()->delta_len.y;
+    }
+    else
+    {
+        ray()->steps_y = 1;
+        ray()->side_len.y = (ray()->map_y + 1.0 - player()->pos.y)
+            * ray()->delta_len.y;
+    }
 }
 
-void	step_side_len_y(void)
+void	do_dda(void)
 {
-	if (cub3()->ray.ray_dir.y < 0)
-	{
-		cub3()->ray.steps_y = -1;
-		cub3()->ray.side_len.y = (cub3()->ray.pos.y - cub3()->ray.map_y)
-			* cub3()->ray.delta_len.y;
-	}
-	else
-	{
-		cub3()->ray.steps_y = 1;
-		cub3()->ray.side_len.y = (cub3()->ray.map_y + 1.0 - cub3()->ray.pos.y)
-			* cub3()->ray.delta_len.y;
-	}
+    int hit_wall;
+
+    hit_wall = 0;
+    while (ray()->hit_wall == 0)
+    {
+        if (ray()->side_len.x < ray()->side_len.y)
+        {
+            ray()->side_len.x += ray()->delta_len.x;
+            ray()->map_x += ray()->steps_x;
+            ray()->side = 0;
+        }
+        else
+        {
+            ray()->side_len.y += ray()->delta_len.y;
+            ray()->map_y += ray()->steps_y;
+            ray()->side = 0;
+        }
+        if (ray()->map_y < 0.25
+            || ray()->map_x > map_global()->y_max - 0.25
+            || ray()->map_x > map_global()->y_max - 1.25)
+            break ;
+        else if (map_iter(ray()->map_x, ray()->map_y) > '0')
+            hit_wall = 1;
+    }
 }
 
 void	perp_render(void)
 {
-	if (cub3()->ray.side == 0)
-		cub3()->ray.perp_wall_len = cub3()->ray.side_len.x
-			- cub3()->ray.delta_len.x;
+	if (ray()->side == 0)
+		ray()->perp_wall_len = ray()->side_len.x - ray()->delta_len.x;
 	else
-		cub3()->ray.perp_wall_len = cub3()->ray.side_len.x
-			- cub3()->ray.delta_len.x;
-	cub3()->ray.line_height = (int)(WIN_HEIGHT / cub3()->ray.perp_wall_len);
-	cub3()->ray.render_start = (-1) * cub3()->ray.line_height / 2 + WIN_HEIGHT
-		/ 2;
-	if (cub3()->ray.render_start < 0)
-		cub3()->ray.render_start = 0;
-	cub3()->ray.render_end = cub3()->ray.line_height / 2 + WIN_HEIGHT / 2;
-	if (cub3()->ray.render_end >= WIN_HEIGHT)
-		cub3()->ray.render_end = WIN_HEIGHT - 1;
+		ray()->perp_wall_len = ray()->side_len.x - ray()->delta_len.x;
+	ray()->line_height = (int)(WIN_HEIGHT / ray()->perp_wall_len);
+	ray()->render_start = -(ray()->line_height / 2 + WIN_HEIGHT / 2);
+	if (ray()->render_start < 0)
+		ray()->render_start = 0;
+	ray()->render_end = ray()->line_height / 2 + WIN_HEIGHT / 2;
+	if (ray()->render_end >= WIN_HEIGHT)
+		ray()->render_end = WIN_HEIGHT - 1;
+    if (ray()->side == 0)
+        ray()->wall_x = player()->pos.y + ray()->wall_len * ray()->dir.y;
+    else
+        ray()->wall_x = player()->pos.x + ray()->wall_len * ray()->dir.x;
+    ray()->wall_x -= floor(ray()->wall_x);
 }

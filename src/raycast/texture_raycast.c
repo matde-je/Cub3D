@@ -12,33 +12,45 @@
 
 #include "../../cub3d.h"
 
+static void get_texture_index(void)
+{
+    if (ray()->side != 0)
+    {
+        if (ray()->dir.y >  0)
+            tex()->index = SOUTH;
+        else
+            tex()->index = NORTH;
+    }
+    else
+    {
+        if (ray()->dir.y <  0)
+            tex()->index = WEST;
+        else
+            tex()->index = EAST;
+    }
+}
 void	render_textures(int x)
 {
 	int		y;
-	double	step;
+    int color;
 
-	step = 0;
-	cub3()->ray.wall_x = 0;
-	if (cub3()->ray.side == 0)
-		cub3()->ray.wall_x = map_global()->pos_y + cub3()->ray.perp_wall_len
-			* cub3()->ray.ray_dir.x;
-	else
-		cub3()->ray.wall_x = map_global()->pos_x + cub3()->ray.perp_wall_len
-			* cub3()->ray.ray_dir.x;
-	cub3()->ray.wall_x = floor(cub3()->ray.wall_x);
-	cub3()->ray.tex_x = (int)(cub3()->ray.wall_x * (double)TEX_SIZE);
-	if (cub3()->ray.side == 0 && cub3()->ray.ray_dir.x > 0)
-		cub3()->ray.tex_x = TEX_SIZE - cub3()->ray.tex_x - 1;
-	if (cub3()->ray.side == 0 && cub3()->ray.ray_dir.y < 0)
-		cub3()->ray.tex_x = TEX_SIZE - cub3()->ray.tex_x - 1;
-	// vertical texture stripe
-	step = 1.0 * TEX_SIZE / cub3()->ray.line_height;
-	cub3()->ray.texture_pos = (cub3()->ray.render_start - WIN_HEIGHT / 2
-			+ cub3()->ray.line_height / 2) * step;
-	cub3()->ray.y = cub3()->ray.render_start;
-	while (y < cub3()->ray.render_end)
+	tex()->x = (int)(ray()->wall_x * (double)TEX_SIZE);
+	if ((ray()->side == 0 && ray()->dir.x > 0)
+            || (ray()->side == 0 && ray()->dir.y < 0))
+		tex()->x = TEX_SIZE - tex()->x - 1;
+	tex()->step = 1.0 * TEX_SIZE / ray()->line_height;
+	tex()->pos = (ray()->render_start - WIN_HEIGHT / 2
+			+ ray()->line_height / 2) * tex()->step;
+	y = ray()->render_start;
+	while (y < ray()->render_end)
 	{
-		cub3()->ray.tex_y = (int)cub3()->ray.texture_pos & (TEX_SIZE - 1);
-		cub3()->ray.texture_pos += step;
+		tex()->y = (int)tex()->pos & (TEX_SIZE - 1);
+        tex()->pos += tex()->step;
+        color = cub3()->tex[tex()->index][TEX_SIZE * tex()->y + tex()->x];
+        if (tex()->index == NORTH || tex()->index == EAST)
+            color = (color >> 1) & 8355711;
+        if (color > 0)
+            cub3()->tex_pix[y][x] = color;
+        y++;
 	}
 }

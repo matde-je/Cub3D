@@ -66,6 +66,7 @@ void	check_map(char *path)
 		init_map();
 }
 
+
 void	init_map(void)
 {
 	t_map	*map1;
@@ -114,6 +115,33 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
+
+static void start_pos_dir(char c)
+{
+    if (c == 'N')
+    {
+        cub3()->ray.dir = (t_point){0, 1};
+        cub3()->ray.pos = (t_point){0.66, 0};
+    }
+    else if (c == 'S')
+    {
+        cub3()->ray.dir = (t_point){0, 1};
+        cub3()->ray.pos = (t_point){-0.66, 0};
+    }
+    else if (c == 'E')
+    {
+        cub3()->ray.dir = (t_point){1, 0};
+        cub3()->ray.pos = (t_point){0, 0.66};
+    }
+    else if (c == 'W') 
+    {
+        cub3()->ray.dir = (t_point){-1, 0};
+        cub3()->ray.pos = (t_point){0, -0.66};
+    }
+    else
+        return ;
+}
+
 void	check_chars(int i)
 {
 	int		pos;
@@ -129,6 +157,7 @@ void	check_chars(int i)
 			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
 				|| mp->line[i] == 'W')
 			{
+                start_pos_dir(mp->line[i]);
 				pos += 1;
 				if (pos != 1)
 					error("Invalid contents in map");
@@ -142,3 +171,4 @@ void	check_chars(int i)
 		mp = mp->next;
 	}
 }
+
