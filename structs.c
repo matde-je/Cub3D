@@ -43,7 +43,14 @@ t_window	*window(void)
 	return (&var);
 }
 
-t_texture	*texture(void)
+t_player *player(void)
+{
+    static t_player var;
+
+    return (&var);
+}
+
+t_texture	*tex(void)
 {
 	static t_texture	var;
 
