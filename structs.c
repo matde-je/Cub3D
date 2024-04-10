@@ -13,23 +13,6 @@
 
 #include "cub3d.h"
 
-t_map	*map(void)
-{
-	static t_map	*var = NULL;
-
-	if (var == NULL)
-	{
-		var = malloc(sizeof(t_map));
-		if (var == NULL)
-			error("alloc fail");
-		var->line = NULL;
-		var->i = 0;
-		var->prev = NULL;
-		var->next = NULL;
-	}
-	return (var);
-}
-
 t_map_global	*map_global(void)
 {
 	static t_map_global	var;

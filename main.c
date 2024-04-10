@@ -32,13 +32,6 @@ char	map_iter(int x, int y)
 	return (' ');
 }
 
-t_c3d	*cub3(void)
-{
-	static t_c3d	cub3;
-
-	return (&cub3);
-}
-
 int	err_out(char *msg)
 {
 	ft_putstr_fd(msg, 1);
