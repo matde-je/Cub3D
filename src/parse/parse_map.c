@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 20:42:35 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:31:27 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	check_map(char *path)
 		init_map();
 }
 
+
 void	init_map(void)
 {
 	t_map	*map1;
@@ -112,30 +113,28 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void	check_chars(int i, int pos)
+void start_pos_dir(char c)
 {
-	t_map	*mp;
-
-	mp = map();
-	while (mp)
-	{
-		i = -1;
-		while (++i < mp->len)
-		{
-			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
-				|| mp->line[i] == 'W')
-			{
-				pos += 1;
-				map_global()->px = i;
-				map_global()->py = mp->i;
-				map_global()->orientation = mp->line[i];
-			}
-			else if (mp->line[i] != 48 && mp->line[i] != 49
-				&& mp->line[i] != 32)
-				error("Invalid contents in map");
-		}
-		mp = mp->next;
-	}
-	if (pos != 1)
-		error("Invalid contents in map");
+    if (c == 'N')
+    {
+        cub3()->ray.dir = (t_point){0, 1};
+        cub3()->ray.pos = (t_point){0.66, 0};
+    }
+    else if (c == 'S')
+    {
+        cub3()->ray.dir = (t_point){0, 1};
+        cub3()->ray.pos = (t_point){-0.66, 0};
+    }
+    else if (c == 'E')
+    {
+        cub3()->ray.dir = (t_point){1, 0};
+        cub3()->ray.pos = (t_point){0, 0.66};
+    }
+    else if (c == 'W') 
+    {
+        cub3()->ray.dir = (t_point){-1, 0};
+        cub3()->ray.pos = (t_point){0, -0.66};
+    }
+    else
+        return ;
 }

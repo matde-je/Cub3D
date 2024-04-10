@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 23:16:12 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:30:42 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+void	check_chars(int i, int pos)
+{
+	t_map	*mp;
+
+	mp = map();
+	while (mp)
+	{
+		i = -1;
+		while (++i < mp->len)
+		{
+			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
+				|| mp->line[i] == 'W')
+			{
+                start_pos_dir(mp->line[i]);
+				pos += 1;
+				map_global()->px = i;
+				map_global()->py = mp->i;
+				map_global()->orientation = mp->line[i];
+			}
+			else if (mp->line[i] != 48 && mp->line[i] != 49
+				&& mp->line[i] != 32)
+				error("Invalid contents in map");
+		}
+		mp = mp->next;
+	}
+	if (pos != 1)
+		error("Invalid contents in map");
+}
 
 void	check_wall(int i)
 {

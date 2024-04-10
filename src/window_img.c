@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 17:23:00 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:28:21 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ void	put_cf_colors(void)
 	{
 		y = WIN_HEIGHT / 2 - 1;
 		while (++y < WIN_HEIGHT)
-			put_pixel_2img(window()->image, x, y, texture()->c[3]);
+			put_pixel_2img(window()->image, x, y, tex()->c[3]);
 	}
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
 		y = -1;
 		while (++y < WIN_HEIGHT / 2)
-			put_pixel_2img(window()->image, x, y, texture()->f[3]);
+			put_pixel_2img(window()->image, x, y, tex()->f[3]);
 	}
 	mlx_put_image_to_window(window()->mlx, window()->win,
 		window()->image->img_ptr, 0, 0);
 }
 
-// loads the textures of the walls to img['orientation']
+// loads the texs of the walls to img['orientation']
 // void	img_func(void)
 // {
 // 		int	w;
@@ -71,13 +71,13 @@ void	put_cf_colors(void)
 // 		h = 32;
 // 		w = 32;
 // 		(window()->img['N']) = mlx_xpm_file_to_image(window()->mlx,
-// 		"./textures/HEDGE.xpm", &w, &h);
+// 		"./texs/HEDGE.xpm", &w, &h);
 // 		(window()->img['S']) = mlx_xpm_file_to_image(window()->mlx,
-// 		"./textures/SLIME.xpm", &w, &h);
+// 		"./texs/SLIME.xpm", &w, &h);
 // 		(window()->img['W']) = mlx_xpm_file_to_image(window()->mlx,
-// 		"./textures/SLUDGE.xpm", &w, &h);
+// 		"./texs/SLUDGE.xpm", &w, &h);
 // 		(window()->img['E']) = mlx_xpm_file_to_image(window()->mlx,
-// 		"./textures/WARN.xpm", &w, &h); */
+// 		"./texs/WARN.xpm", &w, &h); */
 // }
 // puts in window the ceiling and floor colors, pixel by pixel (slow proccess)
 // algorithm

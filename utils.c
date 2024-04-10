@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 22:59:52 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:18:49 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ void	printin(int i)
 	}
 	j = -1;
 	while (++j < 7 && i == 1)
-		printf("%d", texture()->f[j]);
+		printf("%d", tex()->f[j]);
 	printf("\n");
 	j = -1;
 	while (++j < 6 && i == 1)
-		printf("%d", texture()->c[j]);
+		printf("%d", tex()->c[j]);
 	printf("\n");
 	if (i == 2)
 	{
-		printf("%s\n", (char *)texture()->no);
-		printf("%s\n", (char *)texture()->so);
-		printf("%s\n", (char *)texture()->we);
-		printf("%s\n", (char *)texture()->ea);
+		printf("%s\n", (char *)tex()->no);
+		printf("%s\n", (char *)tex()->so);
+		printf("%s\n", (char *)tex()->we);
+		printf("%s\n", (char *)tex()->ea);
 	}
 }
 
@@ -86,18 +86,18 @@ void	freeing(void)
 {
 	if (window()->win)
 		mlx_destroy_window(window()->mlx, window()->win);
-	if (texture()->no)
-		free(texture()->no);
-	if (texture()->so)
-		free(texture()->so);
-	if (texture()->we)
-		free(texture()->we);
-	if (texture()->ea)
-		free(texture()->ea);
-	if (texture()->f)
-		free(texture()->f);
-	if (texture()->c)
-		free(texture()->c);
+	if (tex()->no)
+		free(tex()->no);
+	if (tex()->so)
+		free(tex()->so);
+	if (tex()->we)
+		free(tex()->we);
+	if (tex()->ea)
+		free(tex()->ea);
+	if (tex()->f)
+		free(tex()->f);
+	if (tex()->c)
+		free(tex()->c);
 	if (window()->image && window()->image->img_ptr)
 	{
 		mlx_destroy_image(window()->mlx, window()->image->img_ptr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 22:56:45 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:14:45 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parse_rgb(char **trim, char **trim1, int i)
 		f += 1;
 		if (f != 1)
 			free_trim(trim, trim1, "Invalid color", &split);
-		texture()->f = (int *)malloc(sizeof(int) * 4);
+		tex()->f = (int *)malloc(sizeof(int) * 4);
 		rgb_f(-1, split, 0);
 	}
 	free_trim(trim, trim1, NULL, &split);
@@ -68,16 +68,16 @@ void	rgb_c(int j, char **split, int e)
 	int	green;
 	int	blue;
 
-	texture()->c = (int *)malloc(sizeof(int) * 4);
+	tex()->c = (int *)malloc(sizeof(int) * 4);
 	while (split[++j])
 	{
-		texture()->c[e] = ft_atoi(split[j]);
+		tex()->c[e] = ft_atoi(split[j]);
 		e++;
 	}
-	red = texture()->c[0];
-	green = texture()->c[1];
-	blue = texture()->c[2];
-	texture()->c[3] = (red << 16) | (green << 8) | blue;
+	red = tex()->c[0];
+	green = tex()->c[1];
+	blue = tex()->c[2];
+	tex()->c[3] = (red << 16) | (green << 8) | blue;
 }
 
 void	rgb_f(int j, char **split, int e)
@@ -88,13 +88,13 @@ void	rgb_f(int j, char **split, int e)
 
 	while (split[++j])
 	{
-		texture()->f[e] = ft_atoi(split[j]);
+		tex()->f[e] = ft_atoi(split[j]);
 		e++;
 	}
-	red = texture()->f[0];
-	green = texture()->f[1];
-	blue = texture()->f[2];
-	texture()->f[3] = (red << 16) | (green << 8) | blue;
+	red = tex()->f[0];
+	green = tex()->f[1];
+	blue = tex()->f[2];
+	tex()->f[3] = (red << 16) | (green << 8) | blue;
 }
 
 void	free_trim(char **trim, char **trim1, char *message, char ***split)
