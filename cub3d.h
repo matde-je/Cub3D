@@ -42,6 +42,11 @@
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
 
+# define    NORTH  0
+# define    SOUTH  1
+# define    EAST   2
+# define    WEST   3
+
 typedef struct s_point
 {
     double x;
@@ -110,6 +115,14 @@ typedef struct s_texture
 	void	*we;
 	int		*f;
 	int		*c;
+    unsigned long h_floor;
+    unsigned long h_ceiling;
+    int size;
+    int index;
+    double step;
+    double pos;
+    int x;
+    int y;
 }	t_texture;
 
 //has the angle, distance of the raycasting, 
@@ -122,7 +135,6 @@ typedef struct s_ray
     int steps_x;
     int steps_y;
     t_point dir;
-    t_point ray_dir;
     t_point side_len;
     t_point delta_len;
     double perp_wall_len;
@@ -135,23 +147,18 @@ typedef struct s_ray
     int render_start;
     int render_end;
     int hit_wall;
-    double steps;
-    double texture_pos;
     int y;
-    int tex_y;
-    int tex_x;
 }				t_ray;
 
 typedef struct s_c3d
 {
     void *mlx;
-    t_img image;
-    t_img tex[4];
-    int tex_arr[4][TEX_SIZE * TEX_SIZE];
     void *win;
-    t_ray ray;
-    char **xpm;
-    char **map;
+    t_img image;
+    // t_img tex[4];
+    int tex_arr[4][TEX_SIZE * TEX_SIZE];
+    int **tex;
+    int **tex_pix;
 }   t_c3d;
 
 //Raycast functions//
@@ -166,8 +173,9 @@ t_c3d *cub3(void);
 char map_iter(int x, int y);
 void put_pixel_2img(t_img *image, int x, int y, int color);
 int init_tex(void);
+t_player *player(void);
 t_map			*map(void);
-t_texture		*texture(void);
+t_texture		*tex(void);
 void			printin(int i);
 t_window		*window(void);
 void			parsing(char *path);
