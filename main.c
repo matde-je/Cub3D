@@ -31,12 +31,6 @@ char	map_iter(int x, int y)
 	return (' ');
 }
 
-int	err_out(char *msg)
-{
-	ft_putstr_fd(msg, 1);
-	exit(1);
-}
-
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -65,30 +59,8 @@ void	error(char *str)
 	exit(1);
 }
 
-int	free_all(int i)
+int	err_out(char *msg)
 {
-	t_map	*next;
-	t_map	*current;
-
-	current = map();
-	while (current != NULL)
-	{
-		free(current->line);
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	freeing();
-	if (map_global()->gnl)
-		free(map_global()->gnl);
-	if (map_global()->path)
-		free(map_global()->path);
-	if (window()->mlx)
-	{
-		mlx_destroy_display(window()->mlx);
-		free(window()->mlx);
-	}
-	if (i == 0)
-		exit(0);
-	return (0);
+	ft_putstr_fd(msg, 1);
+	exit(1);
 }

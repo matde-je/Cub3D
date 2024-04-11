@@ -6,13 +6,13 @@
 #    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/10 17:48:13 by matilde          ###   ########.fr        #
+#    Updated: 2024/04/11 10:37:19 by matilde          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c window_img.c get_next_line.c \
-			parse_textures.c parse_rgb.c structs.c more_structs.c \
+			parse_textures.c parse_rgb.c structs.c utils2.c \
 			cameras.c render.c
 			
 

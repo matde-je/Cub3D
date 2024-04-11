@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 18:18:40 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:37 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,22 +62,20 @@ void	check_map(char *path)
 			break ;
 	}
 	if (map_global()->gnl && map_global()->gnl[i] == '1')
-		init_map();
+		init_map(0, 0, NULL, map());
 }
 
-void	init_map(void)
+void	init_map(int i, int max, char *line, t_map *map1)
 {
-	t_map	*map1;
-	int		max;
-	char	*line;
-	int		i;
-
-	map1 = map();
-	max = 0;
-	i = 0;
 	while (map_global()->gnl != NULL)
 	{
 		line = rm_space(rm_nl(map_global()->gnl));
+		if (!line)
+		{
+			map1->prev->next = NULL;
+			free(map1);
+			error("Invalid map");
+		}
 		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)

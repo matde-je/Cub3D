@@ -190,7 +190,7 @@ int					free_all(int i);
 void				error(char *str);
 char				*get_next_line(int fd, int i, int e, char *line);
 void				check_map(char *path);
-void				init_map(void);
+void				init_map(int i, int j, char *line, t_map *map1);
 void				check_map(char *path);
 char				*rm_nl(char *str);
 void				check_chars(int i, int pos);

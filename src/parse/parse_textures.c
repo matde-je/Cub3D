@@ -41,19 +41,6 @@ void	prep_texture(int no, int i, char *trim, char *trim1)
 		free_trim(&trim, &trim1, "Invalid textures", NULL);
 }
 
-void	open_textures(char *path)
-{
-	(map_global()->fd) = open(path, O_RDONLY);
-	if (map_global()->fd < 0)
-		error("Failed to open file");
-	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
-	if (!map_global()->gnl)
-	{
-		close(map_global()->fd);
-		error("Invalid map");
-	}
-}
-
 void	parse_north(char **trim, char **trim1, int i, int *no)
 {
 	int	fd;
@@ -65,7 +52,7 @@ void	parse_north(char **trim, char **trim1, int i, int *no)
 			error("Invalid texture");
 		*trim = ft_strtrim(&map_global()->gnl[i], "N");
 		*trim1 = rm_nl(ft_strtrim(*trim, "O"));
-		(tex()->no) = ft_strtrim(*trim1, " ");
+		(tex()->no) = rm_space(ft_strtrim(*trim1, " "));
 		fd = open(tex()->no, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);
@@ -84,7 +71,7 @@ void	parse_south(char **trim, char **trim1, int i, int *so)
 			error("Invalid texture");
 		*trim = ft_strtrim(&map_global()->gnl[i], "S");
 		*trim1 = ft_strtrim(*trim, "O");
-		(tex()->so) = rm_nl(ft_strtrim(*trim1, " "));
+		(tex()->so) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
 		fd = open(tex()->so, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);
@@ -103,7 +90,7 @@ void	parse_west(char **trim, char **trim1, int i, int *we)
 			error("Invalid texture");
 		*trim = ft_strtrim(&map_global()->gnl[i], "W");
 		*trim1 = ft_strtrim(*trim, "E");
-		(tex()->we) = rm_nl(ft_strtrim(*trim1, " "));
+		(tex()->we) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
 		fd = open(tex()->we, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);
@@ -121,7 +108,7 @@ void	parse_east(char **trim, char **trim1, int i, int *ea)
 			error("Invalid texture");
 		*trim = ft_strtrim(&map_global()->gnl[i], "E");
 		*trim1 = ft_strtrim(*trim, "A");
-		(tex()->ea) = rm_nl(ft_strtrim(*trim1, " "));
+		(tex()->ea) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
 		fd = open(tex()->ea, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);

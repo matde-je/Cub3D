@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 17:30:42 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:58:34 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_wall(int i)
 
 void	wall(int i, t_map *map1)
 {
-	if (map1->i == 0 && map1->next->line[i] != '1')
+	if (map1 && map1-> i && map1->i == 0 && map1->next && map1->next->line && map1->next->line[i] != '1')
 		error("Invalid walls of map");
 	else if (map1->i == map_global()->y_max - 1 && map1->prev->line[i] != '1')
 		error("Invalid walls of map");
