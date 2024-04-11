@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 17:31:27 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/10 18:18:40 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	parsing(char *path)
 		check_wall(0);
 		check_walls();
 		map_global()->gnl = NULL;
-		prep_texture(path, 0, NULL, NULL);
+		open_textures(path);
+		prep_texture(0, 0, NULL, NULL);
 	}
 	else
 		error("Invalid map");

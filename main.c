@@ -3,8 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+
-	+#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+		+#+       */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:52:48 by matilde           #+#    #+#             */
 /*   Updated: 2024/03/20 11:09:27 by matilde          ###   ########.fr       */
@@ -30,13 +29,6 @@ char	map_iter(int x, int y)
 		it = it->next;
 	}
 	return (' ');
-}
-
-t_c3d	*cub3(void)
-{
-	static t_c3d	cub3;
-
-	return (&cub3);
 }
 
 int	err_out(char *msg)
