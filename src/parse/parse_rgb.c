@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 18:26:37 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/11 12:21:21 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 	char	**split;
 	int		i;
 
-	i = 0;
-	while (map_global()->gnl[i] == ' ')
-		i++;
+	i = skipspace(map_global()->gnl);
 	free_trim(trim, trim1, NULL, NULL);
 	if (map_global()->gnl[i] != 'C' && map_global()->gnl[i] != 'F')
 		return ;
@@ -27,6 +25,8 @@ void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 	if (map_global()->gnl[i] == 'C')
 	{
 		*c += 1;
+		if (*c != 1)
+			free_trim(trim, trim1, "Invalid color", &split);
 		rgb_c(-1, split, 0);
 	}
 	if (map_global()->gnl[i] == 'F')
@@ -34,7 +34,6 @@ void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 		*f += 1;
 		if (*f != 1)
 			free_trim(trim, trim1, "Invalid color", &split);
-		tex()->f = (int *)malloc(sizeof(int) * 4);
 		rgb_f(-1, split, 0);
 	}
 	free_trim(trim, trim1, NULL, &split);
@@ -56,8 +55,11 @@ void	parse_rgb2(char **trim, char **trim1, char ***split, int i)
 	*split = ft_split(*trim1, ',');
 	j = -1;
 	while ((*split)[++j])
-		if (ft_atoi((*split)[j]) < 0 || ft_atoi((*split)[j]) > 255)
+	{
+		i = skipspace((*split)[j]);
+		if ((*split)[j][i] < '0' || (*split)[j][i] > '9' || ft_atoi((*split)[j]) < 0 || ft_atoi((*split)[j]) > 255)
 			free_trim(trim, trim1, "Invalid color", split);
+	}
 	if (j < 3)
 		free_trim(trim, trim1, "Invalid color", split);
 }
@@ -86,6 +88,7 @@ void	rgb_f(int j, char **split, int e)
 	int	green;
 	int	blue;
 
+	tex()->f = (int *)malloc(sizeof(int) * 4);
 	while (split[++j])
 	{
 		tex()->f[e] = ft_atoi(split[j]);
