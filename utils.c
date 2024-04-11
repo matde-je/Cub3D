@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 17:18:49 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:08:37 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*rm_space(char *str)
 	i = ft_strlen(str);
 	if (i <= 0)
 		return (NULL);
-	while (str[--i])
+	while (i > 0 && str[--i])
 	{
 		if (str[i] == ' ')
 			continue ;
@@ -50,6 +50,16 @@ char	*rm_space(char *str)
 	if (str[i] != ' ')
 		str[i + 1] = '\0';
 	return (str);
+}
+
+int	ft_arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }
 
 void	printin(int i)
@@ -79,29 +89,6 @@ void	printin(int i)
 		printf("%s\n", (char *)tex()->so);
 		printf("%s\n", (char *)tex()->we);
 		printf("%s\n", (char *)tex()->ea);
-	}
-}
-
-void	freeing(void)
-{
-	if (window()->win)
-		mlx_destroy_window(window()->mlx, window()->win);
-	if (tex()->no)
-		free(tex()->no);
-	if (tex()->so)
-		free(tex()->so);
-	if (tex()->we)
-		free(tex()->we);
-	if (tex()->ea)
-		free(tex()->ea);
-	if (tex()->f)
-		free(tex()->f);
-	if (tex()->c)
-		free(tex()->c);
-	if (window()->image && window()->image->img_ptr)
-	{
-		mlx_destroy_image(window()->mlx, window()->image->img_ptr);
-		free(window()->image);	
 	}
 }
 

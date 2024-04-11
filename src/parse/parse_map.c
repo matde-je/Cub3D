@@ -6,7 +6,7 @@
 /*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 18:18:40 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:37 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,20 @@ void	check_map(char *path)
 			break ;
 	}
 	if (map_global()->gnl && map_global()->gnl[i] == '1')
-		init_map();
+		init_map(0, 0, NULL, map());
 }
 
-
-void	init_map(void)
+void	init_map(int i, int max, char *line, t_map *map1)
 {
-	t_map	*map1;
-	int		max;
-	char	*line;
-	int		i;
-
-	map1 = map();
-	max = 0;
-	i = 0;
 	while (map_global()->gnl != NULL)
 	{
 		line = rm_space(rm_nl(map_global()->gnl));
+		if (!line)
+		{
+			map1->prev->next = NULL;
+			free(map1);
+			error("Invalid map");
+		}
 		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
 		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
 		if (map1->line == NULL)
@@ -114,28 +111,28 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void start_pos_dir(char c)
+void	start_pos_dir(char c)
 {
-    if (c == 'N')
-    {
-        cub3()->ray.dir = (t_point){0, 1};
-        cub3()->ray.pos = (t_point){0.66, 0};
-    }
-    else if (c == 'S')
-    {
-        cub3()->ray.dir = (t_point){0, 1};
-        cub3()->ray.pos = (t_point){-0.66, 0};
-    }
-    else if (c == 'E')
-    {
-        cub3()->ray.dir = (t_point){1, 0};
-        cub3()->ray.pos = (t_point){0, 0.66};
-    }
-    else if (c == 'W') 
-    {
-        cub3()->ray.dir = (t_point){-1, 0};
-        cub3()->ray.pos = (t_point){0, -0.66};
-    }
-    else
-        return ;
+	if (c == 'N')
+	{
+		cub3()->ray.dir = (t_point){0, 1};
+		cub3()->ray.pos = (t_point){0.66, 0};
+	}
+	else if (c == 'S')
+	{
+		cub3()->ray.dir = (t_point){0, 1};
+		cub3()->ray.pos = (t_point){-0.66, 0};
+	}
+	else if (c == 'E')
+	{
+		cub3()->ray.dir = (t_point){1, 0};
+		cub3()->ray.pos = (t_point){0, 0.66};
+	}
+	else if (c == 'W')
+	{
+		cub3()->ray.dir = (t_point){-1, 0};
+		cub3()->ray.pos = (t_point){0, -0.66};
+	}
+	else
+		return ;
 }
