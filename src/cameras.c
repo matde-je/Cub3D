@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cameras.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:39:08 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/07 14:14:47 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/04/22 12:08:49 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,31 @@
 // camera looks left
 void	look_left(void)
 {
-	t_map	*map1;
-	int		i;
+	double		oldplanex;
+	double		oldirx;
+	double		rotspeed;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S'
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				map1->line[i] -= 32;
-				map_global()->orientation = map1->line[i];
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	rotspeed = 0.05;
+	oldirx = player()->dir.x;
+	player()->dir.x = player()->dir.x * cos(-rotspeed) - player()->dir.y * sin(-rotspeed);
+	player()->dir.y = oldirx * sin(-rotspeed) + player()->dir.y * cos(-rotspeed);
+	oldplanex = player()->plane.x;
+    player()->plane.x = player()->plane.x * cos(-rotspeed) - player()->plane.y * sin(-rotspeed);
+    player()->plane.y = oldplanex * sin(-rotspeed) + player()->plane.y * cos(-rotspeed);
 }
 
 // camera look right
 void	look_right(void)
 {
-	t_map	*map1;
-	int		i;
+	double		oldplanex;
+	double		oldirx;
+	double		rotspeed;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S'
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				map1->line[i] += 32;
-				map_global()->orientation = map1->line[i];
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	rotspeed = 0.05;
+	oldirx = player()->dir.x;
+	player()->dir.x = player()->dir.x * cos(rotspeed) - player()->dir.y * sin(rotspeed);
+	player()->dir.y = oldirx * sin(rotspeed) + player()->dir.y * cos(rotspeed);
+	oldplanex = player()->plane.x;
+    player()->plane.x = player()->plane.x * cos(rotspeed) - player()->plane.y * sin(rotspeed);
+    player()->plane.y = oldplanex * sin(rotspeed) + player()->plane.y * cos(rotspeed);
 }

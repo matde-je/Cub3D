@@ -51,10 +51,10 @@ void	error(char *str)
 	int	i;
 
 	i = -1;
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	while (str[++i])
 		write(2, &str[i], 1);
-	write(1, "\n", 1);
+	write(2, "\n", 1);
 	free_all(1);
 	exit(1);
 }
