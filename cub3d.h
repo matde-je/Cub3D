@@ -42,6 +42,7 @@
 # define WIN_WIDTH 700
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
+# define MOVE_SPEED 0.03
 
 # define NORTH 0
 # define SOUTH 1
