@@ -34,7 +34,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 5Z
 # endif
 
 # define PI 3.14159265358979323846
@@ -44,6 +44,7 @@
 # define M_PI 3.14159265358979323846
 # define MOVE_SPEED 0.03
 
+#define MALLOC_ERR "Error allocating in _FILE_"
 # define NORTH 0
 # define SOUTH 1
 # define EAST 2
@@ -126,8 +127,6 @@ typedef struct s_texture
 	double			pos;
 	int				x;
 	int				y;
-    int				**tex_pix;
-    int				tex_arr[4][TEX_SIZE * TEX_SIZE];
 }					t_texture;
 
 // has the angle, distance and ray coordinates of the intersections
@@ -158,10 +157,11 @@ typedef struct s_c3d
 {
 	void			*mlx;
 	void			*win;
+    int             height;
+    int             width;
 	t_img			image;
-	t_ray			ray;
-	// t_img tex[4];
-	int				**tex;
+	t_img			tex_img[4];
+    int				tex[4][TEX_SIZE * TEX_SIZE];
 }					t_c3d;
 
 // Raycast functions//
@@ -177,7 +177,7 @@ void				render_vert_text(int x);
 
 t_c3d				*cub3(void);
 char				map_iter(int x, int y);
-void				put_pixel_2img(t_img *image, int x, int y, int color);
+void				put_pixel_2img(int x, int y, int color);
 int					init_tex(void);
 t_player			*player(void);
 t_map				*map(void);
@@ -215,10 +215,8 @@ void				parse_rgb2(char **trim, char **trim1, char ***split, int i);
 void				prep_texture(int no, int i, char *trim, char *trim1);
 void				freeing(void);
 void				img_func(void);
-void				put_cf_colors(void);
 void				textur_mapping(float x, float y);
 void				raycasting(void);
-void mk_text_buffer(void);
 t_ray				*ray(void);
 char				*rm_space(char *str);
 void				free_trim(char **trim, char **trim1, char *message,

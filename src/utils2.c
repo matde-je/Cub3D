@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:38:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/11 11:36:14 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/29 22:17:35 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "../cub3d.h"
 
 void	open_textures(char *path)
 {
@@ -93,9 +94,3 @@ t_map	*map(void)
 	return (var);
 }
 
-t_c3d	*cub3(void)
-{
-	static t_c3d	cub3;
-
-	return (&cub3);
-}

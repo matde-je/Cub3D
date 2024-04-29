@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matilde <matilde@student.42.fr>            +#+  +:+       +#+         #
+#    By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2024/04/11 10:37:19 by matilde          ###   ########.fr        #
+#    Updated: 2024/04/29 22:13:17 by acuva-nu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ vpath %.c gnl/ src/parse src/init src/raycast/ src/
 
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
-INCS 	   = cub3d.h
+INCS 	   = ../cub3d.h
 NAME       = cub3D
 CC         = cc
 CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address

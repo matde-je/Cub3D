@@ -11,7 +11,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 t_map_global	*map_global(void)
 {
@@ -38,8 +38,6 @@ t_player *player(void)
 t_texture	*tex(void)
 {
 	static t_texture	var;
-    var = (t_texture){NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0,
-        0, 0};
 	return (&var);
 }
 

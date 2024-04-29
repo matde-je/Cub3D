@@ -1,30 +1,34 @@
 #include "../cub3d.h"
 
-void mk_text_buffer(void)
+static int *xpm_to_pixel(char *xpm)
 {
-    int i;
+    t_img tmp;
+    int *buf;
+    int x;
+    int y;
 
-    tex()->tex_pix = ft_calloc(WIN_HEIGHT + 1, sizeof(tex()->tex_pix));
-        if (!tex()->tex_pix)
-            ft_putstr_fd("tex_pix alloc fail\n", 2);
-    i = -1;
-    while(++i < WIN_HEIGHT)
+    tmp.img_ptr = mlx_xpm_file_to_image(cub3()->mlx, xpm, &cub3()->width, 
+            &cub3()->height);
+    tmp.addr = mlx_get_data_addr(cub3()->mlx, &tmp.bpp, &tmp.size, &tmp.endian);
+
+    buf = ft_calloc(1, sizeof * buf * TEX_SIZE * TEX_SIZE);
+    if (!buf)
+        error(MALLOC_ERR);
+    y = -1;
+    while(++y < TEX_SIZE)
     {
-        tex()->tex_pix[i] = ft_calloc(WIN_HEIGHT, sizeof(tex()->tex_pix));
-        if (!tex()->tex_pix[i])
-            ft_putstr_fd("tex_pix alloc fail\n", 2);
-    }
+        x = -1;
+        while(++x < TEX_SIZE)
+            buf[y * TEX_SIZE + x] = tmp.addr[y * TEX_SIZE + x];
+    } 
+    mlx_destroy_image(cub3()->mlx, tmp.img_ptr);
+    return (buf);
 }
 
-void fill_tex_arr(int i)
+int init_tex(void)
 {
-    t_point it;
-    t_img *tmp;
+    tex()
 
-    it = (t_point){-1, -1};
-    while(++y )
 }
-void init_textures(void)
-{
-}
-xp
+
+

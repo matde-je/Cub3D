@@ -12,29 +12,12 @@
 
 #include "../../cub3d.h"
 
-static void	get_texture_index(void)
-{
-	if (ray()->side != 0)
-	{
-		if (ray()->dir.y > 0)
-			tex()->index = SOUTH;
-		else
-			tex()->index = NORTH;
-	}
-	else
-	{
-		if (ray()->dir.y < 0)
-			tex()->index = WEST;
-		else
-			tex()->index = EAST;
-	}
-}
 
 
 void	render_textures(int x)
 {
 	int	y;
-	int	color;
+    int color;
 
 	tex()->x = (int)(ray()->wall_x * (double)TEX_SIZE);
 	if ((ray()->side == 0 && ray()->dir.x > 0) || (ray()->side == 0
@@ -48,11 +31,11 @@ void	render_textures(int x)
 	{
 		tex()->y = (int)tex()->pos & (TEX_SIZE - 1);
 		tex()->pos += tex()->step;
-		color = cub3()->tex[tex()->index][TEX_SIZE * tex()->y + tex()->x];
+		color = cub3()->tex[tex()->index][TEX_SIZE 
+            * tex()->y + tex()->x];
 		if (tex()->index == NORTH || tex()->index == EAST)
 			color = (color >> 1) & 8355711;
-		if (color > 0)
-			tex()->tex_pix[y][x] = color;
+        put_pixel_2img(&cub3()->image, x, y, color);
 		y++;
 	}
 }

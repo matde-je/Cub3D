@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:25:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/10 17:28:21 by matilde          ###   ########.fr       */
+/*   Updated: 2024/04/29 22:31:29 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,6 @@ void	new_window(void)
 
 void	put_cf_colors(void)
 {
-	int	y;
-	int	x;
-
-	x = -1;
-	while (++x < WIN_WIDTH)
-	{
-		y = WIN_HEIGHT / 2 - 1;
-		while (++y < WIN_HEIGHT)
-			put_pixel_2img(window()->image, x, y, tex()->c[3]);
-	}
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
