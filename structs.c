@@ -31,19 +31,22 @@ t_player *player(void)
 {
     static t_player var;
 
+    var = (t_player){'\0', {0, 0}, {0, 0}, {0, 0}, false, 0, 0, 0};
     return (&var);
 }
 
 t_texture	*tex(void)
 {
 	static t_texture	var;
-
+    var = (t_texture){NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0,
+        0, 0};
 	return (&var);
 }
 
 t_ray	*ray(void)
 {
 	static t_ray	var;
-
+    var = (t_ray){0, 0, 0, 0, 0, {0, 0}, {0, 0}, {0, 0}, 0, 0, {0, 0}, 0,
+        {0, 0}, 0, 0, 0, 0, 0, 0};
 	return (&var);
 }

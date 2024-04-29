@@ -126,6 +126,8 @@ typedef struct s_texture
 	double			pos;
 	int				x;
 	int				y;
+    int				**tex_pix;
+    int				tex_arr[4][TEX_SIZE * TEX_SIZE];
 }					t_texture;
 
 // has the angle, distance and ray coordinates of the intersections
@@ -159,9 +161,7 @@ typedef struct s_c3d
 	t_img			image;
 	t_ray			ray;
 	// t_img tex[4];
-	int				tex_arr[4][TEX_SIZE * TEX_SIZE];
 	int				**tex;
-	int				**tex_pix;
 }					t_c3d;
 
 // Raycast functions//
@@ -218,6 +218,7 @@ void				img_func(void);
 void				put_cf_colors(void);
 void				textur_mapping(float x, float y);
 void				raycasting(void);
+void mk_text_buffer(void);
 t_ray				*ray(void);
 char				*rm_space(char *str);
 void				free_trim(char **trim, char **trim1, char *message,

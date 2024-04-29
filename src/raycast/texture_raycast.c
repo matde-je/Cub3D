@@ -29,6 +29,8 @@ static void	get_texture_index(void)
 			tex()->index = EAST;
 	}
 }
+
+
 void	render_textures(int x)
 {
 	int	y;
@@ -50,7 +52,7 @@ void	render_textures(int x)
 		if (tex()->index == NORTH || tex()->index == EAST)
 			color = (color >> 1) & 8355711;
 		if (color > 0)
-			cub3()->tex_pix[y][x] = color;
+			tex()->tex_pix[y][x] = color;
 		y++;
 	}
 }
