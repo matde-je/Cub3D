@@ -99,17 +99,35 @@ void	perp_render(void)
 	ray()->wall_x -= floor(ray()->wall_x);
 }
 
+static void get_tex_idx(void)
+{
+    if (!ray()->side)
+    {
+        if (ray()->dir.x < 0)
+            tex()->index = WEST;
+        else
+            tex()->index = EAST;
+    }
+    else
+    {
+        if (ray()->dir.y > 0)
+            tex()->index = SOUTH;
+        else
+            tex()->index = NORTH;
+    }
+}
 void	render_textures(int x)
 {
 	int	y;
     int color;
-
+    
+    get_tex_idx();
 	tex()->x = (int)(ray()->wall_x * (double)TEX_SIZE);
 	if ((ray()->side == 0 && ray()->dir.x > 0) || (ray()->side == 0
 			&& ray()->dir.y < 0))
 		tex()->x = TEX_SIZE - tex()->x - 1;
 	tex()->step = 1.0 * TEX_SIZE / ray()->line_height;
-	tex()->pos = (ray()->render_start - WIN_HEIGHT / 2 + ray()->line_height / 2)
+	tex()->pos = (ray()->render_start - WIN_HEIGHT / 2.0 + ray()->line_height / 2.0)
 		* tex()->step;
 	y = ray()->render_start - 1;
 	while (++y < ray()->render_end)
