@@ -89,6 +89,17 @@ typedef struct s_img
 	int				height;
 }					t_img;
 
+typedef struct s_img2
+{
+	void			*img_ptr;
+	char			*addr;
+	int				bpp;
+	int				size;
+	int				endian;
+	int				width;
+	int				height;
+}					t_img2;
+
 // has the max lengths of the map and the position of the camera (player)
 typedef struct s_map_global
 {
@@ -157,22 +168,25 @@ typedef struct s_c3d
 {
 	void			*mlx;
 	void			*win;
+    double           framerate;
+    double          move_speed;
+    double          rota_speed;
     int             height;
     int             width;
 	t_img			image;
-	t_img			tex_img[4];
+	t_img2			tex_img[4];
     int				tex[4][TEX_SIZE * TEX_SIZE];
 }					t_c3d;
 
 // Raycast functions//
 void				raycasting(void);
+void                render_floor(void);
+void                render_ceiling(void);
 void				launch_ray(int x);
-void				dda(void);
-void				step_side_len_x(void);
-void				step_side_len_y(void);
+void				do_dda(void);
+void				step_side_len(void);
 void				perp_render(void);
 void				render_textures(int x);
-void				render_vert_text(int x);
 // Raycast functions//
 
 t_c3d				*cub3(void);
@@ -221,7 +235,7 @@ t_ray				*ray(void);
 char				*rm_space(char *str);
 void				free_trim(char **trim, char **trim1, char *message,
 						char ***split);
-void				start_pos_dir(char c);
+void				set_player_start(char c);
 void				open_textures(char *path);
 
 #endif

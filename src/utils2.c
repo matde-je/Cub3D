@@ -26,6 +26,24 @@ void	open_textures(char *path)
 	}
 }
 
+char	map_iter(int x, int y)
+{
+	int		i;
+	int		j;
+	t_map	*it;
+
+	i = -1;
+	j = -1;
+	it = map();
+	while (++i <= x)
+	{
+		while (++j <= y && it->line[j] != '\0')
+			return (it->line[j]);
+		it = it->next;
+	}
+	return (' ');
+}
+
 int	free_all(int i)
 {
 	t_map	*next;

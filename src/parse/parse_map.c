@@ -111,7 +111,7 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void	set_player_start_pos(char c)
+void	set_player_start(char c)
 {
 	if (c == 'N')
 	{

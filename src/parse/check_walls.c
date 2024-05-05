@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/11 11:58:34 by matilde          ###   ########.fr       */
+/*   Updated: 2024/05/05 22:36:10 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_chars(int i, int pos)
 			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
 				|| mp->line[i] == 'W')
 			{
-				start_pos_dir(mp->line[i]);
+				set_player_start(mp->line[i]);
 				pos += 1;
 				map_global()->px = i;
 				map_global()->py = mp->i;

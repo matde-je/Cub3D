@@ -11,27 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "../libft/inc/libft.h"
-#include "../minilibx-linux/mlx.h"
-#include <time.h>
 
-char	map_iter(int x, int y)
-{
-	int		i;
-	int		j;
-	t_map	*it;
-
-	i = -1;
-	j = -1;
-	it = map();
-	while (++i <= x)
-	{
-		while (++j <= y && it->line[j] != '\0')
-			return (it->line[j]);
-		it = it->next;
-	}
-	return (' ');
-}
 
 t_c3d *cub3(void)
 {
@@ -46,15 +26,16 @@ t_c3d *cub3(void)
 
 int start_all(void)
 {
-    draw_floor();
-    draw_ceiling();
+    render_floor();
+    render_ceiling();
     raycasting();
-    //set frame rate
-    //set speed
-    //ser rotation speed
+    cub3()->framerate = 16 /1000.0;
+    cub3()->move_speed = cub3()->framerate * 5.0;
+    cub3()->rota_speed = cub3()->framerate * 3.0;
     mlx_destroy_image(cub3()->mlx, cub3()->image.img_ptr);
     return (0);
 }
+
 int	main(int argc, char **argv)
 {
 
@@ -83,8 +64,3 @@ void	error(char *str)
 	exit(1);
 }
 
-int	err_out(char *msg)
-{
-	ft_putstr_fd(msg, 1);
-	exit(1);
-}
