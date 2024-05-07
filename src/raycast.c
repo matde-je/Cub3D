@@ -116,6 +116,7 @@ static void get_tex_idx(void)
             tex()->index = NORTH;
     }
 }
+
 void	render_textures(int x)
 {
 	int	y;
