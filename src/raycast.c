@@ -6,7 +6,7 @@
 /*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:25:10 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/05 16:22:54 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:51:46 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,106 +14,103 @@
 
 void	launch_ray(int x)
 {
-	ray()->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-	ray()->dir.x = player()->dir.x + ray()->plane.x * ray()->camera_x;
-	ray()->dir.y = player()->dir.y + ray()->plane.y * ray()->camera_x;
-	ray()->map_x = (int)player()->pos.x;
-	ray()->map_y = (int)player()->pos.y;
-	ray()->delta_len.x = fabs(1 / ray()->dir.x);
-	ray()->delta_len.y = fabs(1 / ray()->dir.y);
+	c3d()->r.camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	c3d()->r.dir.x = c3d()->p.dir.x + c3d()->r.plane.x * c3d()->r.camera_x;
+	c3d()->r.dir.y = c3d()->p.dir.y + c3d()->r.plane.y * c3d()->r.camera_x;
+	c3d()->r.map_x = (int)c3d()->p.pos.x;
+	c3d()->r.map_y = (int)c3d()->p.pos.y;
+    c3d()->r.hit_wall = 0;
+	c3d()->r.delta_len.x = fabs(1 / c3d()->r.dir.x);
+	c3d()->r.delta_len.y = fabs(1 / c3d()->r.dir.y);
 }
 
 void	step_side_len(void)
 {
-	if (ray()->dir.x < 0)
+	if (c3d()->r.dir.x < 0)
 	{
-		ray()->steps_x = -1;
-		ray()->side_len.x = (player()->pos.x - ray()->map_x)
-			* ray()->delta_len.x;
+		c3d()->r.steps_x = -1;
+		c3d()->r.side_len.x = (c3d()->p.pos.x - c3d()->r.map_x)
+			* c3d()->r.delta_len.x;
 	}
 	else
 	{
-		ray()->steps_x = 1;
-		ray()->side_len.x = (ray()->map_x + 1.0 - player()->pos.x)
-			* ray()->delta_len.x;
+		c3d()->r.steps_x = 1;
+		c3d()->r.side_len.x = (c3d()->r.map_x + 1.0 - c3d()->p.pos.x)
+			* c3d()->r.delta_len.x;
 	}
-	if (ray()->dir.y < 0)
+	if (c3d()->r.dir.y < 0)
 	{
-		ray()->steps_y = -1;
-		ray()->side_len.y = (player()->pos.y - ray()->map_y)
-			* ray()->delta_len.y;
+		c3d()->r.steps_y = -1;
+		c3d()->r.side_len.y = (c3d()->p.pos.y - c3d()->r.map_y)
+			* c3d()->r.delta_len.y;
 	}
 	else
 	{
-		ray()->steps_y = 1;
-		ray()->side_len.y = (ray()->map_y + 1.0 - player()->pos.y)
-			* ray()->delta_len.y;
+		c3d()->r.steps_y = 1;
+		c3d()->r.side_len.y = (c3d()->r.map_y + 1.0 - c3d()->p.pos.y)
+			* c3d()->r.delta_len.y;
 	}
 }
 
 void	do_dda(void)
 {
-	int	hit_wall;
-
-	hit_wall = 0;
-    (void)hit_wall;
-	while (ray()->hit_wall == 0)
+	while (c3d()->r.hit_wall == 0)
 	{
-		if (ray()->side_len.x < ray()->side_len.y)
+		if (c3d()->r.side_len.x < c3d()->r.side_len.y)
 		{
-			ray()->side_len.x += ray()->delta_len.x;
-			ray()->map_x += ray()->steps_x;
-			ray()->side = 0;
+			c3d()->r.side_len.x += c3d()->r.delta_len.x;
+			c3d()->r.map_x += c3d()->r.steps_x;
+			c3d()->r.side = 0;
 		}
 		else
 		{
-			ray()->side_len.y += ray()->delta_len.y;
-			ray()->map_y += ray()->steps_y;
-			ray()->side = 0;
+			c3d()->r.side_len.y += c3d()->r.delta_len.y;
+			c3d()->r.map_y += c3d()->r.steps_y;
+			c3d()->r.side = 0;
 		}
-		if (ray()->map_y < 0.25 || ray()->map_x > map_global()->y_max - 0.25
-			|| ray()->map_x > map_global()->y_max - 1.25)
+		if (c3d()->r.map_y < 0.25 || c3d()->r.map_x > c3d()->mg.y_max - 0.25
+			|| c3d()->r.map_x > c3d()->mg.y_max - 1.25)
 			break ;
-		else if (map_iter(ray()->map_x, ray()->map_y) > '0')
-			hit_wall = 1;
+		else if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '1')
+			c3d()->r.hit_wall = 1;
 	}
 }
 
 void	perp_render(void)
 {
-	if (ray()->side == 0)
-		ray()->perp_wall_len = ray()->side_len.x - ray()->delta_len.x;
+	if (c3d()->r.side == 0)
+		c3d()->r.perp_wall_len = c3d()->r.side_len.x - c3d()->r.delta_len.x;
 	else
-		ray()->perp_wall_len = ray()->side_len.x - ray()->delta_len.x;
-	ray()->line_height = (int)(WIN_HEIGHT / ray()->perp_wall_len);
-	ray()->render_start = -(ray()->line_height / 2 + WIN_HEIGHT / 2);
-	if (ray()->render_start < 0)
-		ray()->render_start = 0;
-	ray()->render_end = ray()->line_height / 2 + WIN_HEIGHT / 2;
-	if (ray()->render_end >= WIN_HEIGHT)
-		ray()->render_end = WIN_HEIGHT - 1;
-	if (ray()->side == 0)
-		ray()->wall_x = player()->pos.y + ray()->wall_len * ray()->dir.y;
+		c3d()->r.perp_wall_len = c3d()->r.side_len.y - c3d()->r.delta_len.y;
+	c3d()->r.line_height = (int)(WIN_HEIGHT / c3d()->r.perp_wall_len);
+	c3d()->r.render_start = -(c3d()->r.line_height / 2 + WIN_HEIGHT / 2);
+	if (c3d()->r.render_start < 0)
+		c3d()->r.render_start = 0;
+	c3d()->r.render_end = c3d()->r.line_height / 2 + WIN_HEIGHT / 2;
+	if (c3d()->r.render_end >= WIN_HEIGHT)
+		c3d()->r.render_end = WIN_HEIGHT - 1;
+	if (c3d()->r.side == 0)
+		c3d()->r.wall_x = c3d()->p.pos.y + c3d()->r.wall_len * c3d()->r.dir.y;
 	else
-		ray()->wall_x = player()->pos.x + ray()->wall_len * ray()->dir.x;
-	ray()->wall_x -= floor(ray()->wall_x);
+		c3d()->r.wall_x = c3d()->p.pos.x + c3d()->r.wall_len * c3d()->r.dir.x;
+	c3d()->r.wall_x -= floor(c3d()->r.wall_x);
 }
 
 static void get_tex_idx(void)
 {
-    if (!ray()->side)
+    if (!c3d()->r.side)
     {
-        if (ray()->dir.x < 0)
-            tex()->index = WEST;
+        if (c3d()->r.dir.x < 0)
+            c3d()->t.index = WEST;
         else
-            tex()->index = EAST;
+            c3d()->t.index = EAST;
     }
     else
     {
-        if (ray()->dir.y > 0)
-            tex()->index = SOUTH;
+        if (c3d()->r.dir.y > 0)
+            c3d()->t.index = SOUTH;
         else
-            tex()->index = NORTH;
+            c3d()->t.index = NORTH;
     }
 }
 
@@ -123,21 +120,21 @@ void	render_textures(int x)
     int color;
     
     get_tex_idx();
-	tex()->x = (int)(ray()->wall_x * (double)TEX_SIZE);
-	if ((ray()->side == 0 && ray()->dir.x > 0) || (ray()->side == 0
-			&& ray()->dir.y < 0))
-		tex()->x = TEX_SIZE - tex()->x - 1;
-	tex()->step = 1.0 * TEX_SIZE / ray()->line_height;
-	tex()->pos = (ray()->render_start - WIN_HEIGHT / 2.0 + ray()->line_height / 2.0)
-		* tex()->step;
-	y = ray()->render_start - 1;
-	while (++y < ray()->render_end)
+	c3d()->t.x = (int)(c3d()->r.wall_x * (double)TEX_SIZE);
+	if ((c3d()->r.side == 0 && c3d()->r.dir.x < 0) || (c3d()->r.side == 1
+			&& c3d()->r.dir.y > 0))
+		c3d()->t.x = TEX_SIZE - c3d()->t.x - 1;
+	c3d()->t.step = 1.0 * TEX_SIZE / c3d()->r.line_height;
+	c3d()->t.pos = (c3d()->r.render_start - WIN_HEIGHT / 2.0 + c3d()->r.line_height / 2.0)
+		* c3d()->t.step;
+	y = c3d()->r.render_start - 1;
+	while (++y < c3d()->r.render_end)
 	{
-		tex()->y = (int)tex()->pos & (TEX_SIZE - 1);
-		tex()->pos += tex()->step;
-		color = cub3()->tex[tex()->index][TEX_SIZE 
-            * tex()->y + tex()->x];
-		if (tex()->index == NORTH || tex()->index == EAST)
+		c3d()->t.y = (int)c3d()->t.pos & (TEX_SIZE - 1);
+		c3d()->t.pos += c3d()->t.step;
+		color = c3d()->tex[c3d()->t.index][TEX_SIZE 
+            * c3d()->t.y + c3d()->t.x];
+		if (c3d()->t.index == NORTH || c3d()->t.index == EAST)
 			color = (color >> 1) & 8355711;
         put_pixel_2img(x, y, color);
 	}

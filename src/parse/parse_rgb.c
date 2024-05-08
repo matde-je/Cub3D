@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/11 12:21:21 by matilde          ###   ########.fr       */
+/*   Updated: 2024/05/08 20:51:46 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 	char	**split;
 	int		i;
 
-	i = skipspace(map_global()->gnl);
+	i = skipspace(c3d()->mg.gnl);
 	free_trim(trim, trim1, NULL, NULL);
-	if (map_global()->gnl[i] != 'C' && map_global()->gnl[i] != 'F')
+	if (c3d()->mg.gnl[i] != 'C' && c3d()->mg.gnl[i] != 'F')
 		return ;
 	parse_rgb2(trim, trim1, &split, i);
-	if (map_global()->gnl[i] == 'C')
+	if (c3d()->mg.gnl[i] == 'C')
 	{
 		*c += 1;
 		if (*c != 1)
 			free_trim(trim, trim1, "Invalid color", &split);
 		rgb_c(-1, split, 0);
 	}
-	if (map_global()->gnl[i] == 'F')
+	if (c3d()->mg.gnl[i] == 'F')
 	{
 		*f += 1;
 		if (*f != 1)
@@ -44,10 +44,10 @@ void	parse_rgb2(char **trim, char **trim1, char ***split, int i)
 	char	*trim2;
 	int		j;
 
-	if (map_global()->gnl[i] == 'C')
-		*trim = ft_strtrim(&map_global()->gnl[i], "C");
+	if (c3d()->mg.gnl[i] == 'C')
+		*trim = ft_strtrim(&c3d()->mg.gnl[i], "C");
 	else
-		*trim = ft_strtrim(&map_global()->gnl[i], "F");
+		*trim = ft_strtrim(&c3d()->mg.gnl[i], "F");
 	*trim1 = ft_strtrim(*trim, " ");
 	trim2 = rm_space(rm_nl(*trim1));
 	if (!trim2)
@@ -70,16 +70,16 @@ void	rgb_c(int j, char **split, int e)
 	int	green;
 	int	blue;
 
-	tex()->c = (int *)malloc(sizeof(int) * 4);
+	c3d()->t.c = (int *)malloc(sizeof(int) * 4);
 	while (split[++j])
 	{
-		tex()->c[e] = ft_atoi(split[j]);
+		c3d()->t.c[e] = ft_atoi(split[j]);
 		e++;
 	}
-	red = tex()->c[0];
-	green = tex()->c[1];
-	blue = tex()->c[2];
-	tex()->c[3] = (red << 16) | (green << 8) | blue;
+	red = c3d()->t.c[0];
+	green = c3d()->t.c[1];
+	blue = c3d()->t.c[2];
+	c3d()->t.c[3] = (red << 16) | (green << 8) | blue;
 }
 
 void	rgb_f(int j, char **split, int e)
@@ -88,16 +88,16 @@ void	rgb_f(int j, char **split, int e)
 	int	green;
 	int	blue;
 
-	tex()->f = (int *)malloc(sizeof(int) * 4);
+	c3d()->t.f = (int *)malloc(sizeof(int) * 4);
 	while (split[++j])
 	{
-		tex()->f[e] = ft_atoi(split[j]);
+		c3d()->t.f[e] = ft_atoi(split[j]);
 		e++;
 	}
-	red = tex()->f[0];
-	green = tex()->f[1];
-	blue = tex()->f[2];
-	tex()->f[3] = (red << 16) | (green << 8) | blue;
+	red = c3d()->t.f[0];
+	green = c3d()->t.f[1];
+	blue = c3d()->t.f[2];
+	c3d()->t.f[3] = (red << 16) | (green << 8) | blue;
 }
 
 void	free_trim(char **trim, char **trim1, char *message, char ***split)

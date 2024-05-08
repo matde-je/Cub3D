@@ -43,6 +43,7 @@
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
 # define MOVE_SPEED 0.03
+# define ROTA_SPEED 0.05
 
 #define MALLOC_ERR "Error allocating in _FILE_"
 # define NORTH 0
@@ -80,7 +81,7 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void			*img_ptr;
+	void			*ptr;
 	char			*addr;
 	int				bpp;
 	int				size;
@@ -91,7 +92,7 @@ typedef struct s_img
 
 typedef struct s_img2
 {
-	void			*img_ptr;
+	void			*ptr;
 	char			*addr;
 	int				bpp;
 	int				size;
@@ -168,6 +169,11 @@ typedef struct s_c3d
 {
 	void			*mlx;
 	void			*win;
+    t_ray           r;
+    t_texture       t;
+    t_player        p;
+    t_map_global    mg;
+    t_map           m;
     double           framerate;
     double          move_speed;
     double          rota_speed;
@@ -189,7 +195,7 @@ void				perp_render(void);
 void				render_textures(int x);
 // Raycast functions//
 
-t_c3d				*cub3(void);
+t_c3d				*c3d(void);
 char				map_iter(int x, int y);
 void				put_pixel_2img(int x, int y, int color);
 int					init_tex(void);
@@ -235,7 +241,7 @@ t_ray				*ray(void);
 char				*rm_space(char *str);
 void				free_trim(char **trim, char **trim1, char *message,
 						char ***split);
-void				set_player_start(char c);
+void				set_player_start(char x);
 void				open_textures(char *path);
 
 #endif

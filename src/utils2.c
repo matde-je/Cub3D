@@ -15,13 +15,13 @@
 
 void	open_textures(char *path)
 {
-	(map_global()->fd) = open(path, O_RDONLY);
-	if (map_global()->fd < 0)
+	(c3d()->mg.fd) = open(path, O_RDONLY);
+	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
-	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
-	if (!map_global()->gnl)
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+	if (!c3d()->mg.gnl)
 	{
-		close(map_global()->fd);
+		close(c3d()->mg.fd);
 		error("Invalid map");
 	}
 }
@@ -58,14 +58,14 @@ int	free_all(int i)
 		current = next;
 	}
 	freeing();
-	if (map_global()->gnl)
-		free(map_global()->gnl);
-	if (map_global()->path)
-		free(map_global()->path);
-	if (window()->mlx)
+	if (c3d()->mg.gnl)
+		free(c3d()->mg.gnl);
+	if (c3d()->mg.path)
+		free(c3d()->mg.path);
+	if (c3d()->mlx)
 	{
-		mlx_destroy_display(window()->mlx);
-		free(window()->mlx);
+		mlx_destroy_display(c3d()->mlx);
+		free(c3d()->mlx);
 	}
 	if (i == 0)
 		exit(0);
@@ -74,24 +74,24 @@ int	free_all(int i)
 
 void	freeing(void)
 {
-	if (window()->win)
-		mlx_destroy_window(window()->mlx, window()->win);
-	if (tex()->no)
-		free(tex()->no);
-	if (tex()->so)
-		free(tex()->so);
-	if (tex()->we)
-		free(tex()->we);
-	if (tex()->ea)
-		free(tex()->ea);
-	if (tex()->f)
-		free(tex()->f);
-	if (tex()->c)
-		free(tex()->c);
-	if (window()->image && window()->image->img_ptr)
+	if (c3d()->win)
+		mlx_destroy_window(c3d()->mlx, c3d()->win);
+	if (c3d()->t.no)
+		free(c3d()->t.no);
+	if (c3d()->t.so)
+		free(c3d()->t.so);
+	if (c3d()->t.we)
+		free(c3d()->t.we);
+	if (c3d()->t.ea)
+		free(c3d()->t.ea);
+	if (c3d()->t.f)
+		free(c3d()->t.f);
+	if (c3d()->t.c)
+		free(c3d()->t.c);
+	if (c3d()->image.ptr)
 	{
-		mlx_destroy_image(window()->mlx, window()->image->img_ptr);
-		free(window()->image);	
+		mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
+		//free(c3d()->image);	
 	}
 }
 

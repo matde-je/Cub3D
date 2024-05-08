@@ -77,18 +77,18 @@ void	printin(int i)
 	}
 	j = -1;
 	while (++j < 7 && i == 1)
-		printf("%d", tex()->f[j]);
+		printf("%d", c3d()->t.f[j]);
 	printf("\n");
 	j = -1;
 	while (++j < 6 && i == 1)
-		printf("%d", tex()->c[j]);
+		printf("%d", c3d()->t.c[j]);
 	printf("\n");
 	if (i == 2)
 	{
-		printf("%s\n", (char *)tex()->no);
-		printf("%s\n", (char *)tex()->so);
-		printf("%s\n", (char *)tex()->we);
-		printf("%s\n", (char *)tex()->ea);
+		printf("%s\n", (char *)c3d()->t.no);
+		printf("%s\n", (char *)c3d()->t.so);
+		printf("%s\n", (char *)c3d()->t.we);
+		printf("%s\n", (char *)c3d()->t.ea);
 	}
 }
 

@@ -20,15 +20,15 @@ void	parsing(char *path)
 	if ((path[i - 4] == '.' && path[i - 3] == 'c') && (path[i - 2] == 'u'
 			&& path[i - 1] == 'b'))
 	{
-		map_global()->path = malloc(ft_strlen(path) + 1);
-		if (map_global()->path == NULL)
+		c3d()->mg.path = malloc(ft_strlen(path) + 1);
+		if (c3d()->mg.path == NULL)
 			error("Fail to allocate memory");
-		ft_strlcpy(map_global()->path, path, ft_strlen(path) + 1);
+		ft_strlcpy(c3d()->mg.path, path, ft_strlen(path) + 1);
 		check_map(path);
 		check_chars(-1, 0);
 		check_wall(0);
 		check_walls();
-		map_global()->gnl = NULL;
+		c3d()->mg.gnl = NULL;
 		open_textures(path);
 		prep_texture(0, 0, NULL, NULL);
 	}
@@ -40,56 +40,56 @@ void	check_map(char *path)
 {
 	int	i;
 
-	(map_global()->fd) = open(path, O_RDONLY);
-	if (map_global()->fd < 0)
+	(c3d()->mg.fd) = open(path, O_RDONLY);
+	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
-	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
-	if (!map_global()->gnl)
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+	if (!c3d()->mg.gnl)
 		error("Invalid map");
-	while (map_global()->gnl)
+	while (c3d()->mg.gnl)
 	{
 		i = 0;
-		while (map_global()->gnl[i] && map_global()->gnl[i] == ' ')
+		while (c3d()->mg.gnl[i] && c3d()->mg.gnl[i] == ' ')
 			i++;
-		if (map_global()->gnl[i] != '1')
+		if (c3d()->mg.gnl[i] != '1')
 		{
-			free(map_global()->gnl);
-			(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
-			if (!map_global()->gnl)
+			free(c3d()->mg.gnl);
+			(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+			if (!c3d()->mg.gnl)
 				error("Invalid map");
 		}
 		else
 			break ;
 	}
-	if (map_global()->gnl && map_global()->gnl[i] == '1')
+	if (c3d()->mg.gnl && c3d()->mg.gnl[i] == '1')
 		init_map(0, 0, NULL, map());
 }
 
 void	init_map(int i, int max, char *line, t_map *map1)
 {
-	while (map_global()->gnl != NULL)
+	while (c3d()->mg.gnl != NULL)
 	{
-		line = rm_space(rm_nl(map_global()->gnl));
+		line = rm_space(rm_nl(c3d()->mg.gnl));
 		if (!line)
 		{
 			map1->prev->next = NULL;
 			free(map1);
 			error("Invalid map");
 		}
-		ft_memcpy(map_global()->gnl, line, ft_strlen(line) + 1);
-		map1->line = malloc(ft_strlen(map_global()->gnl) + 1);
+		ft_memcpy(c3d()->mg.gnl, line, ft_strlen(line) + 1);
+		map1->line = malloc(ft_strlen(c3d()->mg.gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
-		ft_memcpy(map1->line, map_global()->gnl, ft_strlen(map_global()->gnl)
+		ft_memcpy(map1->line, c3d()->mg.gnl, ft_strlen(c3d()->mg.gnl)
 			+ 1);
 		map1->i = i++;
 		max = aux_map(map1, max);
 		map1 = map1->next;
 	}
-	free(map_global()->gnl);
-	close(map_global()->fd);
-	map_global()->x_max = max;
-	map_global()->y_max = i;
+	free(c3d()->mg.gnl);
+	close(c3d()->mg.fd);
+	c3d()->mg.x_max = max;
+	c3d()->mg.y_max = i;
 }
 
 int	aux_map(t_map *map1, int max)
@@ -97,9 +97,9 @@ int	aux_map(t_map *map1, int max)
 	map1->len = ft_strlen(map1->line);
 	if (map1->len > max)
 		max = map1->len;
-	free(map_global()->gnl);
-	(map_global()->gnl) = (get_next_line(map_global()->fd, 0, 0, NULL));
-	if (map_global()->gnl != NULL)
+	free(c3d()->mg.gnl);
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+	if (c3d()->mg.gnl != NULL)
 	{
 		map1->next = malloc(sizeof(t_map));
 		if (map1->next == NULL)
@@ -111,27 +111,27 @@ int	aux_map(t_map *map1, int max)
 	return (max);
 }
 
-void	set_player_start(char c)
+void	set_player_start(char x)
 {
-	if (c == 'N')
+	if (x == 'N')
 	{
-		player()->dir = (t_point){0, 1};
-		player()->pos = (t_point){0.66, 0};
+		c3d()->p.dir = (t_point){0, 1};
+		c3d()->p.pos = (t_point){0.66, 0};
 	}
-	else if (c == 'S')
+	else if (x == 'S')
 	{
-		player()->dir = (t_point){0, 1};
-		player()->pos = (t_point){-0.66, 0};
+		c3d()->p.dir = (t_point){0, 1};
+		c3d()->p.pos = (t_point){-0.66, 0};
 	}
-	else if (c == 'E')
+	else if (x == 'E')
 	{
-		player()->dir = (t_point){1, 0};
-		player()->pos = (t_point){0, 0.66};
+		c3d()->p.dir = (t_point){1, 0};
+		c3d()->p.pos = (t_point){0, 0.66};
 	}
-	else if (c == 'W')
+	else if (x == 'W')
 	{
-		player()->dir = (t_point){-1, 0};
-		player()->pos = (t_point){0, -0.66};
+		c3d()->p.dir = (t_point){-1, 0};
+		c3d()->p.pos = (t_point){0, -0.66};
 	}
 	else
 		return ;

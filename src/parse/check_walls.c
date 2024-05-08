@@ -27,9 +27,9 @@ void	check_chars(int i, int pos)
 			{
 				set_player_start(mp->line[i]);
 				pos += 1;
-				map_global()->px = i;
-				map_global()->py = mp->i;
-				map_global()->orientation = mp->line[i];
+				c3d()->mg.px = i;
+				c3d()->mg.py = mp->i;
+				c3d()->mg.orientation = mp->line[i];
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)
@@ -49,7 +49,7 @@ void	check_wall(int i)
 	while (map1)
 	{
 		i = 0;
-		if (map1->i == 0 || map1->i == map_global()->y_max - 1)
+		if (map1->i == 0 || map1->i == c3d()->mg.y_max - 1)
 		{
 			while (map1->line[i] == ' ')
 				i++;
@@ -73,7 +73,7 @@ void	wall(int i, t_map *map1)
 {
 	if (map1 && map1-> i && map1->i == 0 && map1->next && map1->next->line && map1->next->line[i] != '1')
 		error("Invalid walls of map");
-	else if (map1->i == map_global()->y_max - 1 && map1->prev->line[i] != '1')
+	else if (map1->i == c3d()->mg.y_max - 1 && map1->prev->line[i] != '1')
 		error("Invalid walls of map");
 }
 
