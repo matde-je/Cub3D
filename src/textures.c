@@ -7,7 +7,7 @@ static void xpm_to_pixel(char *xpm, t_img2 *i, int tex_index)
 
     i->ptr = mlx_xpm_file_to_image(c3d()->mlx, xpm, &i->width, 
             &i->height);
-    i->addr = mlx_get_data_addr(c3d()->mlx, &i->bpp, &i->size, &i->endian);
+    i->addr = mlx_get_data_addr(i->ptr, &i->bpp, &i->size, &i->endian);
     y = -1;
     while(++y < i->height)
     {
@@ -15,7 +15,7 @@ static void xpm_to_pixel(char *xpm, t_img2 *i, int tex_index)
         while(++x < i->height)
         {
             c3d()->tex[tex_index][i->height * y + x] =  \
-                i->addr[i->height * y + x];
+                (i->addr[i->height * y + x]);
         }
     } 
     if (!i->addr)
