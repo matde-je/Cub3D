@@ -16,6 +16,7 @@
 t_c3d *c3d(void)
 {
     static t_c3d var;
+    // ft_bzero(&var, sizeof(t_c3d));
     var.height = WIN_HEIGHT;
     var.width = WIN_WIDTH;
     return (&var);
@@ -23,9 +24,16 @@ t_c3d *c3d(void)
 
 int start_all(void)
 {
+    void *img;
+    char *addr;
+    img = mlx_new_image(c3d()->mlx, WIN_WIDTH, WIN_HEIGHT);
+    c3d()->image.ptr = img;
+    addr = mlx_get_data_addr(c3d()->image.ptr, &c3d()->image.bpp, 
+            &c3d()->image.size, &c3d()->image.endian);
+    c3d()->image.addr = addr;
     render_floor();
     render_ceiling();
-    raycasting();
+    // raycasting();
     mlx_put_image_to_window(c3d()->mlx, c3d()->win, \
             c3d()->image.ptr, 0, 0);
     // mlx_destroy_image(c3d()->mlx, c3d()->image.img_ptr);
