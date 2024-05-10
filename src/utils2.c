@@ -35,7 +35,7 @@ char	map_iter(int x, int y)
 	i = -1;
 	j = -1;
 	it = map();
-	while (++i <= x)
+	while (++i <= x && it != NULL)
 	{
 		while (++j <= y && it->line[j] != '\0')
 			return (it->line[j]);
