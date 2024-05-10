@@ -25,11 +25,11 @@ void	check_chars(int i, int pos)
 			if (mp->line[i] == 'N' || mp->line[i] == 'S' || mp->line[i] == 'E'
 				|| mp->line[i] == 'W')
 			{
-				set_player_start(mp->line[i]);
 				pos += 1;
 				c3d()->mg.px = i;
 				c3d()->mg.py = mp->i;
 				c3d()->mg.orientation = mp->line[i];
+				init_start(i, mp->i);
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)

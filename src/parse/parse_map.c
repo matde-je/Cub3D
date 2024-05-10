@@ -110,29 +110,3 @@ int	aux_map(t_map *map1, int max)
 		map1->next = NULL;
 	return (max);
 }
-
-void	set_player_start(char x)
-{
-	if (x == 'N')
-	{
-		c3d()->p.dir = (t_point){0, 1};
-		c3d()->p.pos = (t_point){0.66, 0};
-	}
-	else if (x == 'S')
-	{
-		c3d()->p.dir = (t_point){0, 1};
-		c3d()->p.pos = (t_point){-0.66, 0};
-	}
-	else if (x == 'E')
-	{
-		c3d()->p.dir = (t_point){1, 0};
-		c3d()->p.pos = (t_point){0, 0.66};
-	}
-	else if (x == 'W')
-	{
-		c3d()->p.dir = (t_point){-1, 0};
-		c3d()->p.pos = (t_point){0, -0.66};
-	}
-	else
-		return ;
-}
