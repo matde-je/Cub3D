@@ -53,16 +53,19 @@
 
 typedef struct s_point
 {
-	double			x;
-	double			y;
+	float			x;
+	float			y;
 }					t_point;
 
 typedef struct s_player
 {
 	char			dirc;
-	t_point			pos;
-	t_point			dir;
-	t_point			plane;
+	float 			pos_x;
+	float 			pos_y;
+	float 			dir_x;
+	float 			dir_y;
+	float          plane_x;
+	float		    plane_y;
 	bool			has_moved;
 	int				move_x;
 	int				move_y;
@@ -135,8 +138,8 @@ typedef struct s_texture
 	unsigned long	h_ceiling;
 	int				size;
 	int				index;
-	double			step;
-	double			pos;
+	float			step;
+	float			pos;
 	int				x;
 	int				y;
 }					t_texture;
@@ -149,14 +152,19 @@ typedef struct s_ray
 	int				map_y;
 	int				steps_x;
 	int				steps_y;
-	t_point			dir;
-	t_point			side_len;
-	t_point			delta_len;
-	double			perp_wall_len;
-	double			wall_len;
-	t_point			pos;
-	double			wall_x;
-	t_point			plane;
+	float 			dir_x;
+	float 			dir_y;
+	float			side_len_x;
+	float			side_len_y;
+	float 			delta_len_x;
+	float 			delta_len_y;
+	float			perp_wall_len;
+	float			wall_len;
+	float          pos_x;
+	float          pos_y;
+	float			wall_x;
+	float          plane_x;
+	float		  plane_y;
 	int				side;
 	int				line_height;
 	int				render_start;
@@ -174,9 +182,9 @@ typedef struct s_c3d
     t_player        p;
     t_map_global    mg;
     t_map           m;
-    double           framerate;
-    double          move_speed;
-    double          rota_speed;
+    float           framerate;
+    float          move_speed;
+    float          rota_speed;
     int             height;
     int             width;
 	t_img			image;
@@ -204,6 +212,7 @@ t_map				*map(void);
 t_texture			*tex(void);
 void				printin(int i);
 t_window			*window(void);
+void init_start(int x, int y);
 void				parsing(char *path);
 void				check_wall(int i);
 int					key_handler(int key);

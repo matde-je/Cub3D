@@ -6,7 +6,7 @@
 /*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:39:08 by matilde           #+#    #+#             */
-/*   Updated: 2024/05/08 20:25:50 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/10 23:41:07 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,31 @@
 // camera looks left
 void	look_left(void)
 {
-	double		oldplanex;
-	double		oldirx;
-	double		rotspeed;
+	float		oldplanex;
+	float		oldirx;
+	float		rotspeed;
 
 	rotspeed = ROTA_SPEED;
-	oldirx = c3d()->p.dir.x;
-	c3d()->p.dir.x = c3d()->p.dir.x * cos(-rotspeed) - c3d()->p.dir.y * sin(-rotspeed);
-	c3d()->p.dir.y = oldirx * sin(-rotspeed) + c3d()->p.dir.y * cos(-rotspeed);
-	oldplanex = c3d()->p.plane.x;
-    c3d()->p.plane.x = c3d()->p.plane.x * cos(-rotspeed) - c3d()->p.plane.y * sin(-rotspeed);
-    c3d()->p.plane.y = oldplanex * sin(-rotspeed) + c3d()->p.plane.y * cos(-rotspeed);
+	oldirx = c3d()->p.dir_x;
+	c3d()->p.dir_x = c3d()->p.dir_x * cos(-rotspeed) - c3d()->p.dir_y * sin(-rotspeed);
+	c3d()->p.dir_y = oldirx * sin(-rotspeed) + c3d()->p.dir_y * cos(-rotspeed);
+	oldplanex = c3d()->p.plane_x;
+    c3d()->p.plane_x = c3d()->p.plane_x * cos(-rotspeed) - c3d()->p.plane_y * sin(-rotspeed);
+    c3d()->p.plane_y = oldplanex * sin(-rotspeed) + c3d()->p.plane_y * cos(-rotspeed);
 }
 
 // camera look right
 void	look_right(void)
 {
-	double		oldplanex;
-	double		oldirx;
-	double		rotspeed;
+	float		oldplanex;
+	float		oldirx;
+	float		rotspeed;
 
 	rotspeed = ROTA_SPEED;
-	oldirx = c3d()->p.dir.x;
-	c3d()->p.dir.x = c3d()->p.dir.x * cos(rotspeed) - c3d()->p.dir.y * sin(rotspeed);
-	c3d()->p.dir.y = oldirx * sin(rotspeed) + c3d()->p.dir.y * cos(rotspeed);
-	oldplanex = c3d()->p.plane.x;
-    c3d()->p.plane.x = c3d()->p.plane.x * cos(rotspeed) - c3d()->p.plane.y * sin(rotspeed);
-    c3d()->p.plane.y = oldplanex * sin(rotspeed) + c3d()->p.plane.y * cos(rotspeed);
+	oldirx = c3d()->p.dir_x;
+	c3d()->p.dir_x = c3d()->p.dir_x * cos(rotspeed) - c3d()->p.dir_y * sin(rotspeed);
+	c3d()->p.dir_y = oldirx * sin(rotspeed) + c3d()->p.dir_y * cos(rotspeed);
+	oldplanex = c3d()->p.plane_x;
+    c3d()->p.plane_x = c3d()->p.plane_x * cos(rotspeed) - c3d()->p.plane_y * sin(rotspeed);
+    c3d()->p.plane_y = oldplanex * sin(rotspeed) + c3d()->p.plane_y * cos(rotspeed);
 }

@@ -6,7 +6,7 @@
 /*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/05/08 14:59:49 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/10 23:37:12 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ void	move_up(int i, t_map *map1)
 {
 	while (map1)
 	{
-		if (map1->i == (int)(c3d()->p.pos.x + c3d()->p.dir.x * MOVE_SPEED))
+		if (map1->i == (int)(c3d()->p.pos_x + c3d()->p.dir_x * MOVE_SPEED))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y))
+				if (i == (int)(c3d()->p.pos_y))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.x += c3d()->p.dir.x * MOVE_SPEED;
+						c3d()->p.pos_x += c3d()->p.dir_x * MOVE_SPEED;
 			}
 		}
-		if (map1->i == (int)(c3d()->p.pos.x))
+		if (map1->i == (int)(c3d()->p.pos_x))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y + c3d()->p.dir.y * MOVE_SPEED))
+				if (i == (int)(c3d()->p.pos_y + c3d()->p.dir_y * MOVE_SPEED))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.y += c3d()->p.dir.y * MOVE_SPEED;
+						c3d()->p.pos_y += c3d()->p.dir_y * MOVE_SPEED;
 			}
 		}
 		map1 = map1->next;
@@ -44,24 +44,24 @@ void	move_down(int i, t_map *map1)
 {
 	while (map1)
 	{
-		if (map1->i == (int)(c3d()->p.pos.x - c3d()->p.dir.x * MOVE_SPEED))
+		if (map1->i == (int)(c3d()->p.pos_x - c3d()->p.dir_x * MOVE_SPEED))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y))
+				if (i == (int)(c3d()->p.pos_y))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.x -= c3d()->p.dir.x * MOVE_SPEED;
+						c3d()->p.pos_x -= c3d()->p.dir_x * MOVE_SPEED;
 			}
 		}
-		if (map1->i == (int)(c3d()->p.pos.x))
+		if (map1->i == (int)(c3d()->p.pos_x))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y - c3d()->p.dir.y * MOVE_SPEED))
+				if (i == (int)(c3d()->p.pos_y - c3d()->p.dir_y * MOVE_SPEED))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.y -= c3d()->p.dir.y * MOVE_SPEED;
+						c3d()->p.pos_y -= c3d()->p.dir_y * MOVE_SPEED;
 			}
 		}
 		map1 = map1->next;
@@ -72,24 +72,24 @@ void	move_left(int i, t_map *map1)
 {
 	while (map1)
 	{
-		if (map1->i == (int)(c3d()->p.pos.x - c3d()->p.dir.y * MOVE_SPEED))
+		if (map1->i == (int)(c3d()->p.pos_x - c3d()->p.dir_y * MOVE_SPEED))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y))
+				if (i == (int)(c3d()->p.pos_y))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.x -= c3d()->p.dir.y * MOVE_SPEED;
+						c3d()->p.pos_x -= c3d()->p.dir_y * MOVE_SPEED;
 			}
 		}
-		if (map1->i == (int)(c3d()->p.pos.x))
+		if (map1->i == (int)(c3d()->p.pos_x))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y - c3d()->p.dir.x * MOVE_SPEED))
+				if (i == (int)(c3d()->p.pos_y - c3d()->p.dir_x * MOVE_SPEED))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.y -= c3d()->p.dir.x * MOVE_SPEED;
+						c3d()->p.pos_y -= c3d()->p.dir_x * MOVE_SPEED;
 			}
 		}
 		map1 = map1->next;
@@ -100,24 +100,24 @@ void	move_right(int i, t_map *map1)
 {
 	while (map1)
 	{
-		if (map1->i == (int)(c3d()->p.pos.x + c3d()->p.dir.y * MOVE_SPEED))
+		if (map1->i == (int)(c3d()->p.pos_x + c3d()->p.dir_y * MOVE_SPEED))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y))
+				if (i == (int)(c3d()->p.pos_y))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.x += c3d()->p.dir.y * MOVE_SPEED;
+						c3d()->p.pos_x += c3d()->p.dir_y * MOVE_SPEED;
 			}
 		}
-		if (map1->i == (int)(c3d()->p.pos.x))
+		if (map1->i == (int)(c3d()->p.pos_x))
 		{
 			i = -1;
 			while (++i < map1->len)
 			{
-				if (i == (int)(c3d()->p.pos.y + c3d()->p.dir.x * MOVE_SPEED))
+				if (i == (int)(c3d()->p.pos_y + c3d()->p.dir_x * MOVE_SPEED))
 					if (map1->line[i] != 1)
-						c3d()->p.pos.y += c3d()->p.dir.x * MOVE_SPEED;
+						c3d()->p.pos_y += c3d()->p.dir_x * MOVE_SPEED;
 			}
 		}
 		map1 = map1->next;

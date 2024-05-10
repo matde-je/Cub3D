@@ -33,10 +33,10 @@ int start_all(void)
     c3d()->image.addr = addr;
     render_floor();
     render_ceiling();
-    // raycasting();
+    raycasting();
     mlx_put_image_to_window(c3d()->mlx, c3d()->win, \
             c3d()->image.ptr, 0, 0);
-    // mlx_destroy_image(c3d()->mlx, c3d()->image.img_ptr);
+    // mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
     return (0);
 }
 

@@ -13,7 +13,7 @@
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c get_next_line.c    \
 		  parse_textures.c textures.c parse_rgb.c utils2.c utils.c raycast.c \
-		  cameras.c render.c 
+		  player_start.c cameras.c render.c 
 			
 #Add any missing folder containing a .c to the vpath
 vpath %.c gnl/ src/parse  src/ 
