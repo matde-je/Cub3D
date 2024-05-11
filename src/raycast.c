@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include <stdio.h>
 
 void	launch_ray(int x)
 {
@@ -79,10 +80,10 @@ void	do_dda(void)
 void	perp_render(void)
 {
 	if (c3d()->r.side == 0)
-		c3d()->r.perp_wall_len = c3d()->r.side_len_x - c3d()->r.delta_len_x;
+		c3d()->r.wall_len = c3d()->r.side_len_x - c3d()->r.delta_len_x;
 	else
-		c3d()->r.perp_wall_len = c3d()->r.side_len_y - c3d()->r.delta_len_y;
-	c3d()->r.line_height = (int)(WIN_HEIGHT / c3d()->r.perp_wall_len);
+		c3d()->r.wall_len = c3d()->r.side_len_y - c3d()->r.delta_len_y;
+	c3d()->r.line_height = (int)(WIN_HEIGHT / c3d()->r.wall_len);
 	c3d()->r.render_start = -(c3d()->r.line_height / 2 + WIN_HEIGHT / 2);
 	if (c3d()->r.render_start < 0)
 		c3d()->r.render_start = 0;
@@ -136,6 +137,7 @@ void	render_textures(int x)
             * c3d()->t.y + c3d()->t.x];
 		if (c3d()->t.index == NORTH || c3d()->t.index == EAST)
 			color = (color >> 1) & 8355711;
+        ft_printf("%d\n", color);
         put_pixel_2img(x, y, color);
 	}
 }
