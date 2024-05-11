@@ -6,7 +6,7 @@
 /*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:25:10 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/10 23:41:07 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/11 02:29:40 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 void	launch_ray(int x)
 {
 	c3d()->r.camera_x = 2 * x / (float)WIN_WIDTH - 1;
-	c3d()->r.dir_x = c3d()->p.dir_x + c3d()->r.plane_x * c3d()->r.camera_x;
-	c3d()->r.dir_y = c3d()->p.dir_y + c3d()->r.plane_y * c3d()->r.camera_x;
+	c3d()->r.dir_x = c3d()->p.dir_x + c3d()->p.plane_x * c3d()->r.camera_x;
+	c3d()->r.dir_y = c3d()->p.dir_y + c3d()->p.plane_y * c3d()->r.camera_x;
 	c3d()->r.map_x = (int)c3d()->p.pos_x;
 	c3d()->r.map_y = (int)c3d()->p.pos_y;
     c3d()->r.hit_wall = 0;
@@ -67,12 +67,14 @@ void	do_dda(void)
 		{
 			c3d()->r.side_len_y += c3d()->r.delta_len_y;
 			c3d()->r.map_y += c3d()->r.steps_y;
-			c3d()->r.side = 0;
+			c3d()->r.side = 1;
 		}
-		if (c3d()->r.map_y < 0.25 || c3d()->r.map_x > c3d()->mg.y_max - 0.25
-			|| c3d()->r.map_x > c3d()->mg.y_max - 1.25)
-			break ;
-		else if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '1')
+		if (c3d()->r.map_y < 0.25 
+				|| c3d()->r.map_x < 0.25
+				|| c3d()->r.map_y > c3d()->mg.y_max - 0.25
+				|| c3d()->r.map_x > c3d()->mg.x_max - 1.25)
+				break ;
+		else if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '0')
 			c3d()->r.hit_wall = 1;
 	}
 }
