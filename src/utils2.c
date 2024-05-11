@@ -33,12 +33,15 @@ char	map_iter(int x, int y)
 	t_map	*it;
 
 	i = -1;
-	j = -1;
 	it = map();
 	while (++i <= x && it != NULL)
 	{
+		j = -1;
 		while (++j <= y && it->line[j] != '\0')
-			return (it->line[j]);
+		{
+			if (i == x && j == y)
+				return (it->line[j]);
+		}
 		it = it->next;
 	}
 	return (' ');
@@ -89,10 +92,7 @@ void	freeing(void)
 	if (c3d()->t.c)
 		free(c3d()->t.c);
 	if (c3d()->image.ptr)
-	{
 		mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
-		//free(c3d()->image);	
-	}
 }
 
 t_map	*map(void)
