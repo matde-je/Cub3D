@@ -158,7 +158,6 @@ typedef struct s_ray
 	float			side_len_y;
 	float 			delta_len_x;
 	float 			delta_len_y;
-	float			perp_wall_len;
 	float			wall_len;
 	float          pos_x;
 	float          pos_y;
