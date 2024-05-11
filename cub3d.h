@@ -42,7 +42,7 @@
 # define WIN_WIDTH 1050
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
-# define MOVE_SPEED 0.03
+# define MOVE_SPEED 0.08
 # define ROTA_SPEED 0.05
 
 #define MALLOC_ERR "Error allocating in _FILE_"
