@@ -23,7 +23,7 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 INCS 	   = ../cub3d.h
 NAME       = cub3D
 CC         = cc
-CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS     = -O3 -Wall -Wextra -Werror #-fsanitize=address
 LDFLAGS	   = -L./libft -lft   -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
 RM         = rm -rf
 

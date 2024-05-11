@@ -38,8 +38,8 @@
 # endif
 
 # define PI 3.14159265358979323846
-# define WIN_HEIGHT 700
-# define WIN_WIDTH 700
+# define WIN_HEIGHT 1000
+# define WIN_WIDTH 1050
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
 # define MOVE_SPEED 0.03
@@ -159,17 +159,12 @@ typedef struct s_ray
 	float 			delta_len_x;
 	float 			delta_len_y;
 	float			wall_len;
-	float          pos_x;
-	float          pos_y;
 	float			wall_x;
-	float          plane_x;
-	float		  plane_y;
 	int				side;
 	int				line_height;
 	int				render_start;
 	int				render_end;
 	int				hit_wall;
-	int				y;
 }					t_ray;
 
 typedef struct s_c3d

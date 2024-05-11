@@ -6,12 +6,11 @@
 /*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:25:10 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/11 02:29:40 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/11 11:36:53 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include <stdio.h>
 
 void	launch_ray(int x)
 {
@@ -69,12 +68,7 @@ void	do_dda(void)
 			c3d()->r.map_y += c3d()->r.steps_y;
 			c3d()->r.side = 1;
 		}
-		if (c3d()->r.map_y < 0.25 
-				|| c3d()->r.map_x < 0.25
-				|| c3d()->r.map_y > c3d()->mg.y_max - 0.25
-				|| c3d()->r.map_x > c3d()->mg.x_max - 1.25)
-				break ;
-		else if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '0')
+		if (map_iter(c3d()->r.map_x, c3d()->r.map_y) > 0)
 			c3d()->r.hit_wall = 1;
 	}
 }
@@ -103,15 +97,15 @@ static void get_tex_idx(void)
 {
     if (!c3d()->r.side)
     {
-        if (c3d()->r.dir_x < 0)
-            c3d()->t.index = WEST;
+        if (c3d()->r.map_x < c3d()->p.pos_x)
+            c3d()->t.index = SOUTH;
         else
-            c3d()->t.index = EAST;
+            c3d()->t.index = WEST;
     }
     else
     {
-        if (c3d()->r.dir_y > 0)
-            c3d()->t.index = SOUTH;
+        if (c3d()->r.map_y < c3d()->p.pos_y)
+            c3d()->t.index = EAST;
         else
             c3d()->t.index = NORTH;
     }
@@ -137,9 +131,8 @@ void	render_textures(int x)
 		c3d()->t.pos += c3d()->t.step;
 		color = c3d()->tex[c3d()->t.index][TEX_SIZE 
             * c3d()->t.y + c3d()->t.x];
-		if (c3d()->t.index == NORTH || c3d()->t.index == EAST)
+		if (c3d()->r.side == 1)
 			color = (color >> 1) & 8355711;
-        ft_printf("%d\n", color);
         put_pixel_2img(x, y, color);
 	}
 }

@@ -91,8 +91,8 @@ void	freeing(void)
 		free(c3d()->t.f);
 	if (c3d()->t.c)
 		free(c3d()->t.c);
-	if (c3d()->image.ptr)
-		mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
+	// if (c3d()->image.ptr)
+		// mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
 }
 
 t_map	*map(void)

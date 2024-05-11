@@ -36,7 +36,7 @@ int start_all(void)
     raycasting();
     mlx_put_image_to_window(c3d()->mlx, c3d()->win, \
             c3d()->image.ptr, 0, 0);
-    // mlx_destroy_image(c3d()->mlx,/*  c */3d()->image.ptr);
+    mlx_destroy_image(c3d()->mlx,c3d()->image.ptr);
     return (0);
 }
 
@@ -62,13 +62,8 @@ int	main(int argc, char **argv)
 
 void	error(char *str)
 {
-	int	i;
-
-	i = -1;
-	write(2, "Error\n", 6);
-	while (str[++i])
-		write(2, &str[i], 1);
-	write(2, "\n", 1);
+    ft_putendl_fd("Error", 2);
+    ft_putendl_fd(str, 2);
 	free_all(1);
 	exit(1);
 }

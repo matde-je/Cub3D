@@ -40,6 +40,7 @@ void	check_map(char *path)
 {
 	int	i;
 
+    i = 0;
 	(c3d()->mg.fd) = open(path, O_RDONLY);
 	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
