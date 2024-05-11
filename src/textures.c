@@ -12,7 +12,7 @@ static void xpm_to_pixel(char *xpm, t_img2 *i, int tex_index)
     while(++y < i->height)
     {
         x = -1;
-        while(++x < i->height)
+        while(++x < i->width)
         {
             c3d()->tex[tex_index][i->height * y + x] =  \
                 (i->addr[i->height * y + x]);
