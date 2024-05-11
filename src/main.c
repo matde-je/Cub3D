@@ -36,7 +36,7 @@ int start_all(void)
     raycasting();
     mlx_put_image_to_window(c3d()->mlx, c3d()->win, \
             c3d()->image.ptr, 0, 0);
-    // mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
+    // mlx_destroy_image(c3d()->mlx,/*  c */3d()->image.ptr);
     return (0);
 }
 
@@ -48,9 +48,6 @@ int	main(int argc, char **argv)
     parsing(argv[1]);
     c3d()->mlx = mlx_init();
     c3d()->win = mlx_new_window(c3d()->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
-    c3d()->image.ptr= mlx_new_image(c3d()->mlx, WIN_WIDTH, WIN_HEIGHT);
-    c3d()->image.addr = mlx_get_data_addr(c3d()->image.ptr, 
-            &c3d()->image.bpp, &c3d()->image.size, &c3d()->image.endian);
     init_tex();
     mlx_loop_hook(c3d()->mlx, start_all, NULL);
 	mlx_key_hook(c3d()->win, key_handler, NULL);
@@ -58,6 +55,8 @@ int	main(int argc, char **argv)
 	if (c3d()->win)
         mlx_loop(c3d()->mlx);
 	free_all(0);
+
+    mlx_destroy_display(c3d()->mlx);
 	return (0);
 }
 
