@@ -22,7 +22,7 @@ void	open_textures(char *path)
 	if (!c3d()->mg.gnl)
 	{
 		close(c3d()->mg.fd);
-		error("Invalid map");
+		error("Invalid texture");
 	}
 }
 

@@ -23,8 +23,8 @@ OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 INCS 	   = ../cub3d.h
 NAME       = cub3D
 CC         = cc
-CFLAGS     = -O3 -Wall -Wextra -Werror #-fsanitize=address
-LDFLAGS	   = -L./libft -lft   -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
+CFLAGS     = -O3 -g -Wall -Wextra -Werror #-fsanitize=address
+LDFLAGS	   = -L./libft -lft  -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
 RM         = rm -rf
 
 all: ${NAME}
@@ -35,14 +35,17 @@ $(OBJ_DIR)/%.o: %.c
 	
 ${NAME}: ${OBJS} 
 	make -s -C libft
+	make -s -C minilibx-linux
 	${CC} ${CFLAGS}  $^ -o $@  -I ${INCS} ${LDFLAGS}
 
 clean:
 	${RM} ${OBJ_DIR} 
+	make clean -s -C minilibx-linux
 	make clean -s -C libft
 
 fclean: clean
 	${RM} ${NAME} 
+	make clean -s -C minilibx-linux
 	make fclean -s -C libft
 
 re: fclean all

@@ -57,7 +57,7 @@ void	check_wall(int i)
 			{
 				if (map1->line[i] == ' ')
 					wall(i, map1);
-				if (map1->line[i] == '0')
+				else if (map1->line[i] != '1')
 					error("Invalid walls of map");
 				i++;
 			}
@@ -71,7 +71,7 @@ void	check_wall(int i)
 
 void	wall(int i, t_map *map1)
 {
-	if (map1 && map1-> i && map1->i == 0 && map1->next && map1->next->line && map1->next->line[i] != '1')
+	if (map1 && map1->i && map1->i == 0 && map1->next && map1->next->line && map1->next->line[i] != '1')
 		error("Invalid walls of map");
 	else if (map1->i == c3d()->mg.y_max - 1 && map1->prev->line[i] != '1')
 		error("Invalid walls of map");

@@ -43,7 +43,8 @@ void	prep_texture(int no, int i, char *trim, char *trim1)
 
 void	parse_north(char **trim, char **trim1, int i, int *no)
 {
-	int	fd;
+	int		fd;
+	char	*str;
 
 	if (c3d()->mg.gnl[i] == 'N' && c3d()->mg.gnl[i + 1] == 'O')
 	{
@@ -53,6 +54,10 @@ void	parse_north(char **trim, char **trim1, int i, int *no)
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "N");
 		*trim1 = rm_nl(ft_strtrim(*trim, "O"));
 		(c3d()->t.no) = rm_space(ft_strtrim(*trim1, " "));
+		str = (char *)c3d()->t.no;
+		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x' && \
+			str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.no, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);
@@ -62,7 +67,8 @@ void	parse_north(char **trim, char **trim1, int i, int *no)
 
 void	parse_south(char **trim, char **trim1, int i, int *so)
 {
-	int	fd;
+	int		fd;
+	char	*str;
 
 	if (c3d()->mg.gnl[i] == 'S' && c3d()->mg.gnl[i + 1] == 'O')
 	{
@@ -72,6 +78,10 @@ void	parse_south(char **trim, char **trim1, int i, int *so)
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "S");
 		*trim1 = ft_strtrim(*trim, "O");
 		(c3d()->t.so) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
+		str = (char *)c3d()->t.so;
+		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x' && \
+		str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.so, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);
@@ -81,16 +91,21 @@ void	parse_south(char **trim, char **trim1, int i, int *so)
 
 void	parse_west(char **trim, char **trim1, int i, int *we)
 {
-	int	fd;
+	int		fd;
+	char	*str;
 
 	if (c3d()->mg.gnl[i] == 'W' && c3d()->mg.gnl[i + 1] == 'E')
 	{
 		*we += 1;
 		if (*we != 1)
-			error("Invalid texture");
+			error("Invalid texture");  
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "W");
 		*trim1 = ft_strtrim(*trim, "E");
 		(c3d()->t.we) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
+		str = (char *)c3d()->t.we;
+		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x' && \
+			str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.we, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);
@@ -99,7 +114,8 @@ void	parse_west(char **trim, char **trim1, int i, int *we)
 }
 void	parse_east(char **trim, char **trim1, int i, int *ea)
 {
-	int	fd;
+	int		fd;
+	char	*str;
 
 	if (c3d()->mg.gnl[i] == 'E' && c3d()->mg.gnl[i + 1] == 'A')
 	{
@@ -109,6 +125,10 @@ void	parse_east(char **trim, char **trim1, int i, int *ea)
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "E");
 		*trim1 = ft_strtrim(*trim, "A");
 		(c3d()->t.ea) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
+		str = (char *)c3d()->t.ea;
+		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x' && \
+			str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.ea, O_RDONLY);
 		if (fd == -1)
 			free_trim(trim, trim1, "Invalid texture", NULL);

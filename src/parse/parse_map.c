@@ -24,7 +24,7 @@ void	parsing(char *path)
 		if (c3d()->mg.path == NULL)
 			error("Fail to allocate memory");
 		ft_strlcpy(c3d()->mg.path, path, ft_strlen(path) + 1);
-		check_map(path);
+		check_map(path, 0);
 		check_chars(-1, 0);
 		check_wall(0);
 		check_walls();
@@ -33,20 +33,17 @@ void	parsing(char *path)
 		prep_texture(0, 0, NULL, NULL);
 	}
 	else
-		error("Invalid map");
+		error("Invalid map path");
 }
 
-void	check_map(char *path)
+void	check_map(char *path, int i)
 {
-	int	i;
-
-    i = 0;
 	(c3d()->mg.fd) = open(path, O_RDONLY);
 	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
 	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
 	if (!c3d()->mg.gnl)
-		error("Invalid map");
+		error("Invalid map1");
 	while (c3d()->mg.gnl)
 	{
 		i = 0;
@@ -57,7 +54,7 @@ void	check_map(char *path)
 			free(c3d()->mg.gnl);
 			(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
 			if (!c3d()->mg.gnl)
-				error("Invalid map");
+				error("Invalid map2");
 		}
 		else
 			break ;
@@ -75,7 +72,7 @@ void	init_map(int i, int max, char *line, t_map *map1)
 		{
 			map1->prev->next = NULL;
 			free(map1);
-			error("Invalid map");
+			error("Invalid map3");
 		}
 		ft_memcpy(c3d()->mg.gnl, line, ft_strlen(line) + 1);
 		map1->line = malloc(ft_strlen(c3d()->mg.gnl) + 1);
