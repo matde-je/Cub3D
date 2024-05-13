@@ -38,8 +38,8 @@ void render_ceiling(void)
 
 void raycasting(void)
 {
-    int x;
 
+    int x;
     x = -1;
     while(++x < WIN_WIDTH)
     {
