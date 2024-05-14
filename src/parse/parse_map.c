@@ -72,7 +72,7 @@ void	init_map(int i, int max, char *line, t_map *map1)
 		{
 			map1->prev->next = NULL;
 			free(map1);
-			error("Invalid map3");
+			break ;
 		}
 		ft_memcpy(c3d()->mg.gnl, line, ft_strlen(line) + 1);
 		map1->line = malloc(ft_strlen(c3d()->mg.gnl) + 1);

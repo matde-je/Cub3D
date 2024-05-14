@@ -226,7 +226,7 @@ int					skipspace(char *str);
 int					aux_map(t_map *map1, int max);
 void				check_walls(void);
 void				check_walls2(t_map *map1);
-void				wall(int i, t_map *map1);
+void				first_last(int i, t_map *map1);
 void				look_right(void);
 void				look_left(void);
 void				parse_rgb(char **trim, char **trim1, int *c, int *f);

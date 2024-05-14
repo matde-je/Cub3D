@@ -30,7 +30,6 @@ void	check_chars(int i, int pos)
 				c3d()->mg.py = mp->i;
 				c3d()->mg.orientation = mp->line[i];
 				init_start(mp->i, i);
-                // mp->line[i] = '0';
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)
@@ -57,7 +56,7 @@ void	check_wall(int i)
 			while (i < map1->len)
 			{
 				if (map1->line[i] == ' ')
-					wall(i, map1);
+					first_last(i, map1);
 				else if (map1->line[i] != '1')
 					error("Invalid walls of map");
 				i++;
@@ -70,12 +69,22 @@ void	check_wall(int i)
 	}
 }
 
-void	wall(int i, t_map *map1)
+void	first_last(int i, t_map *map1)
 {
 	if (map1 && map1->i && map1->i == 0 && map1->next && map1->next->line && map1->next->line[i] != '1')
-		error("Invalid walls of map");
-	else if (map1->i == c3d()->mg.y_max - 1 && map1->prev->line[i] != '1')
-		error("Invalid walls of map");
+	{
+		while (map1->next->line[i] == ' ')
+			map1 = map1->next;
+		if (map1->next->line[i] != '1')
+			error("Invalid first wall of map");
+	}
+	else if (map1->i == c3d()->mg.y_max - 1)
+	{
+		while (map1->prev->line[i] == ' ')
+			map1 = map1->prev;
+		if (map1->prev->line[i] != '1')
+			error("Invalid last wall of map");
+	}
 }
 
 void	check_walls(void)
