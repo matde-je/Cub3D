@@ -38,8 +38,8 @@
 # endif
 
 # define PI 3.14159265358979323846
-# define WIN_HEIGHT 1000
-# define WIN_WIDTH 1050
+# define WIN_HEIGHT 400
+# define WIN_WIDTH 500
 # define TEX_SIZE 64
 # define M_PI 3.14159265358979323846
 # define MOVE_SPEED 0.08
