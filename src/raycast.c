@@ -64,14 +64,14 @@ static void	get_tex_idx(void)
 	if (!c3d()->r.side)
 	{
 		if (c3d()->r.map_x > c3d()->p.pos_x)
-			c3d()->t.index = WEST;
+			c3d()->t.index = SOUTH;
 		else
 			c3d()->t.index = EAST;
 	}
 	else
 	{
 		if (c3d()->r.map_y > c3d()->p.pos_y)
-			c3d()->t.index = SOUTH;
+			c3d()->t.index = WEST;
 		else
 			c3d()->t.index = NORTH;
 	}
@@ -132,13 +132,13 @@ void	render_textures(int x)
     cc[2] = 0 << 16 | 0 << 8 | 255;
     cc[3] = 255 << 16 | 255 << 8 | 255; */
 
-	c3d()->t.x = (int)(c3d()->r.wall_x * (double)TEX_SIZE);
+	c3d()->t.x = (int)(c3d()->r.wall_x * TEX_SIZE);
 	if ((c3d()->r.side == 0 && c3d()->r.dir_x < 0) 
             || (c3d()->r.side == 1 && c3d()->r.dir_y > 0))
 		c3d()->t.x = TEX_SIZE - c3d()->t.x - 1;
 	c3d()->t.step = 1.0 * TEX_SIZE / c3d()->r.line_height;
-	c3d()->t.pos = (c3d()->r.render_start - WIN_HEIGHT / 2.0
-			+ c3d()->r.line_height / 2.0) * c3d()->t.step;
+	c3d()->t.pos = (c3d()->r.render_start - WIN_HEIGHT / 2
+			+ c3d()->r.line_height / 2) * c3d()->t.step;
 	y = c3d()->r.render_start - 1;
 	while (++y < c3d()->r.render_end)
 	{
