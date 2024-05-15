@@ -20,14 +20,14 @@ void	launch_ray(int x)
 	c3d()->r.map_x = (int)c3d()->p.pos_x;
 	c3d()->r.map_y = (int)c3d()->p.pos_y;
 	c3d()->r.hit_wall = 0;
-	if (!c3d()->r.dir_x)
-		c3d()->r.delta_len_y = 1e30;
-	else
+	// if (!c3d()->r.dir_x)
+		// c3d()->r.delta_len_y = 1e30;
+	// else
 		c3d()->r.delta_len_x = fabs(1 / c3d()->r.dir_x);
-	if (!c3d()->r.dir_y)
-		c3d()->r.delta_len_y = 1e30;
-	else
-		c3d()->r.delta_len_y = fabs(1 / c3d()->r.dir_x);
+	// if (!c3d()->r.dir_y)
+		// c3d()->r.delta_len_y = 1e30;
+	// else
+		c3d()->r.delta_len_y = fabs(1 / c3d()->r.dir_y);
 }
 
 void	step_side_len(void)
@@ -64,14 +64,14 @@ static void	get_tex_idx(void)
 	if (!c3d()->r.side)
 	{
 		if (c3d()->r.map_x > c3d()->p.pos_x)
-			c3d()->t.index = SOUTH;
-		else
 			c3d()->t.index = WEST;
+		else
+			c3d()->t.index = EAST;
 	}
 	else
 	{
 		if (c3d()->r.map_y > c3d()->p.pos_y)
-			c3d()->t.index = EAST;
+			c3d()->t.index = SOUTH;
 		else
 			c3d()->t.index = NORTH;
 	}
