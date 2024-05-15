@@ -30,6 +30,7 @@ void	check_chars(int i, int pos)
 				c3d()->mg.py = mp->i;
 				c3d()->mg.orientation = mp->line[i];
 				init_start(mp->i, i);
+                mp->line[i] = '0';
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)
