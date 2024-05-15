@@ -2,8 +2,8 @@
 
 void	put_pixel_2img(int x, int y, int color)
 {
-    if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
-        return ;
+    // if (x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGHT)
+        // return ;
     *(int *)&c3d()->image.addr[(y * c3d()->image.size) + \
     (x * (c3d()->image.bpp / 8))] = color;
 }

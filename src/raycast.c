@@ -126,11 +126,11 @@ void	render_textures(int x)
 {
 	int	y;
 	unsigned int	color;
-     unsigned int  cc[4];
+     /* unsigned int  cc[4];
     cc[0] = 255 << 16 | 0 << 8 | 0;
     cc[1] = 0 << 16 | 255 << 8 | 0;
     cc[2] = 0 << 16 | 0 << 8 | 255;
-    cc[3] = 255 << 16 | 255 << 8 | 255;
+    cc[3] = 255 << 16 | 255 << 8 | 255; */
 
 	c3d()->t.x = (int)(c3d()->r.wall_x * (double)TEX_SIZE);
 	if ((c3d()->r.side == 0 && c3d()->r.dir_x < 0) 
@@ -144,8 +144,8 @@ void	render_textures(int x)
 	{
 		c3d()->t.y = (int)c3d()->t.pos & (TEX_SIZE - 1);
 		c3d()->t.pos += c3d()->t.step;
-		//color = c3d()->tex[c3d()->t.index][TEX_SIZE * c3d()->t.y + c3d()->t.x];
-         color = cc[c3d()->t.index];
+		color = c3d()->tex[c3d()->t.index][TEX_SIZE * c3d()->t.y + c3d()->t.x];
+         // color = cc[c3d()->t.index];
 		if (c3d()->r.side == 1)
 			color = (color >> 1) & 8355711;
 		put_pixel_2img(x, y, color);

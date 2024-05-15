@@ -59,7 +59,6 @@ typedef struct s_point
 
 typedef struct s_player
 {
-	char			dirc;
 	double 			pos_x;
 	double 			pos_y;
 	double 			dir_x;
@@ -96,7 +95,7 @@ typedef struct s_img
 typedef struct s_img2
 {
 	void			*ptr;
-	char			*addr;
+	int 			*addr;
 	int				bpp;
 	int				size;
 	int				endian;
@@ -182,7 +181,7 @@ typedef struct s_c3d
     int             height;
     int             width;
 	t_img			image;
-	t_img2			tex_img[4];
+	t_img2			tex2[4];
     int				tex[4][TEX_SIZE * TEX_SIZE];
 }					t_c3d;
 
