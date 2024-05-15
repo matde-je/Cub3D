@@ -1,6 +1,6 @@
 # include "../cub3d.h"
 
-static void set_player_values(float dir_x, float dir_y, float plane_x, float plane_y)
+static void set_player_values(double dir_x, double dir_y, double plane_x, double plane_y)
 {
     c3d()->p.dir_x = dir_x;
     c3d()->p.dir_y = dir_y;

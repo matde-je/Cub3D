@@ -6,7 +6,7 @@
 /*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:39:08 by matilde           #+#    #+#             */
-/*   Updated: 2024/05/10 23:41:07 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:02:50 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 // camera looks left
 void	look_left(void)
 {
-	float		oldplanex;
-	float		oldirx;
-	float		rotspeed;
+	double		oldplanex;
+	double		oldirx;
+	double		rotspeed;
 
 	rotspeed = ROTA_SPEED;
 	oldirx = c3d()->p.dir_x;
@@ -31,9 +31,9 @@ void	look_left(void)
 // camera look right
 void	look_right(void)
 {
-	float		oldplanex;
-	float		oldirx;
-	float		rotspeed;
+	double		oldplanex;
+	double		oldirx;
+	double		rotspeed;
 
 	rotspeed = ROTA_SPEED;
 	oldirx = c3d()->p.dir_x;

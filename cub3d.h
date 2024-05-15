@@ -53,19 +53,19 @@
 
 typedef struct s_point
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 }					t_point;
 
 typedef struct s_player
 {
 	char			dirc;
-	float 			pos_x;
-	float 			pos_y;
-	float 			dir_x;
-	float 			dir_y;
-	float          plane_x;
-	float		    plane_y;
+	double 			pos_x;
+	double 			pos_y;
+	double 			dir_x;
+	double 			dir_y;
+	double          plane_x;
+	double		    plane_y;
 	bool			has_moved;
 	int				move_x;
 	int				move_y;
@@ -138,8 +138,8 @@ typedef struct s_texture
 	unsigned long	h_ceiling;
 	int				size;
 	int				index;
-	float			step;
-	float			pos;
+	double			step;
+	double			pos;
 	int				x;
 	int				y;
 }					t_texture;
@@ -147,19 +147,19 @@ typedef struct s_texture
 // has the angle, distance and ray coordinates of the intersections
 typedef struct s_ray
 {
-	float			camera_x;
+	double			camera_x;
 	int				map_x;
 	int				map_y;
 	int				steps_x;
 	int				steps_y;
-	float 			dir_x;
-	float 			dir_y;
-	float			side_len_x;
-	float			side_len_y;
-	float 			delta_len_x;
-	float 			delta_len_y;
-	float			wall_len;
-	float			wall_x;
+	double 			dir_x;
+	double 			dir_y;
+	double			side_len_x;
+	double			side_len_y;
+	double 			delta_len_x;
+	double 			delta_len_y;
+	double			wall_len;
+	double			wall_x;
 	int				side;
 	int				line_height;
 	int				render_start;
@@ -176,9 +176,9 @@ typedef struct s_c3d
     t_player        p;
     t_map_global    mg;
     t_map           m;
-    float           framerate;
-    float          move_speed;
-    float          rota_speed;
+    double           framerate;
+    double          move_speed;
+    double          rota_speed;
     int             height;
     int             width;
 	t_img			image;
@@ -236,7 +236,7 @@ void				parse_rgb2(char **trim, char **trim1, char ***split, int i);
 void				prep_texture(int no, int i, char *trim, char *trim1);
 void				freeing(void);
 void				img_func(void);
-void				textur_mapping(float x, float y);
+void				textur_mapping(double x, double y);
 void				raycasting(void);
 t_ray				*ray(void);
 char				*rm_space(char *str);
