@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/05/08 20:51:46 by acuva-nu         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:00:35 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 
 	i = skipspace(c3d()->mg.gnl);
 	free_trim(trim, trim1, NULL, NULL);
-	if (c3d()->mg.gnl[i] != 'C' && c3d()->mg.gnl[i] != 'F')
+	if (c3d()->mg.gnl[i] && c3d()->mg.gnl[i] != 'C' && c3d()->mg.gnl[i] != 'F')
 		return ;
 	parse_rgb2(trim, trim1, &split, i);
 	if (c3d()->mg.gnl[i] == 'C')
