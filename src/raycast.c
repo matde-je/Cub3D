@@ -93,7 +93,7 @@ void	do_dda(void)
 			c3d()->r.map_y += c3d()->r.steps_y;
 			c3d()->r.side = 1;
 		}
-		if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '1')
+        if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '1')
         {
 			c3d()->r.hit_wall = 1;
             get_tex_idx();
