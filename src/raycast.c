@@ -58,16 +58,16 @@ static void	get_tex_idx(void)
 	if (!c3d()->r.side)
 	{
 		if (c3d()->r.dir_x < 0 )
-			c3d()->t.index = NORTH;
+			c3d()->t.index = WEST;
 		else
-			c3d()->t.index = SOUTH;
+			c3d()->t.index = EAST;
 	}
 	else
 	{
 		if (c3d()->r.dir_y > 0)
-			c3d()->t.index = WEST;
+			c3d()->t.index = SOUTH;
 		else
-			c3d()->t.index = EAST;
+			c3d()->t.index = NORTH;
 	}
 }
 
@@ -87,7 +87,7 @@ void	do_dda(void)
 			c3d()->r.map_y += c3d()->r.steps_y;
 			c3d()->r.side = 1;
 		}
-        if (map_iter(c3d()->r.map_x, c3d()->r.map_y) == '1')
+        if (map_iter(c3d()->r.map_y, c3d()->r.map_x) == '1')
         {
 			c3d()->r.hit_wall = 1;
             get_tex_idx();

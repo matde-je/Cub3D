@@ -1,13 +1,8 @@
   C 8, 30    , 10  
-  NO ./textures/WARN.xpm    
-
-  SO      ./textures/WARN.xpm
-
-
-      
-WE          ./textures/WARN.xpm    
-EA          ./textures/WARN.xpm   
-
+NO textures/wolfenstein/grey_stone.xpm
+SO textures/wolfenstein/purple_stone.xpm
+WE textures/wolfenstein/red_brick.xpm
+EA textures/wolfenstein/wood.xpm
   F   10 ,10 ,10
 
  
