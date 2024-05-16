@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 17:38:37 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/29 22:17:35 by acuva-nu         ###   ########.fr       */
+/*   Created: 2024/05/16 18:14:14 by matde-je          #+#    #+#             */
+/*   Updated: 2024/05/16 18:33:12 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../cub3d.h"
+#include "cub3d.h"
 
 void	open_textures(char *path)
 {
 	(c3d()->mg.fd) = open(path, O_RDONLY);
 	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
-	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd));
 	if (!c3d()->mg.gnl)
 	{
 		close(c3d()->mg.fd);
@@ -92,7 +91,7 @@ void	freeing(void)
 	if (c3d()->t.c)
 		free(c3d()->t.c);
 	// if (c3d()->image.ptr)
-		// mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
+	// mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
 }
 
 t_map	*map(void)
@@ -111,4 +110,3 @@ t_map	*map(void)
 	}
 	return (var);
 }
-

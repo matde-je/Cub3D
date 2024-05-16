@@ -6,11 +6,11 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:57:22 by matilde           #+#    #+#             */
-/*   Updated: 2024/05/15 20:56:39 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:15:07 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 void	parse_rgb(char **trim, char **trim1, int *f, int *c)
 {
@@ -56,10 +56,11 @@ void	parse_rgb2(char **trim, char **trim1, char ***split, int i)
 	j = -1;
 	while ((*split)[++j])
 	{
-		i = skipspace((*split)[j]) -1;
+		i = skipspace((*split)[j]) - 1;
 		while ((*split)[j][++i] && i < (int)ft_strlen((*split)[j]))
-			if ((*split)[j][i] != ' ' && ((*split)[j][i] < '0' || (*split)[j][i] > '9' \
-				|| ft_atoi((*split)[j]) < 0 || ft_atoi((*split)[j]) > 255))
+			if ((*split)[j][i] != ' ' && ((*split)[j][i] < '0'
+					|| (*split)[j][i] > '9' || ft_atoi((*split)[j]) < 0
+					|| ft_atoi((*split)[j]) > 255))
 				free_trim(trim, trim1, "Invalid color", split);
 	}
 	if (j < 3)

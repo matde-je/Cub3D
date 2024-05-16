@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+
+	+#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 17:11:59 by matilde           #+#    #+#             */
 /*   Updated: 2024/04/15 14:08:39 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 void	parsing(char *path)
 {
@@ -41,7 +42,7 @@ void	check_map(char *path, int i)
 	(c3d()->mg.fd) = open(path, O_RDONLY);
 	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
-	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd));
 	if (!c3d()->mg.gnl)
 		error("Invalid map1");
 	while (c3d()->mg.gnl)
@@ -52,7 +53,7 @@ void	check_map(char *path, int i)
 		if (c3d()->mg.gnl[i] != '1')
 		{
 			free(c3d()->mg.gnl);
-			(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+			(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd));
 			if (!c3d()->mg.gnl)
 				error("Invalid map2");
 		}
@@ -78,8 +79,7 @@ void	init_map(int i, int max, char *line, t_map *map1)
 		map1->line = malloc(ft_strlen(c3d()->mg.gnl) + 1);
 		if (map1->line == NULL)
 			error("Fail to allocate memory");
-		ft_memcpy(map1->line, c3d()->mg.gnl, ft_strlen(c3d()->mg.gnl)
-			+ 1);
+		ft_memcpy(map1->line, c3d()->mg.gnl, ft_strlen(c3d()->mg.gnl) + 1);
 		map1->i = i++;
 		max = aux_map(map1, max);
 		map1 = map1->next;
@@ -96,7 +96,7 @@ int	aux_map(t_map *map1, int max)
 	if (map1->len > max)
 		max = map1->len;
 	free(c3d()->mg.gnl);
-	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd));
 	if (c3d()->mg.gnl != NULL)
 	{
 		map1->next = malloc(sizeof(t_map));

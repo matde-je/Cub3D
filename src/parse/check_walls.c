@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+
+	+#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:18:06 by matilde           #+#    #+#             */
 /*   Updated: 2024/05/05 22:36:10 by acuva-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../cub3d.h"
 
 void	check_chars(int i, int pos)
 {
@@ -30,7 +31,7 @@ void	check_chars(int i, int pos)
 				c3d()->mg.py = mp->i;
 				c3d()->mg.orientation = mp->line[i];
 				init_start(mp->i, i);
-                mp->line[i] = '0';
+				mp->line[i] = '0';
 			}
 			else if (mp->line[i] != 48 && mp->line[i] != 49
 				&& mp->line[i] != 32)
@@ -72,7 +73,8 @@ void	check_wall(int i)
 
 void	first_last(int i, t_map *map1)
 {
-	if (map1 && map1->i && map1->i == 0 && map1->next && map1->next->line && map1->next->line[i] != '1')
+	if (map1 && map1->i && map1->i == 0 && map1->next && map1->next->line
+		&& map1->next->line[i] != '1')
 	{
 		while (map1->next->line[i] == ' ')
 			map1 = map1->next;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 15:13:10 by matilde           #+#    #+#             */
-/*   Updated: 2024/04/29 22:17:18 by acuva-nu         ###   ########.fr       */
+/*   Created: 2024/05/16 18:14:02 by matde-je          #+#    #+#             */
+/*   Updated: 2024/05/16 18:39:45 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
 char	*rm_nl(char *str)
 {
@@ -62,41 +62,12 @@ int	ft_arr_len(char **arr)
 	return (i);
 }
 
-void	printin(int i)
+void	free_array(char **array)
 {
-	t_map	*map1;
-	int		j;
+	int	i;
 
-	map1 = map();
-	while (map1 && i == 0)
-	{
-		printf("i: %d\n", map1->i);
-		printf("line: %s.\n", map1->line);
-		printf("len: %d\n", map1->len);
-		map1 = map1->next;
-	}
-	j = -1;
-	while (++j < 7 && i == 1)
-		printf("%d", c3d()->t.f[j]);
-	printf("\n");
-	j = -1;
-	while (++j < 6 && i == 1)
-		printf("%d", c3d()->t.c[j]);
-	printf("\n");
-	if (i == 2)
-	{
-		printf("%s\n", (char *)c3d()->t.no);
-		printf("%s\n", (char *)c3d()->t.so);
-		printf("%s\n", (char *)c3d()->t.we);
-		printf("%s\n", (char *)c3d()->t.ea);
-	}
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
 }
-
-// if (window()->img['N'])
-// 	mlx_destroy_image(window()->mlx, window()->img['N']);
-// if (window()->img['S'])
-// 	mlx_destroy_image(window()->mlx, window()->img['S']);
-// if (window()->img['E'])
-// 	mlx_destroy_image(window()->mlx, window()->img['E']);
-// if (window()->img['W'])
-// 	mlx_destroy_image(window()->mlx, window()->img['W']);

@@ -13,10 +13,10 @@
 
 SRCS    = main.c keys.c parse_map.c utils.c check_walls.c get_next_line.c    \
 		  parse_textures.c textures.c parse_rgb.c utils2.c utils.c raycast.c \
-		  player_start.c cameras.c render.c 
+		  player_start.c cameras.c render.c utils_lib.c utils2_lib.c utils3lib.c
 			
 #Add any missing folder containing a .c to the vpath
-vpath %.c gnl/ src/parse  src/ 
+vpath %.c src/parse  src/utils src/gnl src/
 
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
@@ -24,7 +24,7 @@ INCS 	   = ../cub3d.h
 NAME       = cub3D
 CC         = cc
 CFLAGS     = -O3 -g -Wall -Wextra -Werror #-fsanitize=address
-LDFLAGS	   = -L./libft -lft  -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
+LDFLAGS	   = -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
 RM         = rm -rf
 
 all: ${NAME}
@@ -34,19 +34,15 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 ${NAME}: ${OBJS} 
-	make -s -C libft
 	make -s -C minilibx-linux
 	${CC} ${CFLAGS}  $^ -o $@  -I ${INCS} ${LDFLAGS}
 
 clean:
 	${RM} ${OBJ_DIR} 
 	make clean -s -C minilibx-linux
-	make clean -s -C libft
 
 fclean: clean
 	${RM} ${NAME} 
-	make clean -s -C minilibx-linux
-	make fclean -s -C libft
 
 re: fclean all
 
