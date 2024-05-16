@@ -3,136 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 14:42:55 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/19 11:49:13 by matilde          ###   ########.fr       */
+/*   Created: 2024/05/16 18:14:31 by matde-je          #+#    #+#             */
+/*   Updated: 2024/05/16 19:30:07 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
-void	move_up(int i)
+void	move_up(void)
 {
-	t_map	*map1;
+	double	x;
+	double	y;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				if (map1->prev->line[i] == '1')
-					return ;
-				map1->line[i] = '0';
-				map1->prev->line[i] = 'N';
-				map_global()->py = map1->i - 1;
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	x = c3d()->p.pos_x + c3d()->p.dir_x * MOVE_SPEED;
+	y = c3d()->p.pos_y + c3d()->p.dir_y * MOVE_SPEED;
+	return (avoid_wall(x, y));
 }
 
-void	move_down(int i)
+void	move_down(void)
 {
-	t_map	*map1;
+	double	x;
+	double	y;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				if (map1->next->line[i] == '1')
-					return ;
-				map1->line[i] = '0';
-				map1->next->line[i] = 'N';
-				map_global()->py = map1->i + 1;
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	x = c3d()->p.pos_x - c3d()->p.dir_x * MOVE_SPEED;
+	y = c3d()->p.pos_y - c3d()->p.dir_y * MOVE_SPEED;
+	return (avoid_wall(x, y));
 }
 
-void	move_left(int i)
+void	move_left(void)
 {
-	t_map	*map1;
+	double	x;
+	double	y;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				if (map1->line[i -1] == '1')
-					return ;
-				map1->line[i] = '0';
-				map1->line[i -1] = 'N';
-				map_global()->px = i - 1;
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	x = c3d()->p.pos_x + c3d()->p.dir_y * MOVE_SPEED;
+	y = c3d()->p.pos_y - c3d()->p.dir_x * MOVE_SPEED;
+	return (avoid_wall(x, y));
 }
 
-void	move_right(int i)
+void	move_right(void)
 {
-	t_map	*map1;
+	double	x;
+	double	y;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				if (map1->line[i + 1] == '1')
-					return ;
-				map1->line[i] = '0';
-				map1->line[i +1] = 'N';
-				map_global()->px = i + 1;
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	x = c3d()->p.pos_x - c3d()->p.dir_y * MOVE_SPEED;
+	y = c3d()->p.pos_y + c3d()->p.dir_x * MOVE_SPEED;
+	return (avoid_wall(x, y));
 }
 
 int	key_handler(int key)
 {
-	int	i;
-
-	i = -1;
 	if (key == ESC)
 		free_all(0);
 	else if (key == W)
-		move_up(i);
+		move_up();
 	else if (key == A)
-		move_left(i);
+		move_left();
 	else if (key == D)
-		move_right(i);
+		move_right();
 	else if (key == S)
-		move_down(i);
+		move_down();
 	else if (key == LAK)
 		look_left();
 	else if (key == RAK)
 		look_right();
-	if (key == W || key == A || key == S || key == D || key == LAK \
-		|| key == RAK)
-		raycasting();
 	return (0);
 }

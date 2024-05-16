@@ -3,57 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   cameras.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
+/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:39:08 by matilde           #+#    #+#             */
-/*   Updated: 2024/03/05 17:39:16 by matilde          ###   ########.fr       */
+/*   Updated: 2024/05/16 19:28:44 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "cub3d.h"
 
-//camera looks left
+// camera looks left
 void	look_left(void)
 {
-	t_map	*map1;
-	int		i;
+	double	oldplanex;
+	double	oldirx;
+	double	rotspeed;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				map1->line[i] -= 32;
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	rotspeed = ROTA_SPEED;
+	oldirx = c3d()->p.dir_x;
+	c3d()->p.dir_x = c3d()->p.dir_x * cos(-rotspeed) - c3d()->p.dir_y \
+		* sin(-rotspeed);
+	c3d()->p.dir_y = oldirx * sin(-rotspeed) + c3d()->p.dir_y * cos(-rotspeed);
+	oldplanex = c3d()->p.plane_x;
+	c3d()->p.plane_x = c3d()->p.plane_x * cos(-rotspeed) - c3d()->p.plane_y \
+		* sin(-rotspeed);
+	c3d()->p.plane_y = oldplanex * sin(-rotspeed) + c3d()->p.plane_y \
+		* cos(-rotspeed);
 }
 
-//camera look right
+// camera look right
 void	look_right(void)
 {
-	t_map	*map1;
-	int		i;
+	double	oldplanex;
+	double	oldirx;
+	double	rotspeed;
 
-	map1 = map();
-	while (map1)
-	{
-		i = -1;
-		while (++i < map1->len)
-		{
-			if (map1->line[i] == 'N' || map1->line[i] == 'S' \
-				|| map1->line[i] == 'E' || map1->line[i] == 'W')
-			{
-				map1->line[i] += 32;
-				return ;
-			}
-		}
-		map1 = map1->next;
-	}
+	rotspeed = ROTA_SPEED;
+	oldirx = c3d()->p.dir_x;
+	c3d()->p.dir_x = c3d()->p.dir_x * cos(rotspeed) - c3d()->p.dir_y \
+		* sin(rotspeed);
+	c3d()->p.dir_y = oldirx * sin(rotspeed) + c3d()->p.dir_y * cos(rotspeed);
+	oldplanex = c3d()->p.plane_x;
+	c3d()->p.plane_x = c3d()->p.plane_x * cos(rotspeed) - c3d()->p.plane_y \
+		* sin(rotspeed);
+	c3d()->p.plane_y = oldplanex * sin(rotspeed) + c3d()->p.plane_y \
+		* cos(rotspeed);
 }

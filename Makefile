@@ -3,28 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+         #
+#    By: acuva-nu <acuva-nu@student.42lisboa.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/29 12:35:24 by acuva-nu          #+#    #+#              #
-#    Updated: 2024/04/06 13:42:42 by matde-je         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2024/04/29 22:13:17 by acuva-nu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS    = main.c keys.c parse_map.c utils.c check_walls.c window_img.c get_next_line.c \
-			get_next_line_utils.c parse_textures.c parse_rgb.c structs.c \
-			cameras.c raycasting.c orientation.c
-			
 
+SRCS    = main.c keys.c parse_map.c utils.c check_walls.c    \
+		  parse_textures.c textures.c parse_rgb.c utils2.c utils.c raycast.c \
+		  player_start.c cameras.c render.c utils_lib.c utils2_lib.c utils3lib.c \
+			 gnl.c gnl_util.c
+			
 #Add any missing folder containing a .c to the vpath
-vpath %.c gnl/ src/
+vpath %.c src/parse  src/utils src/gnl src/
 
 OBJ_DIR = ./obj
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
-INCS 	   = inc/
+INCS 	   = ../cub3d.h
 NAME       = cub3D
 CC         = cc
-CFLAGS     = -g -Wall -Wextra -Werror #-fsanitize=address
-LDFLAGS	   = -L./libft -lft
+CFLAGS     = -O3 -g -Wall -Wextra -Werror #-fsanitize=address
+LDFLAGS	   = -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz 
 RM         = rm -rf
 
 all: ${NAME}
@@ -34,16 +35,15 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 ${NAME}: ${OBJS} 
-	make -s -C libft
-	${CC} ${CFLAGS}  $^ -Lminilibx-linux -I/minilibx-linux/mlx.h -L/usr/lib -lmlx -lXext -lX11 -lm -lz -o $@  -I ${INCS} ${LDFLAGS}
+	make -s -C minilibx-linux
+	${CC} ${CFLAGS}  $^ -o $@  -I ${INCS} ${LDFLAGS}
 
 clean:
 	${RM} ${OBJ_DIR} 
-	make clean -s -C libft
+	make clean -s -C minilibx-linux
 
 fclean: clean
 	${RM} ${NAME} 
-	make fclean -s -C libft
 
 re: fclean all
 

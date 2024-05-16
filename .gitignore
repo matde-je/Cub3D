@@ -6,3 +6,6 @@ obj/
 ./cub3d
 *.out
 *.json
+*.log
+*.vim
+cub3D
