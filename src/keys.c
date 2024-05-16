@@ -15,7 +15,7 @@
 
 static void  avoid_wall(double x, double y)
 {
-    if (map_iter((int)x, (int)y) == '1')
+    if (map_iter((int)y, (int)x) == '1')
         return ;
     c3d()->p.pos_x = x;
     c3d()->p.pos_y = y;
