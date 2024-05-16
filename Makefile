@@ -11,9 +11,10 @@
 # **************************************************************************** #
 
 
-SRCS    = main.c keys.c parse_map.c utils.c check_walls.c get_next_line.c    \
+SRCS    = main.c keys.c parse_map.c utils.c check_walls.c    \
 		  parse_textures.c textures.c parse_rgb.c utils2.c utils.c raycast.c \
-		  player_start.c cameras.c render.c utils_lib.c utils2_lib.c utils3lib.c
+		  player_start.c cameras.c render.c utils_lib.c utils2_lib.c utils3lib.c \
+			 gnl.c gnl_util.c
 			
 #Add any missing folder containing a .c to the vpath
 vpath %.c src/parse  src/utils src/gnl src/

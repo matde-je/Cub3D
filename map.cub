@@ -1,5 +1,5 @@
   C 0, 30    , 10  
-NO textures/wolfenstein/grey_stone.xpm
+NOO textures/wolfenstein/grey_stone.xpm
 SO textures/wolfenstein/purple_stone.xpm
 WE textures/wolfenstein/red_brick.xpm
 EA textures/wolfenstein/wood.xpm

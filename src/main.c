@@ -16,7 +16,6 @@ t_c3d	*c3d(void)
 {
 	static t_c3d	var;
 
-	// ft_bzero(&var, sizeof(t_c3d));
 	var.height = WIN_HEIGHT;
 	var.width = WIN_WIDTH;
 	return (&var);
@@ -46,7 +45,7 @@ int	main(int argc, char **argv)
 		error("Number of arguments");
 	parsing(argv[1]);
 	c3d()->mlx = mlx_init();
-	c3d()->win = mlx_new_window(c3d()->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	(c3d()->win) = mlx_new_window(c3d()->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	init_tex();
 	mlx_loop_hook(c3d()->mlx, start_all, NULL);
 	mlx_key_hook(c3d()->win, key_handler, NULL);

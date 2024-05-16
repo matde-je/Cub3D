@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:14:14 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/16 18:33:12 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:36:43 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	open_textures(char *path)
 	(c3d()->mg.fd) = open(path, O_RDONLY);
 	if (c3d()->mg.fd < 0)
 		error("Failed to open file");
-	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd));
+	(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
 	if (!c3d()->mg.gnl)
 	{
 		close(c3d()->mg.fd);
@@ -90,8 +90,6 @@ void	freeing(void)
 		free(c3d()->t.f);
 	if (c3d()->t.c)
 		free(c3d()->t.c);
-	// if (c3d()->image.ptr)
-	// mlx_destroy_image(c3d()->mlx, c3d()->image.ptr);
 }
 
 t_map	*map(void)

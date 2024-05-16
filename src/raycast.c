@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 14:25:10 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/16 18:13:37 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:38:06 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ void	step_side_len(void)
 	if (c3d()->r.dir_x < 0)
 	{
 		c3d()->r.steps_x = -1;
-		c3d()->r.side_len_x = (c3d()->p.pos_x - c3d()->r.map_x)
+		c3d()->r.side_len_x = (c3d()->p.pos_x - c3d()->r.map_x) \
 			* c3d()->r.delta_len_x;
 	}
 	else
 	{
 		c3d()->r.steps_x = 1;
-		c3d()->r.side_len_x = (c3d()->r.map_x + 1.0 - c3d()->p.pos_x)
+		c3d()->r.side_len_x = (c3d()->r.map_x + 1.0 - c3d()->p.pos_x) \
 			* c3d()->r.delta_len_x;
 	}
 	if (c3d()->r.dir_y < 0)
 	{
 		c3d()->r.steps_y = -1;
-		c3d()->r.side_len_y = (c3d()->p.pos_y - c3d()->r.map_y)
+		c3d()->r.side_len_y = (c3d()->p.pos_y - c3d()->r.map_y) \
 			* c3d()->r.delta_len_y;
 	}
 	else
 	{
 		c3d()->r.steps_y = 1;
-		c3d()->r.side_len_y = (c3d()->r.map_y + 1.0 - c3d()->p.pos_y)
+		c3d()->r.side_len_y = (c3d()->r.map_y + 1.0 - c3d()->p.pos_y) \
 			* c3d()->r.delta_len_y;
 	}
 }
@@ -86,8 +86,6 @@ void	do_dda(void)
 			c3d()->r.map_y += c3d()->r.steps_y;
 			c3d()->r.side = 1;
 		}
-		// if (c3d()->r.map_x < 0.25 || c3d()->r.map_y < 0.25)
-		// break ;
 		if (map_iter(c3d()->r.map_y, c3d()->r.map_x) == '1')
 		{
 			c3d()->r.hit_wall = 1;
@@ -114,34 +112,4 @@ void	perp_render(void)
 	else
 		c3d()->r.wall_x = c3d()->p.pos_x + c3d()->r.wall_len * c3d()->r.dir_x;
 	c3d()->r.wall_x -= floor(c3d()->r.wall_x);
-}
-
-void	render_textures(int x)
-{
-	int				y;
-	unsigned int	color;
-
-	/* unsigned int  cc[4];
-   cc[0] = 255 << 16 | 0 << 8 | 0;
-   cc[1] = 0 << 16 | 255 << 8 | 0;
-   cc[2] = 0 << 16 | 0 << 8 | 255;
-   cc[3] = 255 << 16 | 255 << 8 | 255; */
-	c3d()->t.x = (int)(c3d()->r.wall_x * TEX_SIZE);
-	if ((c3d()->r.side == 0 && c3d()->r.dir_x < 0) || (c3d()->r.side == 1
-			&& c3d()->r.dir_y > 0))
-		c3d()->t.x = TEX_SIZE - c3d()->t.x - 1;
-	c3d()->t.step = 1.0 * TEX_SIZE / c3d()->r.line_height;
-	c3d()->t.pos = (c3d()->r.render_start - WIN_HEIGHT / 2
-			+ c3d()->r.line_height / 2) * c3d()->t.step;
-	y = c3d()->r.render_start - 1;
-	while (++y < c3d()->r.render_end)
-	{
-		c3d()->t.y = (int)c3d()->t.pos & (TEX_SIZE - 1);
-		c3d()->t.pos += c3d()->t.step;
-		color = c3d()->tex[c3d()->t.index][TEX_SIZE * c3d()->t.y + c3d()->t.x];
-		// color = cc[c3d()->t.index];
-		if (c3d()->r.side == 1)
-			color = (color >> 1) & 8355711;
-		put_pixel_2img(x, y, color);
-	}
 }

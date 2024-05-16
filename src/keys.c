@@ -6,20 +6,11 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:14:31 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/16 18:14:35 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:30:07 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	avoid_wall(double x, double y)
-{
-	if (map_iter((int)y, (int)x) == '1')
-		return ;
-	c3d()->p.pos_x = x;
-	c3d()->p.pos_y = y;
-	return ;
-}
 
 void	move_up(void)
 {

@@ -210,11 +210,10 @@ void				check_wall(int i);
 int					key_handler(int key);
 int					free_all(int i);
 void				error(char *str);
-char				*get_next_line(int fd);
 void				check_map(char *path, int i);
 void				init_map(int i, int j, char *line, t_map *map1);
 char				*rm_nl(char *str);
-void				check_chars(int i, int pos);
+void				check_chars(int i, int pos, t_map *mp);
 void				parse_north(char **trim, char **trim1, int i, int *no);
 void				parse_south(char **trim, char **trim1, int i, int *no);
 void				parse_west(char **trim, char **trim1, int i, int *no);
@@ -261,4 +260,10 @@ void				ft_putstr_fd(char *s, int fd);
 char				*ft_strdup(const char *src);
 char				*ft_strjoin(const char *s1, const char *s2);
 void				free_array(char **array);
+char				*get_next_line(int fd, int i, int e, char *line);
+char				*gnl(int fd, int i, char *buf, char *line);
+char				*ft_strjoin1(char *str1, char *str2);
+char				*ft_strchr1(char *str, int c);
+void				avoid_wall(double x, double y);
+
 #endif

@@ -13,11 +13,8 @@
 
 #include "../cub3d.h"
 
-void	check_chars(int i, int pos)
+void	check_chars(int i, int pos, t_map *mp)
 {
-	t_map	*mp;
-
-	mp = map();
 	while (mp)
 	{
 		i = -1;

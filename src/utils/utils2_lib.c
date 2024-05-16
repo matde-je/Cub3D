@@ -6,7 +6,7 @@
 /*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:00:05 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/16 18:34:53 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:37:04 by matde-je         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ char	**ft_split(char const *s, char c)
 	arr[i] = NULL;
 	return (arr);
 }
+
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*res;

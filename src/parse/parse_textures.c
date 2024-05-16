@@ -34,7 +34,7 @@ void	prep_texture(int no, int i, char *trim, char *trim1)
 		parse_east(&trim, &trim1, i, &ea);
 		parse_rgb(&trim, &trim1, &ce, &f);
 		free(c3d()->mg.gnl);
-		(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd));
+		(c3d()->mg.gnl) = (get_next_line(c3d()->mg.fd, 0, 0, NULL));
 	}
 	close(c3d()->mg.fd);
 	if (so != 1 || ea != 1 || we != 1 || no != 1 || ce != 1 || f != 1)
@@ -46,7 +46,7 @@ void	parse_north(char **trim, char **trim1, int i, int *no)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'N' && c3d()->mg.gnl[i + 1] == 'O')
+	if (c3d()->mg.gnl[i] == 'N' && c3d()->mg.gnl[i + 1] == 'O' && c3d()->mg.gnl[i + 2] != 'O')
 	{
 		*no += 1;
 		if (*no != 1)
@@ -70,7 +70,7 @@ void	parse_south(char **trim, char **trim1, int i, int *so)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'S' && c3d()->mg.gnl[i + 1] == 'O')
+	if (c3d()->mg.gnl[i] == 'S' && c3d()->mg.gnl[i + 1] == 'O' && c3d()->mg.gnl[i + 2] != 'O')
 	{
 		*so += 1;
 		if (*so != 1)
@@ -94,7 +94,7 @@ void	parse_west(char **trim, char **trim1, int i, int *we)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'W' && c3d()->mg.gnl[i + 1] == 'E')
+	if (c3d()->mg.gnl[i] == 'W' && c3d()->mg.gnl[i + 1] == 'E' && c3d()->mg.gnl[i + 2] != 'E')
 	{
 		*we += 1;
 		if (*we != 1)
@@ -112,12 +112,13 @@ void	parse_west(char **trim, char **trim1, int i, int *we)
 		close(fd);
 	}
 }
+
 void	parse_east(char **trim, char **trim1, int i, int *ea)
 {
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'E' && c3d()->mg.gnl[i + 1] == 'A')
+	if (c3d()->mg.gnl[i] == 'E' && c3d()->mg.gnl[i + 1] == 'A'&& c3d()->mg.gnl[i + 2] != 'A')
 	{
 		*ea += 1;
 		if (*ea != 1)
@@ -135,3 +136,4 @@ void	parse_east(char **trim, char **trim1, int i, int *ea)
 		close(fd);
 	}
 }
+
