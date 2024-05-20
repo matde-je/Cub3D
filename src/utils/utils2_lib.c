@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2_lib.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:00:05 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/16 19:37:04 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:41:54 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	l = ft_strlen(s);
 	if (start >= l)
 	{
-		res = malloc(sizeof(char));
-		if (!res)
-			return (NULL);
-		*res = '\0';
-		return (res);
+		return (NULL);
 	}
 	if (l < len)
 		return (ft_strdup((char *)&s[start]));
