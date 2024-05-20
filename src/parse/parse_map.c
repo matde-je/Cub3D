@@ -87,6 +87,7 @@ void	init_map(int i, int max, char *line, t_map *map1)
 		map1 = map1->next;
 	}
 	free(c3d()->mg.gnl);
+	c3d()->mg.gnl = NULL;
 	close(c3d()->mg.fd);
 	c3d()->mg.x_max = max;
 	c3d()->mg.y_max = i;

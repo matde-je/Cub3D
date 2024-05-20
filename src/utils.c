@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: matde-je <matde-je@student.42.fr>          +#+  +:+       +#+        */
+/*   By: matilde <matilde@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 18:14:02 by matde-je          #+#    #+#             */
-/*   Updated: 2024/05/16 18:39:45 by matde-je         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:25:35 by matilde          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*rm_space(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (NULL);
 	i = ft_strlen(str);
 	if (i <= 0)
 		return (NULL);
@@ -60,14 +62,4 @@ int	ft_arr_len(char **arr)
 	while (arr[i])
 		i++;
 	return (i);
-}
-
-void	free_array(char **array)
-{
-	int	i;
-
-	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
 }

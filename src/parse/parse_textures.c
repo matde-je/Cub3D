@@ -46,7 +46,8 @@ void	parse_north(char **trim, char **trim1, int i, int *no)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'N' && c3d()->mg.gnl[i + 1] == 'O' && c3d()->mg.gnl[i + 2] != 'O')
+	if (c3d()->mg.gnl[i] == 'N' && c3d()->mg.gnl[i + 1] && c3d()->mg.gnl[i + 1] == 'O' \
+		&& c3d()->mg.gnl[i + 2] && c3d()->mg.gnl[i + 2] != 'O')
 	{
 		*no += 1;
 		if (*no != 1)
@@ -55,8 +56,8 @@ void	parse_north(char **trim, char **trim1, int i, int *no)
 		*trim1 = rm_nl(ft_strtrim(*trim, "O"));
 		(c3d()->t.so) = rm_space(ft_strtrim(*trim1, " "));
 		str = (char *)c3d()->t.so;
-		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
-			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+		if (!str || ft_strlen(str) <= 4 || (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
+			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm'))
 			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.so, O_RDONLY);
 		if (fd == -1)
@@ -70,17 +71,18 @@ void	parse_south(char **trim, char **trim1, int i, int *so)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'S' && c3d()->mg.gnl[i + 1] == 'O' && c3d()->mg.gnl[i + 2] != 'O')
+	if (c3d()->mg.gnl[i] == 'S' && c3d()->mg.gnl[i + 1] && c3d()->mg.gnl[i + 1] == 'O' \
+		&& c3d()->mg.gnl[i + 2] && c3d()->mg.gnl[i + 2] != 'O')
 	{
 		*so += 1;
 		if (*so != 1)
 			error("Invalid texture");
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "S");
-		*trim1 = ft_strtrim(*trim, "O");
-		(c3d()->t.no) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
+		*trim1 = rm_nl(ft_strtrim(*trim, "O"));
+		(c3d()->t.no) = rm_space(ft_strtrim(*trim1, " "));
 		str = (char *)c3d()->t.no;
-		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
-			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+		if (!str || ft_strlen(str) <= 4 || (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
+			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm'))
 			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.no, O_RDONLY);
 		if (fd == -1)
@@ -94,17 +96,18 @@ void	parse_west(char **trim, char **trim1, int i, int *we)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'W' && c3d()->mg.gnl[i + 1] == 'E' && c3d()->mg.gnl[i + 2] != 'E')
+	if (c3d()->mg.gnl[i] == 'W' && c3d()->mg.gnl[i + 1] && c3d()->mg.gnl[i + 1] == 'E' \
+		&& c3d()->mg.gnl[i + 2] && c3d()->mg.gnl[i + 2] != 'E')
 	{
 		*we += 1;
 		if (*we != 1)
 			error("Invalid texture");
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "W");
-		*trim1 = ft_strtrim(*trim, "E");
-		(c3d()->t.ea) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
+		*trim1 = rm_nl(ft_strtrim(*trim, "E"));
+		(c3d()->t.ea) = rm_space(ft_strtrim(*trim1, " "));
 		str = (char *)c3d()->t.ea;
-		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
-			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+		if (!str || ft_strlen(str) <= 4 || (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
+			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm'))
 			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.ea, O_RDONLY);
 		if (fd == -1)
@@ -118,17 +121,18 @@ void	parse_east(char **trim, char **trim1, int i, int *ea)
 	int		fd;
 	char	*str;
 
-	if (c3d()->mg.gnl[i] == 'E' && c3d()->mg.gnl[i + 1] == 'A'&& c3d()->mg.gnl[i + 2] != 'A')
+	if (c3d()->mg.gnl[i] == 'E' && c3d()->mg.gnl[i + 1] && c3d()->mg.gnl[i + 1] == 'A' \
+		&& c3d()->mg.gnl[i + 2] && c3d()->mg.gnl[i + 2] != 'A')
 	{
 		*ea += 1;
 		if (*ea != 1)
 			error("Invalid texture");
 		*trim = ft_strtrim(&c3d()->mg.gnl[i], "E");
-		*trim1 = ft_strtrim(*trim, "A");
-		(c3d()->t.we) = rm_space(rm_nl(ft_strtrim(*trim1, " ")));
+		*trim1 = rm_nl(ft_strtrim(*trim, "A"));
+		(c3d()->t.we) = rm_space(ft_strtrim(*trim1, " "));
 		str = (char *)c3d()->t.we;
-		if (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
-			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm')
+		if (!str || ft_strlen(str) <= 4 || (str[ft_strlen(str) - 4] != '.' && str[ft_strlen(str) - 4] != 'x'
+			&& str[ft_strlen(str) - 4] != 'p' && str[ft_strlen(str) - 4] != 'm'))
 			free_trim(trim, trim1, "Invalid texture path", NULL);
 		fd = open(c3d()->t.we, O_RDONLY);
 		if (fd == -1)
