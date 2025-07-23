@@ -16,7 +16,7 @@ Cub3D is a simple 3D game engine project inspired by classic raycasting games li
 
 ## Requirements
 
-- GCC
+- GCC or Clang
 - Make
 - X11 development libraries (`xorg`)
 - XShm extension (`libxext-dev`)
